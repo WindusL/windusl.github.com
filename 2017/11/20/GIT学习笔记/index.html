@@ -106,22 +106,22 @@
 
 
 
-  <meta name="description" content="第一次安装设置123#因为git是分布式,这些就是你在提交commit时的签名。(--global全局设置,不加则设置当前版本库)$ git config [--global] user.name &amp;quot;Your Name&amp;quot;$ git config [--global] user.email &amp;quot;email@example.com&amp;quot; 创建版本仓库12345$ gi">
+  <meta name="description" content="第一次安装设置123#因为git是分布式,这些就是你在提交commit时的签名。(--global全局设置,不加则设置当前版本库)$ git config [--global] user.name &amp;quot;Your Name&amp;quot;$ git config [--global] user.email &amp;quot;email@example.com&amp;quot;">
 <meta name="keywords" content="GIT,学习笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GIT学习笔记">
 <meta property="og:url" content="http://fcwalkers.com/2017/11/20/GIT学习笔记/index.html">
 <meta property="og:site_name" content="风尘">
-<meta property="og:description" content="第一次安装设置123#因为git是分布式,这些就是你在提交commit时的签名。(--global全局设置,不加则设置当前版本库)$ git config [--global] user.name &amp;quot;Your Name&amp;quot;$ git config [--global] user.email &amp;quot;email@example.com&amp;quot; 创建版本仓库12345$ gi">
+<meta property="og:description" content="第一次安装设置123#因为git是分布式,这些就是你在提交commit时的签名。(--global全局设置,不加则设置当前版本库)$ git config [--global] user.name &amp;quot;Your Name&amp;quot;$ git config [--global] user.email &amp;quot;email@example.com&amp;quot;">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://fcwalkers.com/2017/11/20/GIT学习笔记/img/QQ20171117-112922@2x.png">
 <meta property="og:image" content="http://fcwalkers.com/2017/11/20/GIT学习笔记/img/QQ20171117-112940@2x.png">
 <meta property="og:image" content="http://fcwalkers.com/2017/11/20/GIT学习笔记/img/QQ20171117-115013@2x.png">
 <meta property="og:image" content="http://fcwalkers.com/2017/11/20/GIT学习笔记/img/QQ20171118223701.png">
-<meta property="og:updated_time" content="2018-03-23T16:51:11.000Z">
+<meta property="og:updated_time" content="2018-03-23T16:53:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GIT学习笔记">
-<meta name="twitter:description" content="第一次安装设置123#因为git是分布式,这些就是你在提交commit时的签名。(--global全局设置,不加则设置当前版本库)$ git config [--global] user.name &amp;quot;Your Name&amp;quot;$ git config [--global] user.email &amp;quot;email@example.com&amp;quot; 创建版本仓库12345$ gi">
+<meta name="twitter:description" content="第一次安装设置123#因为git是分布式,这些就是你在提交commit时的签名。(--global全局设置,不加则设置当前版本库)$ git config [--global] user.name &amp;quot;Your Name&amp;quot;$ git config [--global] user.email &amp;quot;email@example.com&amp;quot;">
 <meta name="twitter:image" content="http://fcwalkers.com/2017/11/20/GIT学习笔记/img/QQ20171117-112922@2x.png">
 
 
@@ -421,6 +421,7 @@
 
       
         <h2 id="第一次安装设置"><a href="#第一次安装设置" class="headerlink" title="第一次安装设置"></a>第一次安装设置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#因为git是分布式,这些就是你在提交commit时的签名。(--global全局设置,不加则设置当前版本库)</span><br><span class="line">$ git config [--global] user.name &quot;Your Name&quot;</span><br><span class="line">$ git config [--global] user.email &quot;email@example.com&quot;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <h2 id="创建版本仓库"><a href="#创建版本仓库" class="headerlink" title="创建版本仓库"></a>创建版本仓库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git init #创建版本仓库  </span><br><span class="line">$ git add #添加文件到版本仓库(可同时添加多个文件空格分割)</span><br><span class="line">$ git commit -m &apos;注释内容&apos; #提交版本  </span><br><span class="line">$ git commit (-v) #提交版本,启动编辑器编写注释(-v显示详细变更信息)</span><br><span class="line">$ git commit -a #提交版本,跳过使用暂存区(不用git add)</span><br></pre></td></tr></table></figure>
 <h2 id="版本比对"><a href="#版本比对" class="headerlink" title="版本比对"></a>版本比对</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git status (-s/--short) #查看版本库状态以及文件修改状态(显示简单信息)</span><br><span class="line">1.未修改状态:nothing to commit,working tree clean</span><br><span class="line">2.修改后文件已在缓存区:Changes to be commited</span><br><span class="line">3.新增文件状态:Untracked files</span><br><span class="line">4.修改后文件未在缓存区:Changes not staged for commit</span><br><span class="line">3与4状态区别在于3无法用git commit –am命令将文件添加到本地仓库</span><br></pre></td></tr></table></figure>
 <blockquote>
@@ -699,7 +700,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-count">2</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
