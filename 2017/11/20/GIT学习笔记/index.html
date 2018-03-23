@@ -114,15 +114,15 @@
 <meta property="og:site_name" content="风尘">
 <meta property="og:description" content="第一次安装设置123#因为git是分布式,这些就是你在提交commit时的签名。(--global全局设置,不加则设置当前版本库)$ git config [--global] user.name &amp;quot;Your Name&amp;quot;$ git config [--global] user.email &amp;quot;email@example.com&amp;quot;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://fcwalkers.com/2017/11/20/GIT学习笔记/img/QQ20171117-112922@2x.png">
-<meta property="og:image" content="http://fcwalkers.com/2017/11/20/GIT学习笔记/img/QQ20171117-112940@2x.png">
-<meta property="og:image" content="http://fcwalkers.com/2017/11/20/GIT学习笔记/img/QQ20171117-115013@2x.png">
-<meta property="og:image" content="http://fcwalkers.com/2017/11/20/GIT学习笔记/img/QQ20171118223701.png">
-<meta property="og:updated_time" content="2018-03-23T16:53:03.000Z">
+<meta property="og:image" content="http://fcwalkers.com/2017/11/20/GIT学习笔记/GIT学习笔记/QQ20171117-112922@2x.png">
+<meta property="og:image" content="http://fcwalkers.com/2017/11/20/GIT学习笔记/GIT学习笔记/QQ20171117-112940@2x.png">
+<meta property="og:image" content="http://fcwalkers.com/2017/11/20/GIT学习笔记/GIT学习笔记/QQ20171117-115013@2x.png">
+<meta property="og:image" content="http://fcwalkers.com/2017/11/20/GIT学习笔记/GIT学习笔记/QQ20171118223701.png">
+<meta property="og:updated_time" content="2018-03-23T17:02:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GIT学习笔记">
 <meta name="twitter:description" content="第一次安装设置123#因为git是分布式,这些就是你在提交commit时的签名。(--global全局设置,不加则设置当前版本库)$ git config [--global] user.name &amp;quot;Your Name&amp;quot;$ git config [--global] user.email &amp;quot;email@example.com&amp;quot;">
-<meta name="twitter:image" content="http://fcwalkers.com/2017/11/20/GIT学习笔记/img/QQ20171117-112922@2x.png">
+<meta name="twitter:image" content="http://fcwalkers.com/2017/11/20/GIT学习笔记/GIT学习笔记/QQ20171117-112922@2x.png">
 
 
 
@@ -434,8 +434,8 @@
 <blockquote>
 <p>git reset 后面如果是版本号不用写全,只写前几位就可以了.GIT版本回退非常快,因为GIT在内部有个指向当前版本的HEAD指针,当回退版本时GIT仅仅是把HEAD从指向当前版本改为指向回退版本(如下图),顺便把工作区更新了.</p>
 </blockquote>
-<p><img src="img/QQ20171117-112922@2x.png" alt="当前版本"></p>
-<p><img src="img/QQ20171117-112940@2x.png" alt="版本回退"></p>
+<p><img src="GIT学习笔记/QQ20171117-112922@2x.png" alt="当前版本"></p>
+<p><img src="GIT学习笔记/QQ20171117-112940@2x.png" alt="版本回退"></p>
 <blockquote>
 <p>由于git log仅显示从当前版本到历史版本的纪录,如果回退了某个版本,又想还原到最新版本怎么办呢?</p>
 </blockquote>
@@ -443,7 +443,7 @@
 <h2 id="工作区和暂存区"><a href="#工作区和暂存区" class="headerlink" title="工作区和暂存区"></a>工作区和暂存区</h2><blockquote>
 <p>git和其它版本控制系统,如SVN的一个不同之处就是有暂存区的概念.<br><code>工作区</code>:就是电脑能看到的仓库文件夹目录.<br><code>版本库</code>:工作区内的隐藏目录.git,这个不算工作区,而是git的版本库.<br>GIT版本库里存了很多东西,其中最重要的就是stage(或者叫index)的暂存区,还有GIT为我们自动创建的第一个分支master,以及一个指向master的指针HEAD.<br>实际上git add就是把所有修改放到暂存区,git commit是把暂缓区的修改提交到分支.<br><strong>因此,修改一个文件后必须要添加(git add)到暂存区,才能提交(git commit)到分支,否则提交无效</strong></p>
 </blockquote>
-<p><img src="img/QQ20171117-115013@2x.png" alt="版本库"></p>
+<p><img src="GIT学习笔记/QQ20171117-115013@2x.png" alt="版本库"></p>
 <h2 id="撤销修改"><a href="#撤销修改" class="headerlink" title="撤销修改"></a>撤销修改</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git commit --amend #撤消上次文件提交的修改,重新提交</span><br><span class="line">$ git checkout -- 文件名 #撤销工作区文件的修改(如果没有--应变成了切换分支的命令)</span><br><span class="line">$ git reset HEAD 文件名 #撤销暂存区文件修改(HEAD表示撤销到最新版本)</span><br></pre></td></tr></table></figure>
 <h2 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git rm　[--cached] 文件名 #从版本库中删除文件(--cached从缓存区中移除到工作区)</span><br></pre></td></tr></table></figure>
 <blockquote>
@@ -466,7 +466,7 @@
 <h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h2><blockquote>
 <p>Git里默认有一个主分支master，其中HEAD严格来说指向的不是提交，而是当前分支，分支才指向提交。  </p>
 </blockquote>
-<p><img src="img/QQ20171118223701.png" alt="指向图"></p>
+<p><img src="GIT学习笔记/QQ20171118223701.png" alt="指向图"></p>
 <blockquote>
 <p>Git创建一个分支只是增加一个指针，然后将HEAD指向新的分支 ，表示在当前分支，工作区的文件没有任何变化。  </p>
 </blockquote>
