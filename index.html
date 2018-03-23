@@ -563,95 +563,16 @@
 
       
         
-          
-            <p>[TOC]</p>
+          <p>[TOC]</p>
 <h2 id="基础正则表达式"><a href="#基础正则表达式" class="headerlink" title="基础正则表达式"></a>基础正则表达式</h2><p>基础正则字符包括:<code>^</code> <code>$</code> <code>.</code> <code>\</code> <code>*</code> <code>[]</code> <code>[n1-n2]</code> <code>[^]</code> <code>\{n,m\}</code>  </p>
 <h3 id="语系对正则表达式的影响"><a href="#语系对正则表达式的影响" class="headerlink" title="语系对正则表达式的影响"></a>语系对正则表达式的影响</h3><p>由于不同语系的编码数据并不相同，所以就会造成数据撷取结果的差异。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">C和zh_TW.big5语系下,英文大小写的编码顺序:</span><br><span class="line">LANG=C     时：0 1 2 3 4 ... A B C D ... Z a b c d ...z</span><br><span class="line">LANG=zh_TW 时：0 1 2 3 4 ... a A b B c C d D ... z Z</span><br><span class="line"></span><br><span class="line"># C语系</span><br><span class="line">$ ll -d /etc/[^a-z]* # 正确显示</span><br><span class="line"></span><br><span class="line"># zh_TW.big5语系(测试zh_CN.UTF-8语系可以正确显示)</span><br><span class="line">$ ll -d /etc/[^a-z]* # 显示混乱</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>上面由于C语系字母是连续的所以正则表达式可以进行匹配,而zh_CN.UTF-8语系字母是非连续排列所以找不到该文件.<strong>由于一般正则表达式，使用的是相容于 POSIX 的标准，因此就使用“ C ”这个语系,所以通常使用正则将系统语系设置成C后使用.</strong></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 搜寻特定字符串(-v表示反向)</span><br><span class="line">$ grep -n (-v) &apos;the&apos; regular_express.txt </span><br><span class="line"># 利用中括号[]搜寻集合字符</span><br><span class="line">$ grep -n &apos;t[ae]st&apos; regular_express.txt</span><br><span class="line">$ grep -n &apos;[^a-z]oo&apos; regular_express.txt</span><br><span class="line">$ grep -n &apos;[0-9]&apos; regular_express.txt</span><br><span class="line"></span><br><span class="line">#如上考虑到语系的影响可以使用特殊符号代替连续编码(&quot; - &quot;)</span><br><span class="line">$ grep -n &apos;[^[:lower:]]oo&apos; regular_express.txt</span><br><span class="line">$ grep -n &apos;[[:digit:]]&apos; regular_express.txt</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>为了要避免这样编码所造成的英文与数字的撷取问题,所以可以使用特殊符号代替</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">特殊符号</th>
-<th style="text-align:center">代表意义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">[:alnum:]</td>
-<td style="text-align:center">代表英文大小写字符及数字，亦即 0-9, A-Z, a-z</td>
-</tr>
-<tr>
-<td style="text-align:center">[:alpha:]</td>
-<td style="text-align:center">代表任何英文大小写字符，亦即 A-Z, a-z</td>
-</tr>
-<tr>
-<td style="text-align:center">[:blank:]</td>
-<td style="text-align:center">代表空白键与 [Tab] 按键两者</td>
-</tr>
-<tr>
-<td style="text-align:center">[:cntrl:]</td>
-<td style="text-align:center">代表键盘上面的控制按键，亦即包括 CR, LF, Tab, Del.. 等等</td>
-</tr>
-<tr>
-<td style="text-align:center">[:digit:]</td>
-<td style="text-align:center">代表数字而已，亦即 0-9</td>
-</tr>
-<tr>
-<td style="text-align:center">[:graph:]</td>
-<td style="text-align:center">除了空白字符 （空白键与 [Tab] 按键） 外的其他所有按键</td>
-</tr>
-<tr>
-<td style="text-align:center">[:lower:]</td>
-<td style="text-align:center">代表小写字符，亦即 a-z</td>
-</tr>
-<tr>
-<td style="text-align:center">[:print:]</td>
-<td style="text-align:center">代表任何可以被打印出来的字符</td>
-</tr>
-<tr>
-<td style="text-align:center">[:punct:]</td>
-<td style="text-align:center">代表标点符号 （punctuation symbol），亦即：” ‘ ? ! ; : # $…</td>
-</tr>
-<tr>
-<td style="text-align:center">[:upper:]</td>
-<td style="text-align:center">代表大写字符，亦即 A-Z</td>
-</tr>
-<tr>
-<td style="text-align:center">[:space:]</td>
-<td style="text-align:center">任何会产生空白的字符，包括空白键, [Tab], CR 等等</td>
-</tr>
-<tr>
-<td style="text-align:center">[:xdigit:]</td>
-<td style="text-align:center">代表 16 进位的数字类型，因此包括： 0-9, A-F, a-f 的数字与字符</td>
-</tr>
-</tbody>
-</table>
-<h2 id="sed-工具"><a href="#sed-工具" class="headerlink" title="sed 工具"></a>sed 工具</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[dmtsai@study ~]$ sed [-nefr] [动作]</span><br><span class="line">选项与参数：</span><br><span class="line">-n  ：使用安静（silent）模式。在一般 sed 的用法中，所有来自 STDIN 的数据一般都会被列出到屏幕上。</span><br><span class="line">      但如果加上 -n 参数后，则只有经过 sed 特殊处理的那一行（或者动作）才会被列出来。</span><br><span class="line">-e  ：直接在命令行界面上进行 sed 的动作编辑；</span><br><span class="line">-f  ：直接将 sed 的动作写在一个文件内， -f filename 则可以执行 filename 内的 sed 动作；</span><br><span class="line">-r  ：sed 的动作支持的是延伸型正则表达式的语法。（默认是基础正则表达式语法）</span><br><span class="line">-i  ：直接修改读取的文件内容，而不是由屏幕输出。</span><br><span class="line"></span><br><span class="line">动作说明：  [n1[,n2]]function</span><br><span class="line">n1, n2 ：不见得会存在，一般代表“选择进行动作的行数”，举例来说，如果我的动作是需要在 10 到 20 行之间进行的，则“ 10,20[动作行为] ”</span><br><span class="line"></span><br><span class="line">function 有下面这些：</span><br><span class="line">a   ：新增， a 的后面可以接字串，而这些字串会在新的一行出现（目前的下一行）～</span><br><span class="line">c   ：取代， c 的后面可以接字串，这些字串可以取代 n1,n2 之间的行！</span><br><span class="line">d   ：删除，因为是删除啊，所以 d 后面通常不接任何咚咚；</span><br><span class="line">i   ：插入， i 的后面可以接字串，而这些字串会在新的一行出现（目前的上一行）；</span><br><span class="line">p   ：打印，亦即将某个选择的数据印出。通常 p 会与参数 sed -n 一起运行～</span><br><span class="line">s   ：取代，可以直接进行取代的工作！通常这个 s 的动作可以搭配正则表达式！</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>以行为单位的功能</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 将/etc/passwd 的内容列出并且打印行号，同时，请将第 	2~5 行删除！</span><br><span class="line">$ nl /etc/passwd | sed &apos;2,5d&apos;</span><br><span class="line">  	1 root:x:0:0:root:/root:/bin/bash</span><br><span class="line">  	6 sync:x:5:0:sync:/sbin:/bin/sync</span><br><span class="line">  	7 shutdown:x:6:0:shutdown:/sbin:/sbin/		shutdown</span><br><span class="line">	.....（后面省略）.....</span><br><span class="line">	</span><br><span class="line"># 承上，在第二行后（亦即是加在第三行）加上“drink tea?”字样！</span><br><span class="line">$ nl /etc/passwd | sed &apos;2a drink tea&apos;</span><br><span class="line">    1  root:x:0:0:root:/root:/bin/bash</span><br><span class="line">    2  bin:x:1:1:bin:/bin:/sbin/nologin</span><br><span class="line">		drink tea</span><br><span class="line">    3  daemon:x:2:2:daemon:/sbin:/sbin/nologin</span><br><span class="line">	.....（后面省略）.....</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li><p>部分数据的搜索与取代功能<br>  <code>sed &#39;s/要被取代的字串(或正则)/新的字串/g</code><br>  如果想用以行为单位取代<br>  <code>sed &#39;n1,n2s/要被取代的字串(或正则)/新的字串/g</code></p>
-</li>
-<li><p>直接修改文件内容（危险动作）<br>  -i 选项可以让 sed 直接去修改后面接的文件内容而不是由屏幕输出！</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#用 sed 将 regular_express.txt 内每一行结尾若为 . 则换成 !</span><br><span class="line">$ sed -i &apos;s/\.$/\!/g&apos; regular_express.txt</span><br><span class="line"></span><br><span class="line">#利用 sed 直接在 regular_express.txt 最后一行加	入“# This is a test”</span><br><span class="line">$ sed -i &apos;$a # This is a test&apos; 	regular_express.txt</span><br><span class="line"># 由于 $ 代表的是最后一行，而 a 的动作是新增，因此该	文件最后新增！</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="延伸正则表达式"><a href="#延伸正则表达式" class="headerlink" title="延伸正则表达式"></a>延伸正则表达式</h2><p>grep 默认仅支持基础正则表达式，如果要使用延伸型正则表达式，你可以使用 grep -E ， 不过更建议直接使用 egrep</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#去除空白行与首先为#的行列(需要使用管线命令来搜寻两次)</span><br><span class="line">grep -v &apos;^$&apos; | grep -v &apos;^#&apos; regular_express.txt</span><br><span class="line"></span><br><span class="line">#使用延伸正则表达式(延伸型正则表达式可以通过群组功能“ | ”来进行一次搜寻！)</span><br><span class="line">egrep -v &apos;^$|^#&apos; regular_express.txt</span><br></pre></td></tr></table></figure>
-<p>延伸正则字符包括:<code>+</code> <code>?</code> <code>|</code> <code>()</code> <code>()+</code></p>
-<h2 id="文件格式化处理"><a href="#文件格式化处理" class="headerlink" title="文件格式化处理"></a>文件格式化处理</h2><h3 id="格式化打印"><a href="#格式化打印" class="headerlink" title="格式化打印"></a>格式化打印</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">printf &apos;打印格式&apos; 实际内容</span><br><span class="line">选项与参数：</span><br><span class="line">关于格式方面的几个特殊样式：</span><br><span class="line">       \a    警告声音输出</span><br><span class="line">       \b    倒退键（backspace）</span><br><span class="line">       \f    清除屏幕 （form feed）</span><br><span class="line">       \n    输出新的一行</span><br><span class="line">       \r    亦即 Enter 按键</span><br><span class="line">       \t    水平的 [tab] 按键</span><br><span class="line">       \v    垂直的 [tab] 按键</span><br><span class="line">       \xNN  NN 为两位数的数字，可以转换数字成为字符。</span><br><span class="line">关于 C 程序语言内，常见的变量格式</span><br><span class="line">       %ns   那个 n 是数字， s 代表 string ，亦即多少个字符；</span><br><span class="line">       %ni   那个 n 是数字， i 代表 integer ，亦即多少整数码数；</span><br><span class="line">       %N.nf 那个 n 与 N 都是数字， f 代表 floating （浮点），如果有小数码数，</span><br><span class="line"> 假设我共要十个位数，但小数点有两位，即为 %10.2f ！</span><br></pre></td></tr></table></figure>
-<h3 id="awk工具"><a href="#awk工具" class="headerlink" title="awk工具"></a>awk工具</h3>
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/21/Linux/Linux正则与文件格式化/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -790,8 +711,7 @@
 
       
         
-          
-            <p>[TOC]</p>
+          <p>[TOC]</p>
 <h2 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h2><p>/etc/shells记录系统所有shell</p>
 <h2 id="Bash-shell-功能"><a href="#Bash-shell-功能" class="headerlink" title="Bash shell 功能"></a>Bash shell 功能</h2><h3 id="命令编修能力"><a href="#命令编修能力" class="headerlink" title="命令编修能力"></a>命令编修能力</h3><blockquote>
 <p>默认指令记忆功能可以达到1000个<br>记录位置~/.bash_history(当前指令用户指令在内存中,登出后才记录到文件此内)</p>
@@ -803,214 +723,13 @@
 <li>程序化脚本shell script</li>
 <li>万用字符(*)</li>
 </ul>
-<h3 id="type指令"><a href="#type指令" class="headerlink" title="type指令"></a>type指令</h3><p>type 这个指令我们可以知道每个指令是否为 bash 的内置指令。 此外，type只能查找可执行文件.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[dmtsai@study ~]$ type [-tpa] name</span><br><span class="line">选项与参数：</span><br><span class="line">    ：不加任何选项与参数时，type 会显示出 name 是外部指令还是 bash 内置指令</span><br><span class="line">-t  ：当加入 -t 参数时，type 会将 name 以下面这些字眼显示出他的意义：</span><br><span class="line">      file    ：表示为外部指令；</span><br><span class="line">      alias   ：表示该指令为命令别名所设置的名称；</span><br><span class="line">      builtin ：表示该指令为 bash 内置的指令功能；</span><br><span class="line">-p  ：如果后面接的 name 为外部指令时，才会显示完整文件名；</span><br><span class="line">-a  ：会由 PATH 变量定义的路径中，将所有含 name 的指令都列出来，包含 alias</span><br></pre></td></tr></table></figure>
-<h3 id="快速编辑"><a href="#快速编辑" class="headerlink" title="快速编辑"></a>快速编辑</h3><ul>
-<li><p>反斜杠( \ )<br>命令输入太长需要换行,利用反斜杠( \ )[Enter]开启下一行,而不执行命令.<br><strong>注意: [Enter] 按键是紧接着反斜线 （ \ ）</strong></p>
-</li>
-<li><p>快捷键</p>
-</li>
-</ul>
-<table><br>    <tr><br>        <th>组合键</th><br>        <th>功能与示范</th><br>    </tr><br>    <tr><br>        <td>[ctrl]+u/[ctrl]+k</td><br>        <td>分别是从光标处向前删除指令串 （[ctrl]+u） 及向后删除指令串 （[ctrl]+k） </td><br>    </tr><br>    <tr><br>        <td>[ctrl]+a/[ctrl]+e</td><br>        <td>分别是让光标移动到整个指令串的最前面 （[ctrl]+a） 或最后面 （[ctrl]+e） </td><br>    </tr><br>    <tr><br>        <td>Ctrl + C</td><br>        <td>终止目前命令</td><br>    </tr><br>    <tr><br>        <td>Ctrl + D</td><br>        <td>输入结束(EOF),例如:邮件结束的时候</td><br>    </tr><br>    <tr><br>        <td>Ctrl + M</td><br>        <td>就是Enter</td><br>    </tr><br>    <tr><br>        <td>Ctrl + S</td><br>        <td>暂停屏幕输出</td><br>    </tr><br>    <tr><br>        <td>Ctrl + Q</td><br>        <td>恢复屏幕输出</td><br>    </tr><br>    <tr><br>        <td>Ctrl + U</td><br>        <td>在提示字符下，将整列命令删除</td><br>    </tr><br>    <tr><br>        <td>Ctrl + Z</td><br>        <td>“暂停”目前的命令 配合fg/bg/jobs命令使用</td><br>    </tr><br></table>
-
-<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><ul>
-<li>echo 指令<br>显示变量内容,”-e”选项可以格式化打印内容</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[dmtsai@study ~]$ echo $PATH</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>变量设置规则</p>
-<ol>
-<li>变量与变量内容以一个”=”来连接.<br> <code>myname=Windus</code></li>
-<li><p>等号两边不能直接接空白符.</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#错误</span><br><span class="line">myname= Windus</span><br><span class="line">myname=Windus L</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-</ul>
-<pre><code>3. 变量内容若有空白符可使用双引号或单引号将变量内容结合起来.  
-
-    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">	#双引号内特殊字符可保持原本特性,如:&quot;$&quot;等</span><br><span class="line">	var=&quot;lang is $LANG&quot;</span><br><span class="line">	echo $var --&gt; lang is UTF8</span><br><span class="line">	</span><br><span class="line">	#单引号内的特殊字符仅为一般字符(纯文本)</span><br><span class="line">	var=&apos;lang is $LANG&apos;</span><br><span class="line">	echo $var --&gt; lang is $LANG</span><br><span class="line">	```  </span><br><span class="line"></span><br><span class="line">4. 变量名称只能是英文字母与数字,但开头字符不能是数字.</span><br><span class="line">5. 可用跳脱字符&quot; \\ &quot;,将特殊符号变成一般符号。(如： [Enter], $, \, 空白字符等）  </span><br><span class="line">	`myname=Windus\ L`</span><br><span class="line">6. 在一串指令的执行中，还需要借由其他额外的指令所提供的信息时，可以使用反单引号“`指令`”或 “$（指令）</span><br></pre></td></tr></table></figure>
-
-    version=$（uname -r）
-    echo $version --&gt; 3.10.0-229.el7.x86_64
-    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">	</span><br><span class="line">7. 若该变量为扩增变量内容时，则可用 &quot;\$变量名称&quot; 或 $&#123;变量&#125; 累加内容</span><br></pre></td></tr></table></figure>
-
-    PATH=&quot;$PATH&quot;:/home/bin
-    或
-    PATH=${PATH}:/home/bin
-    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">		</span><br><span class="line">	8. 若该变量需要在其他子程序执行，则需要以 export 来使变量变成环境变量</span><br><span class="line">		`export PATH`</span><br><span class="line">		</span><br><span class="line">	9. 通常大写字符为系统默认变量，自行设置变量可以使用小写字符，方便判断 （纯粹依照使用者兴趣与嗜好,在 Linux 默认的情况中，使用&#123;大写的字母&#125;来设置的变量一般为系统内定需要的变量）</span><br><span class="line">	10. 取消变量用unset</span><br><span class="line">		`unset myname`</span><br><span class="line"></span><br><span class="line">#### 环境变量</span><br><span class="line">- env命令  </span><br><span class="line">	查看所有环境变量</span><br><span class="line">	- HOME 使用者主文件夹变量, ~就会读取此变量</span><br><span class="line">	- SHELL 目前环境使用的SHELL程序(Linux默认:/bin/bash)</span><br><span class="line">	- HISTSIZE 历史命令记录笔数</span><br><span class="line">	- MAIL 当前用户邮箱文件</span><br><span class="line">	- PATH 可执行文件搜寻的路径(目录与目录中间:分隔).由于搜寻顺序依据PATH变量内目录顺序,所以目录顺序也是重要的.</span><br><span class="line">	- LANG 语系数据</span><br><span class="line">	- RANDOM 随机数变量(/dev/random),内容介于0~32767之间.</span><br></pre></td></tr></table></figure>
-
-    #想要获取指定范围内的数,使用delcare声名数值类型
-    [dmtsai@study ~]$ declare -i number=$RANDOM*10/32768 ; 
-    echo $number
-    8   &lt;== 此时会随机取出 0~9 之间的数值喔！
-    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- set命令</span><br><span class="line">	查看所有变量(含环境变量与自定变量)</span><br><span class="line">	- PS1 提示字符的设置</span><br></pre></td></tr></table></figure>
-
-    \d ：可显示出“星期 月 日”的日期格式，如：&quot;Mon Feb 2&quot;
-    \H ：完整的主机名称。举例来说，鸟哥的练习机为“study.centos.vbird”
-    \h ：仅取主机名称在第一个小数点之前的名字，如鸟哥主机则为“study”后面省略
-    \t ：显示时间，为 24 小时格式的“HH:MM:SS”
-    \T ：显示时间，为 12 小时格式的“HH:MM:SS”
-    \A ：显示时间，为 24 小时格式的“HH:MM”
-    \@ ：显示时间，为 12 小时格式的“am/pm”样式
-    \u ：目前使用者的帐号名称，如“dmtsai”；
-    \v ：BASH 的版本信息，如鸟哥的测试主机版本为 4.2.46（1）-release，仅取“4.2”显示
-    \w ：完整的工作目录名称，由根目录写起的目录名称。但主文件夹会以 ~ 取代；
-    \W ：利用 basename 函数取得工作目录名称，所以仅会列出最后一个目录名。
-    \# ：下达的第几个指令。
-    \$ ：提示字符，如果是 root 时，提示字符为 # ，否则就是 $ 
-    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">		</span><br><span class="line">	- \$ 本shell的PID  </span><br><span class="line">		`echo $$`</span><br><span class="line">	- ? 上个指令的回传值</span><br><span class="line">		执行某些指令时， 这些指令都会回传一个执行后的代码。一般来说，如果成功的执行该指令， 则会回传一个 0 值,如果执行过程发生错误,就会传回错误代码.一般以非0代码取代.</span><br><span class="line">		</span><br><span class="line">- export命令  </span><br><span class="line">	当你登陆 Linux 并取得一个 bash 之后，你的 bash 就是一个独立的程序，这个程序的识别使用的是一个称为程序识别码，被称为 PID 的就是。 接下来你在这个 bash 下面所下达的任何指令都是由这个 bash 所衍生出来的，那些被下达的指令就被称为子程序了.</span><br><span class="line">	![程序相关性示意图](img/QQ20180307-115110@2x.png)</span><br><span class="line"></span><br><span class="line">	子程序仅会继承父程序的环境变量， 子程序不会继承父程序的自订变量.所以你在原本 bash 的自订变量在进入了子程序后就会消失不见， 一直到你离开子程序并回到原本的父程序后，这个变量才会又出现！</span><br><span class="line">此时,把自定变量变成环境变量就变得很有必要了:</span><br><span class="line">`export 变量名称`</span><br><span class="line"></span><br><span class="line">如果export后面不加变量名称,就会将系统所有变量列出来,等同于set命令.</span><br><span class="line"></span><br><span class="line">#### 语系变量</span><br><span class="line">- 查看Linux支持的语系</span><br></pre></td></tr></table></figure>
-
-[dmtsai@study ~]$ locale -a
-....（前面省略）....
-zh_TW
-zh_TW.big5     &lt;==大五码的中文编码
-zh_TW.euctw
-zh_TW.utf8     &lt;==万国码的中文编码
-zu_ZA
-zu_ZA.iso88591
-zu_ZA.utf8
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">	</span><br><span class="line">- 修改Linux语系</span><br></pre></td></tr></table></figure>
-
-locale  &lt;==后面不加任何选项与参数即可！
-LANG=en_US                   &lt;==主语言的环境
-LC_CTYPE=&quot;en_US&quot;             &lt;==字符（文字）辨识的编码
-LC_NUMERIC=&quot;en_US&quot;           &lt;==数字系统的显示讯息
-LC_TIME=&quot;en_US&quot;              &lt;==时间系统的显示数据
-LC_COLLATE=&quot;en_US&quot;           &lt;==字串的比较与排序等
-LC_MONETARY=&quot;en_US&quot;          &lt;==币值格式的显示等
-LC_MESSAGES=&quot;en_US&quot;          &lt;==讯息显示的内容，如功能表、错误讯息等
-LC_ALL=                      &lt;==整体语系的环境
-....（后面省略）....
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">	</span><br><span class="line">	可以逐一设置每个与语系有关的变量数据,可也以直接设置LANG或LC_ALL(其它语系变量会被这两个变量所取代).</span><br><span class="line">	</span><br><span class="line">	系统默认语系文件是: **/etc/locale.conf**</span><br><span class="line"></span><br><span class="line">#### 变量范围</span><br><span class="line">环境变量可以被子程序引用的原理:</span><br><span class="line">1. 当启动一个shell,系统会分配一个记忆区给shell使用,使此内存内的变量,即环境变量可让子程序使用.</span><br><span class="line">2. 若父程序用export功能,将自定变量内容写到上述内存区块当中(环境变量).</span><br><span class="line">3. 当载入另一个shell时(亦启动一个子程序,离开原本父程序),子程序可以将父shell的环境变量所在记忆区导入自己的环境变量区块当中.</span><br><span class="line"></span><br><span class="line">#### 变量键盘读取/阵列与宣告</span><br><span class="line">- read命令</span><br><span class="line">	程序执行的过程当中，会等待使用者输入 &quot;yes/no&quot; 之类的讯息,和使用者对谈时使用此命令.</span><br></pre></td></tr></table></figure>
-
-[dmtsai@study ~]$ read [-pt] variable
-选项与参数：
--p  ：后面可以接提示字符！
--t  ：后面可以接等待的“秒数！”这个比较有趣～不会一直等待使用者啦！
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- declare/typeset</span><br><span class="line">	declare 或 typeset 是一样的功能，就是在“宣告变量的类型.</span><br></pre></td></tr></table></figure>
-
-[dmtsai@study ~]$ declare [-aixr] variable
-选项与参数：
--a  ：将后面名为 variable 的变量定义成为阵列 （array） 类型
--i  ：将后面名为 variable 的变量定义成为整数数字 （integer） 类型
--x  ：用法与 export 一样，就是将后面的 variable 变成环境变量；
--r  ：将变量设置成为 readonly 类型，该变量不可被更改内容，也不能 unset
--p     : 仅列出变量类型
-
-范例一：让变量 sum 进行 100+300+50 的加总结果
-[dmtsai@study ~]$ sum=100+300+50
-[dmtsai@study ~]$ echo ${sum}
-100+300+50  &lt;==咦！怎么没有帮我计算加总？因为这是文字体态的变量属性啊！
-[dmtsai@study ~]$ declare -i sum=100+300+50
-[dmtsai@study ~]$ echo ${sum}
-450         &lt;==瞭乎？？
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">	</span><br><span class="line">	&gt; 注意 : bash环境下,变量类型默认为“字串”，所以若不指定变量类型，则 1+2 为一个“字串”而不是“计算式”。 所以上述第一个执行的结果才会出现那个情况的；</span><br><span class="line">bash 环境中的数值运算，默认最多仅能到达整数形态，所以 1/3 结果是 0； </span><br><span class="line"></span><br><span class="line">#### 变量内容删除/取代/替换</span><br><span class="line">***</span><br><span class="line">暂时跳过</span><br><span class="line">***</span><br><span class="line">	</span><br><span class="line">### 系统限制关系 ulimit</span><br></pre></td></tr></table></figure>
-</code></pre><p>[dmtsai@study ~]$ ulimit [-SHacdfltu] [配额]<br>选项与参数：<br>-H  ：hard limit ，严格的设置，必定不能超过这个设置的数值；<br>-S  ：soft limit ，警告的设置，可以超过这个设置值，但是若超过则有警告讯息。<br>      在设置上，通常 soft 会比 hard 小，举例来说，soft 可设置为 80 而 hard<br>      设置为 100，那么你可以使用到 90 （因为没有超过 100），但介于 80~100 之间时，<br>      系统会有警告讯息通知你！<br>-a  ：后面不接任何选项与参数，可列出所有的限制额度；<br>-c  ：当某些程序发生错误时，系统可能会将该程序在内存中的信息写成文件（除错用），<br>      这种文件就被称为核心文件（core file）。此为限制每个核心文件的最大容量。<br>-f  ：此 shell 可以创建的最大文件大小（一般可能设置为 2GB）单位为 KBytes<br>-d  ：程序可使用的最大断裂内存（segment）容量；<br>-l  ：可用于锁定 （lock） 的内存量<br>-t  ：可使用的最大 CPU 时间 （单位为秒）<br>-u  ：单一使用者可以使用的最大程序（process）数量。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 命令别名与历史命令</span><br><span class="line">#### 别名设置 alias / unalias</span><br></pre></td></tr></table></figure></p>
-<p>#设置别名<br>[dmtsai@study ~]$ alias lm=’ls -al | more</p>
-<p>#取消别名<br>[dmtsai@study ~]$ unalias lm<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt; 设置别名,在机器重启后将丢失,如果想永久存在,需要写在~/.bash_profile文件内</span><br><span class="line"></span><br><span class="line">#### 历史命令 history</span><br><span class="line">历史命令记录在~/.bash_history文件中,记录的数量由HISTFILESIZE环境变量决定.</span><br></pre></td></tr></table></figure></p>
-<p>[dmtsai@study ~]$ history [-raw] histfiles<br>选项与参数：<br>n   ：数字，意思是“要列出最近的 n 笔命令列表”的意思！<br>-c  ：将目前的 shell 中的所有 history 内容全部消除<br>-a  ：将目前新增的 history 指令新增入 histfiles 中，若没有加 histfiles ，<br>      则默认写入 ~/.bash_history<br>-r  ：将 histfiles 的内容读到目前这个 shell 的 history 记忆中；<br>-w  ：将目前的 history 记忆内容写入 histfiles 中！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 历史命令的使用:</span><br></pre></td></tr></table></figure></p>
-<pre><code>[dmtsai@study ~]$ !
-选项与参数：
-number  ：执行第几笔指令的意思；
-command ：由最近的指令向前搜寻“指令串开头为 command”的那个指令，并执行；
-!!      ：就是执行上一个指令（相当于按↑按键后，按 Enter）
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 同一帐号同时多次登陆的history写入问题</span><br><span class="line"></span><br><span class="line">	因为这些 bash 在同时以同一个身份登陆， 因此所有的 bash 都有自己的 1000 笔记录在内存中。因为等到登出时才会更新记录文件，所以，最后登出的那个 bash 才会是最后写入的数据。如此一来其他 bash 的指令操作就不会被记录下来了 （其实有被记录，只是被后来的最后一个 bash 所覆盖更新了） 。</span><br><span class="line"></span><br><span class="line">- 历史命令时间问题</span><br><span class="line">	历史命令还有一个问题，那就是无法记录指令下达的时间。由于这 1000 笔历史命令是依序记录的， 但是并没有记录时间，所以在查询方面会有一些不方便。其实可以通过~/.bash_logout 来进行 history 的记录，并加上 date 来增加时间参数.</span><br><span class="line"></span><br><span class="line">## Bash Shell操作环境</span><br><span class="line"></span><br><span class="line">### Bash 进站欢迎信息 /etc/issue  /etc/motd</span><br></pre></td></tr></table></figure>
-</code></pre><p>issue 内的各代码意义:<br>    \d 本地端时间的日期；<br>    \l 显示第几个终端机接口；<br>    \m 显示硬件的等级 （i386/i486/i586/i686…）；<br>    \n 显示主机的网络名称；<br>    \O 显示 domain name；<br>    \r 操作系统的版本 （相当于 uname -r）<br>    \t 显示本地端时间的时间；<br>    \S 操作系统的名称；<br>    \v 操作系统的版本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt; 当我们使用 telnet 连接到主机时，主机的登陆画面就会显示 /etc/issue.net 而不是 /etc/issue</span><br><span class="line">&gt; /etc/motd 里面显示的则是文字信息</span><br><span class="line"></span><br><span class="line">### bash环境配置文件</span><br><span class="line">#### login与non-login Shell</span><br><span class="line">- login shell：取得 bash 时需要完整的登陆流程的，就称为 login shell。举例来说，你要由 tty1 ~ tty6 登陆，需要输入使用者的帐号与密码，此时取得的 bash 就称为“ login shell ”</span><br><span class="line"></span><br><span class="line">- non-login shell：取得 bash 接口的方法不需要重复登陆的举动，举例来说，（1）你以 X window 登陆 Linux 后， 再以 X 的图形化接口启动终端机，此时那个终端接口并没有需要再次的输入帐号与密码，那个 bash 的环境就称为 non-login shell了。（2）你在原本的 bash 环境下再次下达 bash 这个指令，同样的也没有输入帐号密码， 那第二个 bash （子程序） 也是 non-login shell 。</span><br><span class="line"></span><br><span class="line">&gt; 这两个Shell，读取的配置文件数据并不一样.</span><br><span class="line"></span><br><span class="line">#### /etc/profile (login Shell读取)</span><br><span class="line">这个配置文件可以利用使用者的识别码 （UID） 来决定很多重要的变量数据， 也是每个使用者登陆取得 bash 时一定会读取的配置文件.所以设置全局环境就要改这个文件!</span><br></pre></td></tr></table></figure></p>
-<p>主要变量:<br>PATH：会依据 UID 决定 PATH 变量要不要含有 sbin 的系统指令目录；<br>MAIL：依据帐号设置好使用者的 mailbox 到 /var/spool/mail/帐号名；<br>USER：根据使用者的帐号设置此一变量内容；<br>HOSTNAME：依据主机的 hostname 指令决定此一变量内容；<br>HISTSIZE：历史命令记录笔数。CentOS 7.x 设置为 1000 ；<br>umask：包括 root 默认为 022 而一般用户为 002 等！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt; /etc/profile 还会调用外部的设置数据,主要有如下:</span><br><span class="line"></span><br><span class="line">- /etc/profile.d/*.sh</span><br><span class="line">	“这个目录内的众多文件！只要在 /etc/profile.d/ 这个目录内且扩展名为 .sh ，另外，使用者能够具有 r 的权限， 那么该文件就会被 /etc/profile 调用进来。在 CentOS 7.x 中，这个目录下面的文件规范了 bash 操作接口的颜色、 语系、ll 与 ls 指令的命令别名、vi 的命令别名、which 的命令别名等等。如果你需要帮所有使用者设置一些共享的命令别名时， 可以在这个目录下面自行创建扩展名为 .sh 的文件，并将所需要的数据写入即可！</span><br><span class="line"></span><br><span class="line">- /etc/locale.conf</span><br><span class="line">	这个文件是由 /etc/profile.d/lang.sh 调用进来的！这也是我们决定 bash 默认使用何种语系的重要配置文件！ 文件里最重要的就是 LANG/LC_ALL 这些个变量的设置！</span><br><span class="line"></span><br><span class="line">- /usr/share/bash-completion/completions/*</span><br><span class="line">	这个目录下除前面谈过 [tab] 命令补齐、文件名补齐之外，还可以进行指令的选项/参数补齐功能！那就是从这个目录里面找到相对应的指令来处理的！ 其实这个目录下面的内容是由 /etc/profile.d/bash_completion.sh 这个文件载入的啦！</span><br><span class="line"></span><br><span class="line">#### ~/.bash_profile (login Shell读取)</span><br><span class="line">bash 在读完了整体环境设置的 /etc/profile 并借此调用其他配置文件后，接下来则是会读取使用者的个人配置文件。 在 login shell 的 bash 环境中，所读取的个人偏好配置文件其实主要有三个，依序分别是：</span><br></pre></td></tr></table></figure></p>
-<ol>
-<li>~/.bash_profile</li>
-<li>~/.bash_login</li>
-<li>~/.profile<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">其实 bash 的 login shell 设置只会读取上面三个文件的其中一个， 而读取的顺序则是依照上面的顺序。也就是说，如果 ~/.bash_profile 存在，那么其他两个文件不论有无存在，都不会被读取。 如果 ~/.bash_profile 不存在才会去读取 ~/.bash_login，而前两者都不存在才会读取 ~/.profile 的意思。 会有这么多的文件，其实是因应其他 shell 转换过来的使用者的习惯而已。</span><br><span class="line"></span><br><span class="line">![shell 读取流程](img/QQ20180315-174127@2x.png)</span><br><span class="line"></span><br><span class="line">#### source 读入环境配置文件指令</span><br><span class="line">由于 /etc/profile 与 ~/.bash_profile 都是在取得 login shell 的时候才会读取的配置文件，所以， 如果你将自己的偏好设置写入上述的文件后，通常都是得登出再登陆后，该设置才会生效。利用这个指令可以直接生效!</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>[dmtsai@study ~]$ source 配置文件文件名</p>
-<p>范例：将主文件夹的 ~/.bashrc 的设置读入目前的 bash 环境中<br>[dmtsai@study ~]$ source ~/.bashrc  &lt;==下面这两个指令是一样的！<br>[dmtsai@study ~]$  .  ~/.bashrc<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### ~/.bashrc （non-login shell 读取）</span><br><span class="line">CentOS 7.x 还会主动的调用 /etc/bashrc 这个文件</span><br></pre></td></tr></table></figure></p>
-<p>/etc/bashrc文件记录内容</p>
-<ol>
-<li>依据不同的 UID 规范出 umask 的值；</li>
-<li>依据不同的 UID 规范出提示字符 （就是 PS1 变量）；</li>
-<li>调用 /etc/profile.d/*.sh 的设置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt; /etc/bashrc文件是Red Hat系统特有的,如果此文件丢失,可以复制 /etc/skel/.bashrc 到你的主文件夹.</span><br><span class="line"></span><br><span class="line">### 终端机环境设置 stty , set</span><br><span class="line">#### stty命令 </span><br><span class="line">查阅目前的一些按键内容</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>[dmtsai@study ~]$ stty [-a]<br>选项与参数：<br>-a  ：将目前所有的 stty 参数列出来；</p>
-<p>#列出所有的按键与按键内容<br>[dmtsai@study ~]$ stty -a<br>speed 38400 baud; rows 20; columns 90; line = 0;<br>intr = ^C; quit = ^\; erase = ^?; kill = ^U; eof = ^D; eol = <undef>; eol2 = <undef>;<br>swtch = <undef>; start = ^Q; stop = ^S; susp = ^Z; rprnt = ^R; werase = ^W; lnext = ^V;<br>flush = ^O; min = 1; time = 0;<br>….（以下省略）….</undef></undef></undef></p>
-<p>#设置按键<br>[dmtsai@study ~]$ stty erase ^h</p>
-<p>意义:<br>intr  : 送出一个 interrupt （中断） 的讯号给目前正在 执行的程序 （就是终止啰！）；<br>quit  : 送出一个 quit 的讯号给目前正在执行的程序；<br>erase : 向后删除字符，<br>kill  : 删除在目前命令行上的所有文字；<br>eof   : End of file 的意思，代表“结束输入”。<br>start : 在某个程序停止后，重新启动他的 output<br>stop  : 停止目前屏幕的输出；<br>susp  : 送出一个 terminal stop 的讯号给正在 run 的程序。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### set命令</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">暂无</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">### 万用字符与特殊符号</span><br><span class="line">万用字符:</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>代表“ 0 个到无穷多个”任意字符<br>?    代表“一定有一个”任意字符<br>[]    同样代表“一定有一个在括号内”的字符（非任意字符）。例如 [abcd] 代表“一定有一个字符， 可能是 a, b, c, d 这四个任何一个”</li>
-</ul>
-<p>[-]    若有减号在中括号内时，代表“在编码顺序内的所有字符”。例如 [0-9] 代表 0 到 9 之间的所有数字，因为数字的语系编码是连续的！</p>
-<p>[^]    若中括号内的第一个字符为指数符号 （^） ，那表示“反向选择”，例如 [^abc] 代表 一定有一个字符，只要是非 a, b, c 的其他字符就接受的意思。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">特殊字符:</span><br></pre></td></tr></table></figure></p>
-<h1 id="注解符号：这个最常被使用在-script-当中，视为说明！在后的数据均不执行"><a href="#注解符号：这个最常被使用在-script-当中，视为说明！在后的数据均不执行" class="headerlink" title="注解符号：这个最常被使用在 script 当中，视为说明！在后的数据均不执行"></a>注解符号：这个最常被使用在 script 当中，视为说明！在后的数据均不执行</h1><p>\    跳脱符号：将“特殊字符或万用字符”还原成一般字符<br>|    管线 （pipe）：分隔两个管线命令的界定（后两节介绍）；<br>;    连续指令下达分隔符号：连续性命令的界定 （注意:与管线命令并不相同）<br>~    使用者的主文件夹<br>$    取用变量前置字符：亦即是变量之前需要加的变量取代值<br>&amp;    工作控制 （job control）：将指令变成背景下工作<br>!    逻辑运算意义上的“非” not 的意思！<br>/    目录符号：路径分隔的符号</p>
-<blockquote>
-<p>, &gt;&gt;    数据流重导向：输出导向，分别是“取代”与“累加”<br>&lt;, &lt;&lt;    数据流重导向：输入导向<br>‘’    单引号，不具有变量置换的功能 （$ 变为纯文本）<br>“”    具有变量置换的功能！ （$ 可保留相关功能）<br><code></code>    两个“ ` ”中间为可以先执行的指令，亦可使用 $（ ）<br>()    在中间为子 shell 的起始与结束<br>{}    在中间为命令区块的组合！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">## 数据流重导向</span><br><span class="line">### 数据流输入/输出</span><br><span class="line">***标准输出***:指的是“指令执行所回传的正确的讯息”  </span><br><span class="line">***标准错误输出***:“ 指令执行失败后，所回传的错误讯息”  </span><br><span class="line"></span><br><span class="line">&gt; 标准输入　　（stdin） ：代码为 0 ，使用 &lt; 或 &lt;&lt; ；  </span><br><span class="line">&gt; 标准输出　　（stdout）：代码为 1 ，使用 &gt; 或 &gt;&gt; ；  </span><br><span class="line">&gt; 标准错误输出（stderr）：代码为 2 ，使用 2&gt; 或 2&gt;&gt; ；</span><br><span class="line"></span><br><span class="line">#### /dev/null 垃圾桶黑洞设备与特殊写法</span><br><span class="line">/dev/null 可以吃掉任何导向这个设备的信息 </span><br><span class="line"></span><br><span class="line">#### 2&gt;&amp; | &amp;&gt;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<pre><code>#将指令的数据全部写入名为 list 的文件中(包括错误信息)
-[dmtsai@study ~]$ find /home -name .bashrc &gt; list 2&gt;&amp;1    
-[dmtsai@study ~]$ find /home -name .bashrc &amp;&gt; list        
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#### 标准输入</span><br></pre></td></tr></table></figure>
-</code></pre><p>#利用 cat 指令来创建一个文件的简单流程<br>[dmtsai@study ~]$ cat &gt; catfile<br>testing<br>cat file test<br>&lt;==这里按下 [ctrl]+d 来离开</p>
-<p>[dmtsai@study ~]$ cat catfile<br>testing<br>cat file test</p>
-<p>#用 stdin 取代键盘的输入以创建新文件的简单流程<br>[dmtsai@study ~]$ cat &gt; catfile &lt; ~/.bashrc<br>[dmtsai@study ~]$ ll catfile ~/.bashrc</p>
-<h1 id="注意看，这两个文件的大小会一模一样！几乎像是使用-cp-来复制一般！"><a href="#注意看，这两个文件的大小会一模一样！几乎像是使用-cp-来复制一般！" class="headerlink" title="注意看，这两个文件的大小会一模一样！几乎像是使用 cp 来复制一般！"></a>注意看，这两个文件的大小会一模一样！几乎像是使用 cp 来复制一般！</h1><p>-rw-r–r–. 1 dmtsai dmtsai 231 Mar  6 06:06 /home/dmtsai/.bashrc<br>-rw-rw-r–. 1 dmtsai dmtsai 231 Jul  9 18:58 catfile</p>
-<p>#用 cat 直接将输入的讯息输出到 catfile 中， 且当由键盘输入 eof 时，该次输入就结束<br>[dmtsai@study ~]$ cat &gt; catfile &lt;&lt; “eof”</p>
-<blockquote>
-<p>This is a test.<br>OK now stop<br>eof  &lt;==输入这关键字，立刻就结束而不需要输入 [ctrl]+d</p>
-</blockquote>
-<p>[dmtsai@study ~]$ cat catfile<br>This is a test.<br>OK now stop     &lt;==只有这两行，不会存在关键字那一行！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 命令执行的判断依据 ;  &amp;&amp;  ||</span><br><span class="line">#### 不考虑指令相关性的连续指令下达 cmd;cmd</span><br></pre></td></tr></table></figure></p>
-<p>[root@study ~]# sync; sync; shutdown -h now<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### $? （指令回传值） 与 &amp;&amp; 或 ||</span><br><span class="line">若前一个指令执行的结果为正确，在 Linux 下面会回传一个 $? = 0 的值</span><br><span class="line"></span><br><span class="line">&lt;table&gt;</span><br><span class="line">	&lt;tr&gt;</span><br><span class="line">		&lt;th&gt;指令&lt;/th&gt;</span><br><span class="line">		&lt;th&gt;说明&lt;/th&gt;</span><br><span class="line">	&lt;/tr&gt;</span><br><span class="line">	&lt;tr&gt;</span><br><span class="line">		&lt;td&gt;cmd1 &amp;&amp; cmd2&lt;/td&gt;</span><br><span class="line">		&lt;td&gt;</span><br><span class="line">		1. 若 cmd1 执行完毕且正确执行（$?=0），则开始执行 cmd2。&lt;br/&gt;  </span><br><span class="line">		2. 若 cmd1 执行完毕且为错误 （$?≠0），则 cmd2 不执行。&lt;/td&gt;</span><br><span class="line">	&lt;/tr&gt;</span><br><span class="line">	&lt;tr&gt;</span><br><span class="line">		&lt;td&gt;cmd1 || cmd2&lt;/td&gt;</span><br><span class="line">		&lt;td&gt;</span><br><span class="line">		1. 若 cmd1 执行完毕且正确执行（$?=0），则 cmd2 不执行。&lt;br/&gt;  </span><br><span class="line">		2. 若 cmd1 执行完毕且为错误 （$?≠0），则开始执行 cmd2。&lt;/td&gt;</span><br><span class="line">	&lt;/tr&gt;</span><br><span class="line">&lt;/table&gt;</span><br></pre></td></tr></table></figure></p>
-<p>[dmtsai@study ~]$ ls /tmp/abc || mkdir /tmp/abc &amp;&amp; touch /tmp/abc/hehe<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Linux 下面的指令都是由左往右执行,上面执行结果:  </span><br><span class="line">*情况一:*  </span><br><span class="line">（1）若 /tmp/abc 不存在故回传 $?≠0，则  </span><br><span class="line">（2）因为 || 遇到非为 0 的 \$? 故开始 mkdir /tmp/abc，由于 mkdir /tmp/abc 会成功进行，所以回传 \$?=0   </span><br><span class="line">（3）因为 &amp;&amp; 遇到 \$?=0 故会执行 touch /tmp/abc/hehe，最终 hehe 就被创建了；</span><br><span class="line"></span><br><span class="line">*情况二:*  </span><br><span class="line">（1）若 /tmp/abc 存在故回传 $?=0，则  </span><br><span class="line">（2）因为 || 遇到 0 的 $? 不会进行，此时 $?=0 继续向后传，故   </span><br><span class="line">（3）因为 &amp;&amp; 遇到 \$?=0 就开始创建 /tmp/abc/hehe 了！最终 /tmp/abc/hehe 被创建起来。</span><br><span class="line"></span><br><span class="line">![指令执行关系示意图](img/QQ20180316-134233@2x.png)</span><br></pre></td></tr></table></figure></p>
-<p>ls /tmp/vbirding || echo “not exist” &amp;&amp; echo “exist”</p>
-<p>#返回结果:<br>not exist<br>exist<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt; 由于指令是一个接着一个去执行的，因此，如果真要使用判断， 那么这个 &amp;&amp; 与 || 的顺序就不能搞错(如上面例子).  </span><br><span class="line">&gt; 一般来说，假设判断式有三个，也就是：  </span><br><span class="line">&gt; command1 &amp;&amp; command2 || command3</span><br><span class="line"></span><br><span class="line">## 管线命令(pipe)</span><br><span class="line">**管线命令使用的是“ | ”这个界定符号！ 另外，管线命令与“连续下达命令”是不一样！**   </span><br><span class="line">**管线命令“ | ”仅能处理经由前面一个指令传来的正确信息，也就是 standard output 的信息，对于 stdandard error 并没有直接处理的能力.**  </span><br><span class="line">**每个管线后面接的第一个数据必定是“指令”喔！而且这个指令必须要能够接受 standard input 的数据才行，这样的指令才可以是为“管线命令”**</span><br><span class="line"></span><br><span class="line">### 撷取命令 cut grep</span><br><span class="line">#### cut</span><br><span class="line">将一段讯息的某一段给他“切”出来～ 处理的讯息是以“行”为单位</span><br></pre></td></tr></table></figure></p>
-<p>[dmtsai@study ~]$ cut -d’分隔字符’ -f fields &lt;==用于有特定分隔字符<br>[dmtsai@study ~]$ cut -c 字符区间            &lt;==用于排列整齐的讯息<br>选项与参数：<br>-d  ：后面接分隔字符。与 -f 一起使用；<br>-f  ：依据 -d 的分隔字符将一段讯息分区成为数段，用 -f 取出第几段的意思；<br>-c  ：以字符 （characters） 的单位取出固定字符区间；</p>
-<p>[dmtsai@study ~]$ echo ${PATH} | cut -d ‘:’ -f 5 #显示切割后的第5个<br>[dmtsai@study ~]$ echo ${PATH} | cut -d ‘:’ -f 3,5 #显示切割后的3-5个<br>[dmtsai@study ~]$ echo ${PATH} | cut -d ‘:’ -f 3- #显示切割后的3到最后一个</p>
-<p>#将 export 输出的讯息，取得第 12 字符以后的所有字串<br>[dmtsai@study ~]$ export<br>declare -x HISTCONTROL=”ignoredups”<br>declare -x HISTSIZE=”1000”<br>declare -x HOME=”/home/dmtsai”<br>declare -x HOSTNAME=”study.centos.vbird”<br>…..（其他省略）…..</p>
-<h1 id="注意看，每个数据都是排列整齐的输出！如果我们不想要“-declare-x-”时，就得这么做："><a href="#注意看，每个数据都是排列整齐的输出！如果我们不想要“-declare-x-”时，就得这么做：" class="headerlink" title="注意看，每个数据都是排列整齐的输出！如果我们不想要“ declare -x ”时，就得这么做："></a>注意看，每个数据都是排列整齐的输出！如果我们不想要“ declare -x ”时，就得这么做：</h1><p>[dmtsai@study ~]$ export | cut -c 12-<br>HISTCONTROL=”ignoredups”<br>HISTSIZE=”1000”<br>HOME=”/home/dmtsai”<br>HOSTNAME=”study.centos.vbird”<br>…..（其他省略）…..<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### grep</span><br></pre></td></tr></table></figure></p>
-<p>[dmtsai@study ~]$ grep [-acinv] [–color=auto] ‘搜寻字串’ filename<br>选项与参数：<br>-a ：将 binary 文件以 text 文件的方式搜寻数据<br>-c ：计算找到 ‘搜寻字串’ 的次数<br>-i ：忽略大小写的不同，所以大小写视为相同<br>-n ：顺便输出行号<br>-v ：反向选择，亦即显示出没有 ‘搜寻字串’ 内容的那一行！<br>–color=auto ：可以将找到的关键字部分加上颜色的显示喔！<br>-A : 后面可加数字，为 after 的意思，除了列出该行外，后续的 n 行也列出来；<br>-B : 后面可加数字，为 before 的意思，除了列出该行外，前面的 n 行也列出来；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 排序命令 sort wc uniq</span><br><span class="line">#### sort</span><br></pre></td></tr></table></figure></p>
-<p>[dmtsai@study ~]$ sort [-fbMnrtuk] [file or stdin]<br>选项与参数：<br>-f  ：忽略大小写的差异，例如 A 与 a 视为编码相同；<br>-b  ：忽略最前面的空白字符部分；<br>-M  ：以月份的名字来排序，例如 JAN, DEC 等等的排序方法；<br>-n  ：使用“纯数字”进行排序（默认是以文字体态来排序的）；<br>-r  ：反向排序；<br>-u  ：就是 uniq ，相同的数据中，仅出现一行代表；<br>-t  ：分隔符号，默认是用 [tab] 键来分隔；<br>-k  ：以那个区间 （field） 来进行排序的意思</p>
-<p>#/etc/passwd 内容是以 : 来分隔的，我想以第三栏来排序，该如何？<br>[dmtsai@study ~]$ cat /etc/passwd | sort -t ‘:’ -k 3<br>root:x:0:0:root:/root:/bin/bash<br>dmtsai:x:1000:1000:dmtsai:/home/dmtsai:/bin/bash<br>alex:x:1001:1002::/home/alex:/bin/bash<br>arod:x:1002:1003::/home/arod:/bin/bash</p>
-<h1 id="看到特殊字体的输出部分了吧？怎么会这样排列啊？呵呵！没错啦～"><a href="#看到特殊字体的输出部分了吧？怎么会这样排列啊？呵呵！没错啦～" class="headerlink" title="看到特殊字体的输出部分了吧？怎么会这样排列啊？呵呵！没错啦～"></a>看到特殊字体的输出部分了吧？怎么会这样排列啊？呵呵！没错啦～</h1><h1 id="如果是以文字体态来排序的话，原本就会是这样，想要使用数字排序："><a href="#如果是以文字体态来排序的话，原本就会是这样，想要使用数字排序：" class="headerlink" title="如果是以文字体态来排序的话，原本就会是这样，想要使用数字排序："></a>如果是以文字体态来排序的话，原本就会是这样，想要使用数字排序：</h1><h1 id="cat-etc-passwd-sort-t-‘-’-k-3-n"><a href="#cat-etc-passwd-sort-t-‘-’-k-3-n" class="headerlink" title="cat /etc/passwd | sort -t ‘:’ -k 3 -n"></a>cat /etc/passwd | sort -t ‘:’ -k 3 -n</h1><h1 id="这样才行啊！用那个-n-来告知-sort-以数字来排序啊！"><a href="#这样才行啊！用那个-n-来告知-sort-以数字来排序啊！" class="headerlink" title="这样才行啊！用那个 -n 来告知 sort 以数字来排序啊！"></a>这样才行啊！用那个 -n 来告知 sort 以数字来排序啊！</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### uniq</span><br><span class="line">重复的数据仅列出一个显示</span><br></pre></td></tr></table></figure>
-<p>[dmtsai@study ~]$ uniq [-ic]<br>选项与参数：<br>-i  ：忽略大小写字符的不同；<br>-c  ：进行计数</p>
-<p>#使用 last 将帐号列出，仅取出帐号栏，进行排序后仅取出一位；<br>[dmtsai@study ~]$ last | cut -d ‘ ‘ -f1 | sort | uniq</p>
-<p>#承上,继续显示每个帐号登录次数<br>[dmtsai@study ~]$ last | cut -d ‘ ‘ -f1 | sort | uniq -c<br>      1<br>      6 （unknown<br>     47 dmtsai<br>      4 reboot<br>      7 root<br>      1 wtmp<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### wc</span><br></pre></td></tr></table></figure></p>
-<p>[dmtsai@study ~]$ wc [-lwm]<br>选项与参数：<br>-l  ：仅列出行；<br>-w  ：仅列出多少字（英文单字）；<br>-m  ：多少字符；</p>
-<p>#/etc/man_db.conf 里面到底有多少相关字、行、字符数？<br>[dmtsai@study ~]$ cat /etc/man_db.conf | wc<br>    131     723    5171</p>
-<h1 id="输出的三个数字中，分别代表：-“行、字数、字符数"><a href="#输出的三个数字中，分别代表：-“行、字数、字符数" class="headerlink" title="输出的三个数字中，分别代表： “行、字数、字符数"></a>输出的三个数字中，分别代表： “行、字数、字符数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 双重导向tee</span><br><span class="line">可以让 standard output 转存一份到文件内并将同样的数据继续送到屏幕去处理.</span><br><span class="line">![tee工作流程示意图](img/QQ20180319-161532@2x.png)</span><br></pre></td></tr></table></figure>
-<p>[dmtsai@study ~]$ tee [-a] file<br>选项与参数：<br>-a  ：以累加 （append） 的方式，将数据加入 file 当中！</p>
-<p>[dmtsai@study ~]$ ls -l /home | tee ~/homefile | more</p>
-<h1 id="将-ls-的数据存一份到-homefile-，同时屏幕也有输出讯息！"><a href="#将-ls-的数据存一份到-homefile-，同时屏幕也有输出讯息！" class="headerlink" title="将 ls 的数据存一份到 ~/homefile ，同时屏幕也有输出讯息！"></a>将 ls 的数据存一份到 ~/homefile ，同时屏幕也有输出讯息！</h1><p>[dmtsai@study ~]$ ls -l / | tee -a ~/homefile | more</p>
-<h1 id="要注意！-tee-后接的文件会被覆盖，若加上-a-这个选项则能将讯息累加。"><a href="#要注意！-tee-后接的文件会被覆盖，若加上-a-这个选项则能将讯息累加。" class="headerlink" title="要注意！ tee 后接的文件会被覆盖，若加上 -a 这个选项则能将讯息累加。"></a>要注意！ tee 后接的文件会被覆盖，若加上 -a 这个选项则能将讯息累加。</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 字符转换命令 tr, col, join, paste, expand</span><br><span class="line">#### tr </span><br><span class="line">tr 可以用来删除一段讯息当中的文字，或者是进行文字讯息的替换！</span><br></pre></td></tr></table></figure>
-<p>[dmtsai@study ~]$ tr [-ds] SET1 …<br>选项与参数：<br>-d  ：删除讯息当中的 SET1 这个字串；<br>-s  ：取代掉重复的字符！</p>
-<p>#将 last 输出的讯息中，所有的小写变成大写字符：<br>[dmtsai@study ~]$ last | tr ‘[a-z]’ ‘[A-Z]’</p>
-<h1 id="不加单引号也是可以执行的，如：“-last-tr-a-z-A-Z-”"><a href="#不加单引号也是可以执行的，如：“-last-tr-a-z-A-Z-”" class="headerlink" title="不加单引号也是可以执行的，如：“ last | tr [a-z] [A-Z] ”"></a>不加单引号也是可以执行的，如：“ last | tr [a-z] [A-Z] ”</h1><p>#将 /etc/passwd 输出的讯息中，将冒号 （:） 删除<br>[dmtsai@study ~]$ cat /etc/passwd | tr -d ‘:’<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### col </span><br><span class="line">用来简单的处理将 [tab] 按键取代成为空白键.(***还有其它用途???***)</span><br></pre></td></tr></table></figure></p>
-<p>[dmtsai@study ~]$ col [-xb]<br>选项与参数：<br>-x  ：将 tab 键转换成对等的空白键</p>
-<p>#利用 cat -A 显示出所有特殊按键，最后以 col 将 [tab] 转成空白<br>[dmtsai@study ~]$ cat -A /etc/man_db.conf  &lt;==此时会看到很多 ^I 的符号，那就是 tab<br>[dmtsai@study ~]$ cat /etc/man_db.conf | col -x | cat -A | more<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 分区命令 split</span><br><span class="line">如果有文件太大，导致一些携带式设备无法复制的问题，split 可以将一个大文件，依据文件大小或行数来分区，就可以将大文件分区成为小文件了</span><br></pre></td></tr></table></figure></p>
-<p>[dmtsai@study ~]$ split [-bl] file PREFIX<br>选项与参数：<br>-b  ：后面可接欲分区成的文件大小，可加单位，例如 b, k, m 等；<br>-l  ：以行数来进行分区。<br>PREFIX ：代表前置字符的意思，可作为分区文件的前导文字。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">`范例一`：我的 /etc/services 有六百多K，若想要分成 300K 一个文件时？</span><br></pre></td></tr></table></figure></p>
-<p>[dmtsai@study ~]$ cd /tmp; split -b 300k /etc/services services<br>[dmtsai@study tmp]$ ll -k services*<br>-rw-rw-r–. 1 dmtsai dmtsai 307200 Jul  9 22:52 servicesaa<br>-rw-rw-r–. 1 dmtsai dmtsai 307200 Jul  9 22:52 servicesab<br>-rw-rw-r–. 1 dmtsai dmtsai  55893 Jul  9 22:52 servicesac</p>
-<h1 id="那个文件名可以随意取的啦！我们只要写上前导文字，小文件就会以xxxaa-xxxab-xxxac-等方式来创建小文件的！"><a href="#那个文件名可以随意取的啦！我们只要写上前导文字，小文件就会以xxxaa-xxxab-xxxac-等方式来创建小文件的！" class="headerlink" title="那个文件名可以随意取的啦！我们只要写上前导文字，小文件就会以xxxaa, xxxab, xxxac 等方式来创建小文件的！"></a>那个文件名可以随意取的啦！我们只要写上前导文字，小文件就会以xxxaa, xxxab, xxxac 等方式来创建小文件的！</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">`“范例二`：如何将上面的三个小文件合成一个文件，文件名为 servicesback</span><br></pre></td></tr></table></figure>
-<p>#用数据流重导向合成文件<br>[dmtsai@study tmp]$ cat services* &gt;&gt; servicesback<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">`范例三`：使用 ls -al / 输出的信息中，每十行记录成一个文件</span><br></pre></td></tr></table></figure></p>
-<p>[dmtsai@study tmp]$ ls -al / | split -l 10 - lsroot<br>[dmtsai@study tmp]$ wc -l lsroot*<br>  10 lsrootaa<br>  10 lsrootab<br>   4 lsrootac<br>  24 total</p>
-<h1 id="重点在那个-啦！一般来说，如果需要-stdout-stdin-时，但偏偏又没有文件，有的只是-时，那么那个-就会被当成-stdin-或-stdout-～"><a href="#重点在那个-啦！一般来说，如果需要-stdout-stdin-时，但偏偏又没有文件，有的只是-时，那么那个-就会被当成-stdin-或-stdout-～" class="headerlink" title="重点在那个 - 啦！一般来说，如果需要 stdout/stdin 时，但偏偏又没有文件，有的只是 - 时，那么那个 - 就会被当成 stdin 或 stdout ～"></a>重点在那个 - 啦！一般来说，如果需要 stdout/stdin 时，但偏偏又没有文件，有的只是 - 时，那么那个 - 就会被当成 stdin 或 stdout ～</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 参数代换 xargs</span><br></pre></td></tr></table></figure>
-<p>[dmtsai@study ~]$ xargs [-0epn] command<br>选项与参数：<br>-0  ：如果输入的 stdin 含有特殊字符，例如 `, \, 空白键等等字符时，这个 -0 参数<br>      可以将他还原成一般字符。这个参数可以用于特殊状态！<br>-e  ：这个是 EOF （end of file） 的意思。后面可以接一个字符串，当 xargs 分析到这个字串时，就会停止继续工作！<br>-p  ：在执行每个指令的 argument 时，都会询问使用者的意思；<br>-n  ：后面接次数，每次 command 指令执行时，要使用几个参数的意思。<br>当 xargs 后面没有接任何的指令时，默认是以 echo 来进行输出喔！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">`范例一`：将 /etc/passwd 内的第一栏取出，仅取三行，使用 id 这个指令将每个帐号内容秀出来.</span><br></pre></td></tr></table></figure></p>
-<p>[dmtsai@study ~]$ id root<br>uid=0（root） gid=0（root） groups=0（root）   </p>
-<h1 id="这个-id-指令可以查询使用者的-UID-GID-等信息"><a href="#这个-id-指令可以查询使用者的-UID-GID-等信息" class="headerlink" title="这个 id 指令可以查询使用者的 UID/GID 等信息"></a>这个 id 指令可以查询使用者的 UID/GID 等信息</h1><p>[dmtsai@study ~]$ id $(cut -d ‘:’ -f 1 /etc/passwd | head -n 3)</p>
-<h1 id="虽然使用-（cmd）-可以预先取得参数，但可惜的是，-id-这个指令“仅”能接受一个参数而已！"><a href="#虽然使用-（cmd）-可以预先取得参数，但可惜的是，-id-这个指令“仅”能接受一个参数而已！" class="headerlink" title="虽然使用 $（cmd） 可以预先取得参数，但可惜的是， id 这个指令“仅”能接受一个参数而已！"></a>虽然使用 $（cmd） 可以预先取得参数，但可惜的是， id 这个指令“仅”能接受一个参数而已！</h1><h1 id="所以上述的这个指令执行会出现错误！根本不会显示用户的-ID-啊！"><a href="#所以上述的这个指令执行会出现错误！根本不会显示用户的-ID-啊！" class="headerlink" title="所以上述的这个指令执行会出现错误！根本不会显示用户的 ID 啊！"></a>所以上述的这个指令执行会出现错误！根本不会显示用户的 ID 啊！</h1><p>[dmtsai@study ~]$ cut -d ‘:’ -f 1 /etc/passwd | head -n 3 | id<br>uid=1000 (dmtsai) gid=1000 (dmtsai) groups=1000 (dmtsai),10(wheel)</p>
-<h1 id="因为-id-并不是管线命令，因此在上面这个指令执行后，前面的东西通通不见！只会执行-id！"><a href="#因为-id-并不是管线命令，因此在上面这个指令执行后，前面的东西通通不见！只会执行-id！" class="headerlink" title="因为 id 并不是管线命令，因此在上面这个指令执行后，前面的东西通通不见！只会执行 id！"></a>因为 id 并不是管线命令，因此在上面这个指令执行后，前面的东西通通不见！只会执行 id！</h1><p>[dmtsai@study ~]$ cut -d ‘:’ -f 1 /etc/passwd | head -n 3 | xargs id</p>
-<h1 id="依旧会出现错误！这是因为-xargs-一口气将全部的数据通通丢给-id-处理～但id-就接受-1-个参数！"><a href="#依旧会出现错误！这是因为-xargs-一口气将全部的数据通通丢给-id-处理～但id-就接受-1-个参数！" class="headerlink" title="依旧会出现错误！这是因为 xargs 一口气将全部的数据通通丢给 id 处理～但id 就接受 1 个参数！"></a>依旧会出现错误！这是因为 xargs 一口气将全部的数据通通丢给 id 处理～但id 就接受 1 个参数！</h1><p>[dmtsai@study ~]$ cut -d ‘:’ -f 1 /etc/passwd | head -n 3 | xargs -n 1 id<br>uid=0（root） gid=0（root） groups=0（root）<br>uid=1（bin） gid=1（bin） groups=1（bin）<br>uid=2（daemon） gid=2（daemon） groups=2（daemon）</p>
-<h1 id="通过-n-来处理，一次给予一个参数，因此上述的结果就-OK-正常的显示啰！"><a href="#通过-n-来处理，一次给予一个参数，因此上述的结果就-OK-正常的显示啰！" class="headerlink" title="通过 -n 来处理，一次给予一个参数，因此上述的结果就 OK 正常的显示啰！"></a>通过 -n 来处理，一次给予一个参数，因此上述的结果就 OK 正常的显示啰！</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">`范例二`：同上，但是每次执行 id 时，都要询问使用者是否动作？</span><br></pre></td></tr></table></figure>
-<p>[dmtsai@study ~]$ cut -d ‘:’ -f 1 /etc/passwd | head -n 3 | xargs -p -n 1 id<br>id root ?…y<br>uid=0（root） gid=0（root） groups=0（root）<br>id bin ?…y<br>…..（下面省略）…..</p>
-<h1 id="呵呵！这个-p-的选项可以让使用者的使用过程中，被询问到每个指令是否执行！"><a href="#呵呵！这个-p-的选项可以让使用者的使用过程中，被询问到每个指令是否执行！" class="headerlink" title="呵呵！这个 -p 的选项可以让使用者的使用过程中，被询问到每个指令是否执行！"></a>呵呵！这个 -p 的选项可以让使用者的使用过程中，被询问到每个指令是否执行！</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">`范例三`：将所有的 /etc/passwd 内的帐号都以 id 查阅，但查到 sync 就结束指令串</span><br></pre></td></tr></table></figure>
-<p>[dmtsai@study ~]$ cut -d ‘:’ -f 1 /etc/passwd | xargs -e’sync’ -n 1 id</p>
-<h1 id="仔细与上面的案例做比较。也同时注意，那个-e’sync’-是连在一起的，中间没有空白键。"><a href="#仔细与上面的案例做比较。也同时注意，那个-e’sync’-是连在一起的，中间没有空白键。" class="headerlink" title="仔细与上面的案例做比较。也同时注意，那个 -e’sync’ 是连在一起的，中间没有空白键。"></a>仔细与上面的案例做比较。也同时注意，那个 -e’sync’ 是连在一起的，中间没有空白键。</h1><h1 id="上个例子当中，第六个参数是-sync-啊，那么我们下达-e’sync’-后，则分析到-sync-这个字串时，"><a href="#上个例子当中，第六个参数是-sync-啊，那么我们下达-e’sync’-后，则分析到-sync-这个字串时，" class="headerlink" title="上个例子当中，第六个参数是 sync 啊，那么我们下达 -e’sync’ 后，则分析到 sync 这个字串时，"></a>上个例子当中，第六个参数是 sync 啊，那么我们下达 -e’sync’ 后，则分析到 sync 这个字串时，</h1><h1 id="后面的其他-stdin-的内容就会被-xargs-舍弃掉了！"><a href="#后面的其他-stdin-的内容就会被-xargs-舍弃掉了！" class="headerlink" title="后面的其他 stdin 的内容就会被 xargs 舍弃掉了！"></a>后面的其他 stdin 的内容就会被 xargs 舍弃掉了！</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">***很多指令其实并不支持管线命令，因此我们可以通过 xargs 来提供该指令引用 standard input 之用！***</span><br><span class="line"></span><br><span class="line">`范例四`：找出 /usr/sbin 下面具有特殊权限的文件名，并使用 ls -l 列出详细属性</span><br></pre></td></tr></table></figure>
-<p>[dmtsai@study ~]$ find /usr/sbin -perm /7000 | xargs ls -l<br>-rwx–s–x. 1 root lock      11208 Jun 10  2014 /usr/sbin/lockdev<br>-rwsr-xr-x. 1 root root     113400 Mar  6 12:17 /usr/sbin/mount.nfs<br>-rwxr-sr-x. 1 root root      11208 Mar  6 11:05 /usr/sbin/netreport<br>…..（下面省略）…..</p>
-<h1 id="也可以使用“-ls-l-（find-usr-sbin-perm-7000）-”来处理这个范例！"><a href="#也可以使用“-ls-l-（find-usr-sbin-perm-7000）-”来处理这个范例！" class="headerlink" title="也可以使用“ ls -l $（find /usr/sbin -perm /7000） ”来处理这个范例！"></a>也可以使用“ ls -l $（find /usr/sbin -perm /7000） ”来处理这个范例！</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 减号 &quot; - &quot; 的用途</span><br><span class="line">管线命令当中，常常会使用到前一个指令的 stdout 作为这次的 stdin ， 某些指令需要用到文件名称 （例如 tar） 来进行处理时，该 stdin 与 stdout 可以利用减号 &quot;-&quot; 来替代.</span><br></pre></td></tr></table></figure>
-<p>[root@study ~]# mkdir /tmp/homeback<br>[root@study ~]# tar -cvf - /home | tar -xvf - -C /tmp/homeback<br><code>`</code></p>
-<blockquote>
-<p>上面这个例子是：“将 /home 里面的文件给他打包，但打包的数据不是纪录到文件，而是传送到 stdout； 经过管线后，将 tar -cvf - /home 传送给后面的 tar -xvf - ”。后面的这个 - 则是取用前一个指令的 stdout， 因此，我们就不需要使用 filename 了</p>
-</blockquote>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/06/Linux/Linux的Bash/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1149,40 +868,15 @@ command ：由最近的指令向前搜寻“指令串开头为 command”的那�
 
       
         
-          
-            <p>[TOC]</p>
-<h2 id="压缩文件的技术"><a href="#压缩文件的技术" class="headerlink" title="压缩文件的技术"></a>压缩文件的技术</h2><p>压缩文件简单原理:目前我们使用的计算机系统中都是使用所谓的 Bytes 单位来计量的！不过，事实上，计算机最小的计量单位应该是 bits 才对啊。此外，我们也知道 1 Byte = 8 bits 。但是如果今天我们只是记忆一个数字，亦即是 1 这个数字呢?由于我们记录数字是 1 ，考虑计算机所谓的二进制喔，如此一来， 1 会在最右边占据 1 个 bit ，而其他的 7 个 bits 将会自动的被填上 0 啰！你看看，其实在这样的例子中，那 7 个 bits 应该是“空的”才对！不过，为了要满足目前我们的操作系统数据的存取，所以就会将该数据转为 Byte 的型态来记录了！而一些聪明的计算机工程师就利用一些复杂的计算方式， 将这些没有使用到的空间“丢”出来，以让文件占用的空间变小！这就是压缩的技术啦！<br>另外一种压缩技术也很有趣，他是将重复的数据进行统计记录的。举例来说，如果你的数据为“111….”共有100个1时， 那么压缩技术会记录为“100个1”而不是真的有100个1的位存在！<br>简单的说，你可以将他想成，其实文件里面有相当多的“空间”存在，并不是完全填满的， 而“压缩”的技术就是将这些“空间”填满，以让整个文件占用的容量下降！ 不过，这些“压缩过的文件”并无法直接被我们的操作系统所使用的，因此， 若要使用这些被压缩过的文件数据，则必须将他“还原”回来未压缩前的模样， 那就是所谓的“解压缩</p>
-<h2 id="常见的压缩指令"><a href="#常见的压缩指令" class="headerlink" title="常见的压缩指令"></a>常见的压缩指令</h2><blockquote>
-<p><em>.Z         compress 程序压缩的文件；
-</em>.zip       zip 程序压缩的文件；<br><em>.gz        gzip 程序压缩的文件；
-</em>.bz2       bzip2 程序压缩的文件；<br><em>.xz        xz 程序压缩的文件；
-</em>.tar       tar 程序打包的数据，并没有压缩过；<br><em>.tar.gz    tar 程序打包的文件，其中并且经过 gzip 的压缩
-</em>.tar.bz2   tar 程序打包的文件，其中并且经过 bzip2 的压缩<br>*.tar.xz    tar 程序打包的文件，其中并且经过 xz 的压缩</p>
-</blockquote>
-<ul>
-<li>gzip, zcat/zmore/zless/zgrep<br>gzip是目前应用最广的压缩指令,后缀为*.gz<br>如果压缩的文件是文本文件,压缩后可以使用zcat相关指令读取出来.</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[dmtsai@study ~]$ gzip [-cdtv#] 文件名</span><br><span class="line">选项与参数：</span><br><span class="line">-c  ：将压缩的数据输出到屏幕上，可通过数据流重导向来处理；</span><br><span class="line">-d  ：解压缩的参数；</span><br><span class="line">-t  ：可以用来检验一个压缩文件的一致性～看看文件有无错误；</span><br><span class="line">-v  ：可以显示出原文件/压缩文件的压缩比等信息；</span><br><span class="line">-#  ：#为数字的意思，代表压缩等级，-1最快，但是压缩比最差、-9最慢，但是压缩比最好！默认是 -6</span><br></pre></td></tr></table></figure>
-<p>gzip压缩默认会删除原文件,如果想保留原文件可以使用如下命令:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[dmtsai@study tmp]$ gzip -9 -c services &gt; services.gz</span><br><span class="line">-c 选项打印出文件到屏幕,然后使用 &gt; 重定向</span><br></pre></td></tr></table></figure>
-<p>找出压缩文件中的关键字命令:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[dmtsai@study tmp]$ zgrep -n &apos;http&apos; services.gz</span><br><span class="line">14:#       http://www.iana.org/assignments/port-numbers</span><br><span class="line">89:http            80/tcp          www www-http    # WorldWideWeb HTTP</span><br><span class="line">90:http            80/udp          www www-http    # HyperText Transfer Protocol</span><br><span class="line">.....（下面省略）.....</span><br></pre></td></tr></table></figure>
-<ul>
-<li>bzip2, bzcat/bzmore/bzless/bzgrep<br>与gzip用法类似,比gzip压缩比更好<br>后缀为*.bz2</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[dmtsai@study ~]$ bzip2 [-cdkzv#] 文件名</span><br><span class="line">选项与参数：</span><br><span class="line">-c  ：将压缩的过程产生的数据输出到屏幕上！</span><br><span class="line">-d  ：解压缩的参数</span><br><span class="line">-k  ：保留原始文件，而不会删除原始的文件喔！</span><br><span class="line">-z  ：压缩的参数 （默认值，可以不加）</span><br><span class="line">-v  ：可以显示出原文件/压缩文件的压缩比等信息；</span><br><span class="line">-#  ：与 gzip 同样的，都是在计算压缩比的参数， -9 最佳， -1 最快！</span><br></pre></td></tr></table></figure>
-<ul>
-<li>xz, xzcat/xzmore/xzless/xzgrep<br>与gzip,bzip2用法类似,比bzip2压缩比更好<br>后缀为*.xz</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[dmtsai@study ~]$ xz [-dtlkc#] 文件名</span><br><span class="line">选项与参数：</span><br><span class="line">-d  ：就是解压缩啊！</span><br><span class="line">-t  ：测试压缩文件的完整性，看有没有错误</span><br><span class="line">-l  ：列出压缩文件的相关信息</span><br><span class="line">-k  ：保留原本的文件不删除～</span><br><span class="line">-c  ：同样的，就是将数据由屏幕上输出的意思！</span><br><span class="line">-#  ：同样的，也有较佳的压缩比的意思！”</span><br></pre></td></tr></table></figure>
-<h2 id="打包文件"><a href="#打包文件" class="headerlink" title="打包文件"></a>打包文件</h2><p>虽然 gzip, bzip2, xz 也能够针对目录来进行压缩，不过， 这两个指令对目录的压缩指的是“将目录内的所有文件 “分别” 进行压缩”的动作！而不像在 Windows 的系统，可以使用类似 WinRAR 这一类的压缩软件来将好多数据“包成一个文件”的样式。</p>
-<h3 id="tar命令常用选项"><a href="#tar命令常用选项" class="headerlink" title="tar命令常用选项"></a>tar命令常用选项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[dmtsai@study ~]$ tar [-z|-j|-J][cv][-f 待创建的新文件名] filename... &lt;==打包与压缩</span><br><span class="line">[dmtsai@study ~]$ tar [-z|-j|-J][tv] [-f 既有的 tar文件名]     &lt;==察看文件名</span><br><span class="line">[dmtsai@study ~]$ tar [-z|-j|-J] [xv] [-f 既有的 tar文件名][-C 目录]   &lt;==解压缩</span><br><span class="line">选项与参数：</span><br><span class="line">-c  ：创建打包文件，可搭配 -v 来察看过程中被打包的文件名（filename）</span><br><span class="line">-t  ：察看打包文件的内容含有哪些文件名，重点在察看“文件名”就是了；</span><br><span class="line">-x  ：解打包或解压缩的功能，可以搭配 -C （大写） 在特定目录解开</span><br><span class="line">      特别留意的是， -c, -t, -x 不可同时出现在一串命令行中。</span><br><span class="line">-z  ：通过 gzip  的支持进行压缩/解压缩：此时文件名最好为 *.tar.gz</span><br><span class="line">-j  ：通过 bzip2 的支持进行压缩/解压缩：此时文件名最好为 *.tar.bz2</span><br><span class="line">-J  ：通过 xz    的支持进行压缩/解压缩：此时文件名最好为 *.tar.xz</span><br><span class="line">      特别留意， -z, -j, -J 不可以同时出现在一串命令行中</span><br><span class="line">-v  ：在压缩/解压缩的过程中，将正在处理的文件名显示出来！</span><br><span class="line">-f filename：-f 后面要立刻接要被处理的文件名！建议 -f 单独写一个选项啰！（比较不会忘记）</span><br><span class="line">-C 目录    ：这个选项用在解压缩，若要在特定目录解压缩，可以使用这个选项。</span><br><span class="line"></span><br><span class="line">其他后续练习会使用到的选项介绍：</span><br><span class="line">-p（小写） ：保留备份数据的原本权限与属性，常用于备份（-c）重要的配置文件</span><br><span class="line">-P（大写） ：保留绝对路径，亦即允许备份数据中含有根目录存在之意；</span><br><span class="line">--exclude=FILE：在压缩的过程中，不要将 FILE 打包！</span><br></pre></td></tr></table></figure>
-<h3 id="tar备份"><a href="#tar备份" class="headerlink" title="tar备份"></a>tar备份</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[dmtsai@study ~]$ su -  # 因为备份 /etc 需要 root 的权限，否则会出现一堆错误</span><br><span class="line">[root@study ~]# time tar -zpcv -f /root/etc.tar.gz /etc</span><br><span class="line">tar: Removing leading `/&apos; from member names  &lt;==注意这个警告讯息</span><br><span class="line">/etc/</span><br><span class="line">....（中间省略）....</span><br><span class="line">/etc/hostname</span><br><span class="line"></span><br><span class="line">#多了time会显示程序运行时间</span><br><span class="line">#加上&quot;-p&quot;选项原因是为了保存原本文件的权限和属性</span><br></pre></td></tr></table></figure>
-<p><em>tar备份默认是没有根目录的,那为什么要拿掉根目录呢？主要是为了安全！我们使用 tar 备份的数据可能会需要解压缩回来使用， 在 tar 所记录的文件名 （就是我们刚刚使用 tar -jtvf 所察看到的文件名） 那就是解压缩后的实际文件名。 如果拿掉了根目录，假设你将备份数据在 /tmp 解开，那么解压缩的文件名就会变成“/tmp/etc/xxx”。 但“如果没有拿掉根目录，解压缩后的文件名就会是绝对路径， 亦即解压缩后的数据一定会被放置到 /etc/xxx 去！”如此一来，你的原本的 /etc/ 下面的数据， 就会被备份数据所覆盖过去了！如果想保存根目录可以使用-P选项</em></p>
-<h3 id="解压tar包内单一文件"><a href="#解压tar包内单一文件" class="headerlink" title="解压tar包内单一文件"></a>解压tar包内单一文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># 1. 先找到我们要的文件名，假设解开 shadow 文件好了：</span><br><span class="line">[root@study ~]# tar -jtv -f /root/etc.tar.bz2 | grep &apos;shadow&apos;</span><br><span class="line">---------- root/root       721 2015-06-17 00:20 etc/gshadow</span><br><span class="line">---------- root/root      1183 2015-06-17 00:20 etc/shadow-</span><br><span class="line">---------- root/root      1210 2015-06-17 00:20 etc/shadow  &lt;==这是我们要的！</span><br><span class="line">---------- root/root       707 2015-06-17 00:20 etc/gshadow-</span><br><span class="line"># 先搜寻重要的文件名！其中那个 grep 是“撷取”关键字的功能！我们会在第三篇说明！</span><br><span class="line"># 这里您先有个概念即可！那个管线 | 配合 grep 可以撷取关键字的意思！</span><br><span class="line"></span><br><span class="line"># 2. 将该文件解开！语法与实际作法如下：</span><br><span class="line">[root@study ~]# tar -jxv -f 打包档.tar.bz2 待解开文件名</span><br><span class="line">[root@study ~]# tar -jxv -f /root/etc.tar.bz2 etc/shadow</span><br><span class="line">etc/shadow</span><br><span class="line">[root@study ~]# ll etc</span><br><span class="line">total 4</span><br><span class="line">----------. 1 root root 1210 Jun 17 00:20 shadow</span><br><span class="line"># 很有趣！此时只会解开一个文件而已！不过，重点是那个文件名！你要找到正确的文件名。</span><br><span class="line"># 在本例中，你不能写成 /etc/shadow ！因为记录在 etc.tar.bz2 内的并没有 / 之故！</span><br></pre></td></tr></table></figure>
-<h3 id="tarfile与tarball"><a href="#tarfile与tarball" class="headerlink" title="tarfile与tarball"></a>tarfile与tarball</h3><p>使用tar打包的文件称为tarfile<br>如果打包文件同时使用压缩则称为tarball.</p>
-
-          
+          <p>[TOC]</p>
+<h2 id="压缩文件的技术"><a href="#压缩文件的技术" class="headerlink" title="压缩文件的技术"></a>压缩文件的技术</h2><p>压缩文件简单原理:目前我们使用的计算机系统中都是使用所谓的 Bytes 单位来计量的！不过，事实上，计算机最小的计量单位应该是 bits 才对啊。此外，我们也知道 1 Byte = 8 bits 。但是如果今天我们只是记忆一个数字，亦即是 1 这个数字呢?由于我们记录数字是 1 ，考虑计算机所谓的二进制喔，如此一来， 1 会在最右边占据 1 个 bit ，而其他的 7 个 bits 将会自动的被填上 0 啰！你看看，其实在这样的例子中，那 7 个 bits 应该是“空的”才对！不过，为了要满足目前我们的操作系统数据的存取，所以就会将该数据转为 Byte 的型态来记录了！而一些聪明的计算机工程师就利用一些复杂的计算方式， 将这些没有使用到的空间“丢”出来，以让文件占用的空间变小！这就是压缩的技术啦！ </p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/02/Linux/文件压缩:打包:备份/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1321,29 +1015,19 @@ command ：由最近的指令向前搜寻“指令串开头为 command”的那�
 
       
         
-          
-            <p>[TOC]</p>
+          <p>[TOC]</p>
 <h2 id="循环性执行的例行性工作高度"><a href="#循环性执行的例行性工作高度" class="headerlink" title="循环性执行的例行性工作高度"></a>循环性执行的例行性工作高度</h2><p>循环执行的例行性工作调度由cron(crond)服务 控制.Lnux上有非常多的例行性工作,因此这个服务是默认启动的.</p>
 <ul>
 <li>使用者的设置  </li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/etc/cron.allow 允许使用crontab的用户</span><br><span class="line">/etc/cron.deny 不允许使用crontab的用户</span><br><span class="line">allow优先级优于deny</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>当用户使用crontab指令创建工作调度之后,该项工作被纪录到/var/spool/cron里,而且是以账号作为判别的.如:用Windus使用后会纪录到/var/spool/cron/Windus<code>注意:不要使用vim编辑该文件,可能由于输入法错误导致无法执行cron</code><br>另外,cron执行的每一项任务都纪录到/var/log/cron中.</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@study ~]# crontab [-u username] [-l|-e|-r]</span><br><span class="line">选项与参数：</span><br><span class="line">-u  ：只有 root 才能进行这个任务，亦即帮其他使用者创建/移除 crontab 工作调度；</span><br><span class="line">-e  ：编辑 crontab 的工作内容</span><br><span class="line">-l  ：查阅 crontab 的工作内容</span><br><span class="line">-r  ：移除所有的 crontab 的工作内容，若仅要移除一项，请用 -e 去编辑。</span><br></pre></td></tr></table></figure>
-<p><strong>每项工作格式都有六个字段,意义为:</strong>  </p>
-<table style="width:100%;"><br><tr><br>    <th>代表意义</th><br>    <td>分</td><br>    <td>时</td><br>    <td>日期</td><br>    <td>月</td><br>    <td>周</td><br>    <td>指令</td><br></tr><br><tr><br>    <th>数字范围</th><br>    <td>0~59</td><br>    <td>0~23</td><br>    <td>1~31</td><br>    <td>1~12</td><br>    <td>0~7</td><br>    <td>执行指令</td><br></tr><br></table>
-
-<table style="width:100%;"><br><thead><br>    <tr><br>        <th colspan="2" style="text-align:center;">特殊字符</th><br>    </tr><br></thead><br><tr><br>    <th style="text-align:center">字符</th><br>    <th style="text-align:center">意义</th><br></tr><br><tr><br>    <th><em>(星号)</em></th><br>    <td>代表任何时刻都接受的意思！举例来说，范例一内那个日、月、周都是  ， 就代表着“不论何月、何日的礼拜几的 12:00 都执行后续指令”的意思！<br>    </td><br></tr><br><tr><br>    <th>,(逗号)</th><br>    <td>代表分隔时段的意思。举例来说，如果要下达的工作是 3:00 与 6:00 时，就会是：0 3,6 <em> </em> <em> command<br>时间参数还是有五栏，不过第二栏是 3,6 ，代表 3 与 6 都适用！<br>    </em></td><br></tr><br><tr><br>    <th>-(减号)</th><br>    <td>代表一段时间范围内，举例来说， 8 点到 12 点之间的每小时的 20 分都进行一项工作：20 8-12  <em> </em> command<br>仔细看到第二栏变成 8-12 喔！代表 8,9,10,11,12 都适用的意思！<br>    </td><br></tr><br><tr><br>    <th>/n(斜线)</th><br>    <td>那个 n 代表数字，亦即是“每隔 n 单位间隔”的意思，例如每五分钟进行一次，则：<em>/5 </em> <em> </em> <em> command 用 </em> 与 /5 来搭配，也可以写成 0-59/5 ，相同意思!<br>    </td><br></tr><br></table>
-
-<p><code>注意:周指令0和7都代表星期天</code>  </p>
-<ul>
-<li>crond服务读取配置文件位置  </li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- /etc/crontab</span><br><span class="line">- /etc/cron.d/*</span><br><span class="line">- /var/spool/cron/*</span><br><span class="line"></span><br><span class="line">前两个跟系统有关的配置文件,后一个跟用户有关</span><br></pre></td></tr></table></figure>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/11/Linux/例行性工作调度/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1628,53 +1312,15 @@ command ：由最近的指令向前搜寻“指令串开头为 command”的那�
 
       
         
-          
-            <p>[TOC]</p>
+          <p>[TOC]</p>
 <h2 id="EXT2文件系统"><a href="#EXT2文件系统" class="headerlink" title="EXT2文件系统"></a>EXT2文件系统</h2><p><img src="/2017/09/29/Linux/磁盘与文件管理/QQ20180117-095156@2x.png" alt="ext2文件系统示意图"></p>
-<ul>
-<li><p>data block 用来放置文件内容数据的地方.在EXT2文件系统中支持block大小有1k 2k 4k.  </p>
-<blockquote>
-<p>每个block大小在与数量在格式化完成后就确定,不能再改变了.(<strong>除非格        式化或使用resize2fs等指令变更文件系统大小</strong>)<br>每个block最多只能放一个文件<br>如果文件大于block大小,那文件会占用多个block<br>如果文件大小小于block,那么剩余容量就不能再使用了(磁盘空间会浪费).</p>
-</blockquote>
-<hr>
-</li>
-<li><p>inode table  </p>
-<ul>
-<li><p>记录内容:  </p>
-<blockquote>
-<p>该文件的存取模式（read/write/excute）<br>该文件的拥有者与群组（owner/group）<br>该文件的容量<br>该文件创建或状态改变的时间（ctime）<br>“最近一次的读取时间（atime）<br>最近修改的时间（mtime）<br>定义文件特性的旗标（flag），如 SetUID…<br>该文件真正内容的指向 （pointer）<br>不记录文件名(文件名记录在block上)</p>
-</blockquote>
-</li>
-<li><p>特点:  </p>
-<blockquote>
-<p>每个 inode 大小均固定为 128 Bytes（新的 ext4 与 xfs 可设置到         256 Bytes）<br>每个文件都仅会占用一个 inode 而已<br>承上，因此文件系统能够创建的文件数量与 inode 的数量有关<br>系统读取文件时需要先找到 inode，并分析 inode 所记录的权限与使用        者是否符合，若符合才能够开始实际读取 block 的内容。  </p>
-</blockquote>
-<p><img src="/2017/09/29/Linux/磁盘与文件管理/QQ20180109-160713@2x.png" alt="inode结构示意图"></p>
-<p><strong><em>inode要记录的数据特别多,而只有128Bytes.inode记录一个block号码要4Byte,所以大文件一个inode肯定是不够用的.为此,inode记录block号码区域定义了12个直接,一个间接,一个双间接,一个三间接记录区.</em></strong>  </p>
-<blockquote>
-<p>如上图,最左边为 inode 本身 （128 Bytes），里面有 12 个直接指向 block 号码的对照，这 12 笔记录就能够直接取得 block 号码啦！ 至于所谓的间接就是再拿一个 block 来当作记录 block 号码的记录区，如果文件太大时， 就会使用间接的 block 来记录号码。如上图 7.1.4 当中间接只是拿一个 block 来记录额外的号码而已。 同理，如果文件持续长大，那么就会利用所谓的双间接，第一个 block 仅再指出下一个记录号码的 block 在哪里， 实际记录的在第二个 block 当中。依此类推，三间接就是利用第三层 block 来记录号码啦！</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">	inode指定block大小计算(block为1k):</span><br><span class="line">	- 12 个直接指向： 12*1K=12K</span><br><span class="line">		  由于是直接,12所以总共可以记录12笔</span><br><span class="line">	- 1  个间接： 256*1K=256K</span><br><span class="line">		  每笔 block 号码的记录会花去 4Bytes，因此 1K 的大小能够记录 256 笔记录</span><br><span class="line">	- 1  个双间接: 256*256*1K=2562K</span><br><span class="line">		  第一层 block 会指定256个第二层,每个第二层可以指定 256个号码</span><br><span class="line">	- 1  个三间接： 256*256*256*1K=2563K</span><br><span class="line">		  第一层 block 会指定256个第二层,每个第二层可以指定256个第三层，每个第三层可以指定 256 个号码</span><br><span class="line">	得到:12 + 256 + 256*256 + 256*256*256 （K） = 16GB</span><br><span class="line">	</span><br><span class="line">	上面方法不能用在2k及4k block大小计算中,因为大于2k block将会受到EXT2文件系统本身的限制,所以计算结果会不太符合之故.</span><br><span class="line">	```  </span><br><span class="line">	</span><br><span class="line">	***</span><br><span class="line">	</span><br><span class="line">- super block 记录整个文件系统信息,没有它就没有文件系统  </span><br><span class="line">	- 记录信息  </span><br><span class="line">	</span><br><span class="line">	&gt; block 与 inode 的总量</span><br><span class="line">	&gt; 未使用与已使用的 inode / block 数量</span><br><span class="line"> 	&gt; block 与 inode 的大小（block为1,2,4K,inode为 128Bytes或 256Bytes）</span><br><span class="line">	&gt; filesystem 的挂载时间、最近一次写入数据的时间、最近一次检验磁盘 （fsck） 的时间等文件系统的相关信息</span><br><span class="line">	&gt; 一个 valid bit 数值，若此文件系统已被挂载，则 valid bit 为 0 ，若未被挂载，则 valid bit 为 1  	</span><br><span class="line">	</span><br><span class="line">	*superblock大小为1024Bytes,文件系统除了第一个block group含有superblock以外,后续的block group都不一定含有supperblock,若含有则是对第一个block group的备份.*</span><br><span class="line">	</span><br><span class="line">- block bitmap (区块对照表)</span><br><span class="line">	文件修改时,记录block是否被占用.  </span><br><span class="line">- inode bitmap (inode对照表)</span><br><span class="line">	与block bitmap功能类似,记录inode占用情况.  </span><br><span class="line">- Filesystem Description （文件系统描述说明）</span><br><span class="line">	这个区段可以描述每个 block group 的开始与结束的 block 号码，以及说明每个区段 （superblock, bitmap, inodemap, data block） 分别介于哪一个 block 号码之间。  </span><br><span class="line">	</span><br><span class="line">- dumpe2fs 查询 Ext 家族 superblock 信息的指令  </span><br><span class="line"></span><br><span class="line">&gt; 由于目前centos7以xfs为默认文件系统,所以这个指令无法使用.</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<p>[root@study ~]# dumpe2fs [-bh] 设备文件名<br>选项与参数：<br>-b ：列出保留为坏轨的部分（一般用不到吧！？）<br>-h ：仅列出 superblock 的数据，不会列出其他的区段内容！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">***</span><br><span class="line"></span><br><span class="line">- 目录树的操作  </span><br><span class="line">由于目录树是由根目录开始读起，因此系统通过挂载的信息可以找到挂载点的 inode 号码，此时就能够得到根目录的 inode 内容，并依据该 inode 读取根目录的 block 内的文件名数据，再一层一层的往下读到正确的文件名。  </span><br><span class="line"></span><br><span class="line">	- 读取步骤</span><br></pre></td></tr></table></figure></p>
-<pre><code>[root@study ~]# ll -di / /etc /etc/passwd  
-
- 128 dr-xr-xr-x.  17 root root 4096 May  4 17:56 /
-33595521 drwxr-xr-x. 131 root root 8192 Jun 17 00:20 /etc
-36628004 -rw-r--r--.   1 root root 2092 Jun 17 00:20 /etc/    passwd
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">	1. / 的 inode：</span><br><span class="line">		通过挂载点的信息找到 inode 号码为 128 的根目录 inode，且 inode 规范的权限让我们可以读取该 block 的内容（有 r 与 x） ；</span><br><span class="line"></span><br><span class="line">	2. / 的 block：</span><br><span class="line">		经过上个步骤取得 block 的号码，并找到该内容有 etc/ 目录的 inode 号码 （33595521）； </span><br><span class="line"></span><br><span class="line">	3. etc/ 的 inode：</span><br><span class="line">	读取 33595521 号 inode 得知 dmtsai 具有 r 与 x 的权限，因此可以读取 etc/ 的 block 内容； </span><br><span class="line"></span><br><span class="line">	4. etc/ 的 block：</span><br><span class="line">	经过上个步骤取得 block 号码，并找到该内容有 passwd 文件的 inode 号码 （36628004）； </span><br><span class="line"></span><br><span class="line">	5. passwd 的 inode：</span><br><span class="line">	读取 36628004 号 inode 得知 dmtsai 具有 r 的权限，因此可以读取 passwd 的 block 内容;  </span><br><span class="line">	</span><br><span class="line">	6. passwd 的 block：</span><br><span class="line">	最后将该 block 内容的数据读出来。</span><br><span class="line">	</span><br><span class="line">	- 写步骤  </span><br><span class="line">	</span><br><span class="line">	1. 先确定使用者对于欲新增文件的目录是否具有 w 与 x 的权限，若有的话才能新增；</span><br><span class="line">	2. 根据 inode bitmap 找到没有使用的 inode 号码，并将新文件的权限/属性写入；</span><br><span class="line">	3. 根据 block bitmap 找到没有使用中的 block 号码，并将实际的数据写入 block 中，且更新 inode 的 block 指向数据；</span><br><span class="line">	4. 将刚刚写入的 inode 与 block 数据同步更新 inode bitmap 与 block bitmap，并更新 superblock 的内容。</span><br><span class="line"></span><br><span class="line">***</span><br><span class="line"></span><br><span class="line">- 日志式文件系统  </span><br><span class="line">	由于各种情况,可能造成数据发生问题,导致写入数据只有inode/block,而缺失bitmap,此时发生metadata与实际数据存放区产生不一致的情况.  </span><br><span class="line">	在早期的 Ext2 文件系统中，如果发生这个问题， 那么系统在重新开机的时候，就会借由 Superblock 当中记录的 valid bit （是否有挂载） 与 filesystem state （clean 与否） 等状态来判断是否强制进行数据一致性的检查！若有需要检查时则以 e2fsck 这支程序来进行的。  </span><br><span class="line">	因为要针对metadata区域和实际数据存放区域进行比对,所以非常耗时.  </span><br><span class="line">	为了避免上述问题的发生,应运而生了日志文件系统,具体执行步骤:  </span><br><span class="line">	1. 预备：当系统要写入一个文件时，会先在日志记录区块中纪录某个文件准备要写入的信息；</span><br><span class="line">	2. 实际写入：开始写入文件的权限与数据；开始更新 metadata 的数据；</span><br><span class="line">	3. 结束：完成数据与 metadata 的更新后，在日志记录区块当中完成该文件的纪录。  </span><br><span class="line"></span><br><span class="line">*在这样的程序当中，万一数据的纪录过程当中发生了问题，那么我们的系统只要去检查日志记录区块， 就可以知道哪个文件发生了问题，针对该问题来做一致性的检查即可，而不必针对整块 filesystem 去检查， 这样就可以达到快速修复 filesystem 的能力*</span><br><span class="line"></span><br><span class="line">## XFS文件系统  </span><br><span class="line">*EXT文件系统目前对于格式化处理,采用预先规划出inode/block/meta data等数据,未来系统可以直接使用,由于现在硬盘越来越大,所以格式化越来越慢.因此,从centos7.x开始文件系统已默认更换成XFS这个比较适合大容量磁盘与巨型文件,性能较佳的文件系统了.*</span><br><span class="line">***</span><br><span class="line"></span><br><span class="line">基本止,xfs就是一个日志文件系统,最早之前它就是被开发来用于大容量磁盘以及高性能文件系统之用.Ext4几乎所有的功能xfs都具备.  </span><br><span class="line">xfs文件系统在数据分布上,主要规划三个部分:一个数据区(data section),一个文件系统活动登录区(log section),一个实时运行区(realtime section).</span><br><span class="line"></span><br><span class="line">- 数据区(data section)  </span><br><span class="line">基本上,数据区和Ext文件系统一样,包括inode/data block/superblock等数据,都放在这个区块.这个数据区与Ext家族的block group类似,也是分为多个存储区群组(allocation groups)来分别放置文件系统所要的数据.每个存储区群组都包含了(1)整个文件系统的superblock(2)剩余空间管理机制(3)inode的分配与追踪.此外，inode与 block 都是系统需要用到时， 这才动态配置产生，所以格式化动作超级快！</span><br><span class="line"></span><br><span class="line">&gt; 另外，与 ext 家族不同的是， xfs 的 block 与 inode 有多种不同的容量可供设置，block 容量可由 512Bytes ~ 64K 调配，不过，Linux 的环境下， 由于内存控制的关系 （分页档 pagesize 的容量之故），因此最高可以使用的 block 大小为 4K 而已！（鸟哥尝试格式化 block 成为 16K 是没问题的，不过，Linux 核心不给挂载！ 所以格式化完成后也无法使用啦！） 至于 inode 容量可由 256Bytes 到 2M 这么大！不过，大概还是保留 256Bytes 的默认值就很够用了！  </span><br><span class="line"></span><br><span class="line">- 文件系统活动登录区(log section)  </span><br><span class="line">这个区域主要用来被记录文件系统的变化,其实有点像日志区.</span><br><span class="line"></span><br><span class="line">- 实时运行区(realtime section)  </span><br><span class="line">当有文件被创建时,xfs会在这个区域找一个到数个extent区块,将文件放置在这个区块内,等分配完毕后再写入data section的inode与block中去.  </span><br><span class="line">这个extent区块大小要在格式化时候指定,最小值4K,最大可到1G.  </span><br><span class="line">一般非磁盘阵列的磁盘默认64K,而具有磁盘阵列的情况下,则建议extent设置为与stripe一样大较佳.</span><br></pre></td></tr></table></figure>
-</code></pre><p>xfs文件系统的描述数据观察:</p>
-<p>#找出系统 /boot 这个挂载点下面的文件系统的 superblock 纪录<br>[root@study ~]# df -T /boot<br>Filesystem   Type 1K-blocks   Used Available Use% Mounted on<br>/dev/vda2     xfs    1038336 133704    904632  13% /boot</p>
-<p>[root@study ~]# xfs_info /dev/vda2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- df命令  </span><br><span class="line">列出文件系统的整体磁盘使用量</span><br></pre></td></tr></table></figure></p>
-<p>[root@study ~]# df [-ahikHTm] [目录或文件名]<br>选项与参数：<br>-a  ：列出所有的文件系统，包括系统特有的 /proc 等文件系统；<br>-k  ：以 KBytes 的容量显示各文件系统；<br>-m  ：以 MBytes 的容量显示各文件系统；<br>-h  ：以人们较易阅读的 GBytes, MBytes, KBytes 等格式自行显示；<br>-H  ：以 M=1000K 取代 M=1024K 的进位方式；<br>-T  ：连同该 partition 的 filesystem 名称 （例如 xfs） 也列出；<br>-i  ：不用磁盘容量，而以 inode 的数量来显示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- du命令  </span><br><span class="line">评估文件系统的磁盘使用量（常用在推估目录所占容量）</span><br></pre></td></tr></table></figure></p>
-<p>[root@study ~]# du [-ahskm] 文件或目录名称<br>选项与参数：<br>-a  ：列出所有的文件与目录容量，因为默认仅统计目录下面的文件量而已。<br>-h  ：以人们较易读的容量格式 （G/M） 显示；<br>-s  ：列出总量而已，而不列出每个各别的目录占用容量；<br>-S  ：不包括子目录下的总计，与 -s 有点差别。<br>-k  ：以 KBytes 列出容量显示；<br>-m  ：以 MBytes 列出容量显示；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">*df 主要读取的数据几乎都是针对一整个文件系统，因此读取的范围主要是在 Superblock 内的信息， 所以这个指令显示结果的速度非常的快速.*</span><br><span class="line">*du 这个指令其实会直接到文件系统内去搜寻所有的文件数据，这个指令的会执行一小段时间！*</span><br><span class="line"></span><br><span class="line">- Hard Link （实体链接, 硬式链接或实际链接）</span><br><span class="line">由于每个文件都占用一个inode,文件内容由inode记录指向,想要读取文件必须经过目录记录的文件名来指向到正确的inode号码才能读取.也就是说,其实文件名只与目录有关,但是文件内容则与inode有关.  </span><br><span class="line">如果有多个文件名对应一个inode,那就是实体链接的由来.  </span><br><span class="line">**限制:**  </span><br><span class="line">  </span><br><span class="line">&gt; - 不能跨FileSystem</span><br><span class="line">&gt; - 不能link目录</span><br><span class="line"></span><br><span class="line">*如果hard link到链接到目录时,链接的数据需要连同被链接目录下面的所有数据都创建链接，举例来说，如果你要将 /etc 使用实体链接创建一个 /etc_hd 的目录时，那么在 /etc_hd 下面的所有文件名同时都与 /etc 下面的文件名要创建 hard link 的，而不是仅链接到 /etc_hd 与 /etc 而已。 并且，未来如果需要在 /etc_hd 下面创建新文件时，连带的， /etc 下面的数据又得要创建一次 hard link ，因此造成环境相当大的复杂度.所以啰，目前 hard link 对于目录暂时还是不支持的啊！*</span><br><span class="line"></span><br><span class="line">- Symbolic Link(符号链接)  </span><br><span class="line">Symbolic link 就是在创建一个独立的文件，而这个文件会让数据的读取指向他 link 的那个文件的文件名！由于只是利用文件来做为指向的动作， 所以，当来源文件被删除之后，symbolic link 的文件会“开不了”， 会一直说“无法打开某文件！”。实际上就是找不到原始“文件名”而已啦！</span><br></pre></td></tr></table></figure></p>
-<p>[root@study ~]# ln -s /etc/crontab crontab2<br>[root@study ~]# ll -i /etc/crontab /root/crontab2<br>34474855 -rw-r–r–. 2 root root 451 Jun 10  2014 /etc/crontab<br>53745909 lrwxrwxrwx. 1 root root  12 Jun 23 22:31 /root/crontab2 -&gt; /etc/crontab<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">上面结果我们可以知道两个文件指向不同的 inode 号码，当然就是两个独立的文件存在！ 而且链接文件的重要内容就是他会写上目标文件的“文件名”， 你可以发现为什么上表中链接文件的大小为 12 Bytes 呢？ 因为箭头（--&gt;）右边的文件名“/etc/crontab”总共有 12 个英文，每个英文占用 1 个 Bytes ，所以文件大小就是 12Bytes了！</span><br><span class="line"></span><br><span class="line">- ln命令</span><br></pre></td></tr></table></figure></p>
-<p>[root@study ~]# ln [-sf] 来源文件 目标文件<br>选项与参数：<br>-s  ：如果不加任何参数就进行链接，那就是hard link，至于 -s 就是symbolic link<br>-f  ：如果 目标文件 存在时，就主动的将目标文件直接移除后再创建！<br><code>`</code></p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/09/29/Linux/磁盘与文件管理/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1813,116 +1459,20 @@ command ：由最近的指令向前搜寻“指令串开头为 command”的那�
 
       
         
-          
-            <p>[TOC]</p>
+          <p>[TOC]</p>
 <h2 id="目录相关操作"><a href="#目录相关操作" class="headerlink" title="目录相关操作"></a>目录相关操作</h2><blockquote>
 <p>.         代表此层目录<br>..        代表上一层目录</p>
 <ul>
 <li>代表前一个工作目录<br>~         代表“目前使用者身份”所在的主文件夹<br>~account  代表 account 这个使用者的主文件夹（account是个帐号名称）</li>
 </ul>
 </blockquote>
-<ul>
-<li><p>pwd命令</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#显示所在目录</span></span><br><span class="line">root@study ~]<span class="comment"># pwd [-P]</span></span><br><span class="line">-P  ：显示出确实的路径，而非使用链接 （link） 路径。</span><br><span class="line"></span><br><span class="line">[root@study mail]<span class="comment"># ls -ld /var/mail</span></span><br><span class="line">lrwxrwxrwx. 1 root root 10 May  4 	17:51 /var/mail -&gt; spool/mail</span><br><span class="line">[root@study ~]<span class="comment"># cd /var/mail   </span></span><br><span class="line">[root@study mail]<span class="comment"># pwd</span></span><br><span class="line">/var/mail         &lt;==列出目前的工作目录</span><br><span class="line">[root@study mail]<span class="comment"># pwd -P</span></span><br><span class="line">/var/spool/mail</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>mkdir  创建目录</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@study ~]<span class="comment"># mkdir [-p] 目录名</span></span><br><span class="line">-p : 创建层级目录</span><br><span class="line">mkdir -p /home/windus/<span class="built_in">test</span>/linux</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>ls命令</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">	选项与参数：</span><br><span class="line">-a  ：全部的文件，连同隐藏文件（ 开头为 . 的文件） 一起列出来（常用）</span><br><span class="line">-A  ：全部的文件，连同隐藏文件，但不包括 . 与 .. 这两个目录</span><br><span class="line">-d  ：仅列出目录本身，而不是列出目录内的文件数据（常用）</span><br><span class="line">-f  ：直接列出结果，而不进行排序 （ls 默认会以文件名排序！）</span><br><span class="line">-F  ：根据文件、目录等信息，给予附加数据结构，例如：</span><br><span class="line">      *:代表可可执行文件； /:代表目录； =:代表 socket 文件； |:代表 FIFO 文件；</span><br><span class="line">-h  ：将文件大小以人类较易读的方式（例如 GB, KB 等等）列出来；</span><br><span class="line">-i  ：列出 inode 号码，inode 的意义下一章将会介绍；</span><br><span class="line">-l  ：长数据串行出，包含文件的属性与权限等等数据；（常用）</span><br><span class="line">字段说明:</span><br><span class="line">1.文件属性：drwxr-xr-x</span><br><span class="line">2.文件硬链接数量 3</span><br><span class="line">3.所有者：user</span><br><span class="line">4.所属用户组：group</span><br><span class="line">5.文件大小：102 byte</span><br><span class="line">6.修改时间：Mar11　22:56</span><br><span class="line">7.文件名：Filename</span><br><span class="line">-n  ：列出 UID 与 GID 而非使用者与群组的名称 （UID与GID会在帐号管理提到！）</span><br><span class="line">-r  ：将排序结果反向输出，例如：原本文件名由小到大，反向则为由大到小；</span><br><span class="line">-R  ：连同子目录内容一起列出来，等于该目录下的所有文件都会显示出来；</span><br><span class="line">-S  ：以文件大小大小排序，而不是用文件名排序；</span><br><span class="line">-t  ：依时间排序，而不是用文件名。</span><br><span class="line">--color=never  ：不要依据文件特性给予颜色显示；</span><br><span class="line">--color=always ：显示颜色</span><br><span class="line">--color=auto   ：让系统自行依据设置来判断是否给予颜色</span><br><span class="line">--full-time    ：以完整时间模式 （包含年、月、日、时、分） 输出</span><br><span class="line">--time=&#123;atime,ctime&#125; ：输出 access 时间或改变权限属性时间 （ctime）而非内容变更时间 （modification time）</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>cp命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">选项与参数:</span><br><span class="line">-a  ：相当于 -dr --preserve=all 的意思，至于 dr 请参考下列说明；（常用）</span><br><span class="line">-d  ：若来源文件为链接文件的属性（link file），则复制链接文件属性而非文件本身；</span><br><span class="line">-i  ：若目标文件（destination）已经存在时，在覆盖时会先询问动作的进行（常用）</span><br><span class="line">-l  ：进行硬式链接（hard link）的链接文件创建，而非复制文件本身；</span><br><span class="line">-p  ：连同文件的属性（权限、用户、时间）一起复制过去，而非使用默认属性（备份常用）；</span><br><span class="line">-r  ：递回持续复制，用于目录的复制行为；（常用）</span><br><span class="line">-s  ：复制成为符号链接文件 （symbolic link），亦即“捷径”文件；</span><br><span class="line">-u  ：destination 比 source 旧才更新 destination，或 destination 不存在的情况下才复制。</span><br><span class="line">--preserve=all ：除了 -p 的权限相关参数外，还加入 SELinux 的属性, links, xattr 等也复制了。</span><br><span class="line">```	</span><br><span class="line">- rmdir命令</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>root@study ~]# rmdir [-p] 目录名称<br>选项与参数：<br>-p ：连同“上层”“空的”目录也一起删除<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- rm命令</span><br><span class="line">&gt; 1.在指令前加上反斜线，可以忽略掉 alias 的指定选项喔！**^[详见bash章节]**</span><br><span class="line">2.删除一个带有 - 开头的文件。（因为“－”是选项,所以系统误判了！</span><br></pre></td></tr></table></figure></p>
-<p>#错误<br>[root@study tmp]# rm -aaa-<br>rm: invalid option – ‘a‘</p>
-<p>#正确 rm –help查找<br>[root@study tmp]# rm ./-aaa-<br>[root@study tmp]# rm – -aaa-<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- mv命令</span><br></pre></td></tr></table></figure></p>
-<p>选项与参数：<br>-f  ：force 强制的意思，如果目标文件已经存在，不会询问而直接覆盖；<br>-i  ：若目标文件 （destination） 已经存在时，就会询问是否覆盖！<br>-u  ：若目标文件已经存在，且 source 比较新，才会更新 （update）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; 特殊用处:</span><br><span class="line">1.文件更名(类似命令rename)</span><br><span class="line">2.可同时移动多个文件到同一目录</span><br><span class="line">- rename命令</span><br></pre></td></tr></table></figure></p>
-<p>参数:<br>原字符串：将文件名需要替换的字符串；<br>目标字符串：将文件名中含有的原字符替换成目标字符串；<br>文件：指定要改变文件名的文件列表<br>#<br>[root@study tmp]# rename .htm .html *.htm<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- 获取文件/目录名</span><br><span class="line">	- basename</span><br></pre></td></tr></table></figure></p>
-<pre><code>选项:
--a, --multiple       support multiple arguments and treat each as a NAME
-  -s, --suffix=SUFFIX  remove a trailing SUFFIX
-  -z, --zero           separate output with NUL rather than newline
-</code></pre><p>  #例子<br>  basename /usr/bin/sort          -&gt; “sort”<br>  basename include/stdio.h .h     -&gt; “stdio”<br>  basename -s .h include/stdio.h  -&gt; “stdio”<br>  basename -a any/str1 any/str2   -&gt; “str1” followed by “str2”<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- dirname</span><br></pre></td></tr></table></figure></p>
-<pre><code>#例子
-dirname /usr/bin/          -&gt; &quot;/usr&quot;
-  dirname dir1/str dir2/str  -&gt; &quot;dir1&quot;     followed by &quot;dir2&quot;
-  dirname stdio.h            -&gt; &quot;.&quot;
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">* [文件内容审阅](#2)	</span><br><span class="line">	</span><br><span class="line">##文件内容审阅</span><br><span class="line">- cat命令  </span><br><span class="line"></span><br><span class="line">*由第一行开始显示内容(与tac相反)*</span><br></pre></td></tr></table></figure>
-</code></pre><p>选项与参数：<br>-A  ：相当于 -vET 的整合选项，可列出一些特殊字符而不是空白而已；<br>-b  ：列出行号，仅针对非空白行做行号显示，空白行不标行号！<br>-E  ：将结尾的断行字符 $ 显示出来；<br>-n  ：打印出行号，连同空白行也会有行号，与 -b 的选项不同；<br>-T  ：将 [tab] 按键以 ^I 显示出来；<br>-v  ：列出一些看不出来的特殊字符<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- nl指令</span><br><span class="line">*添加行号打印,默认不打印空行行号.“其默认的结果与 cat -n 有点不太一样， nl 可以将行号做比较多的显示设计，包括位数与是否自动补齐 0 等等的功能呢。*</span><br></pre></td></tr></table></figure></p>
-<p>nl [选项]… [文件]…<br>-b  ：指定行号指定的方式，主要有两种：<br>    -b a ：表示不论是否为空行，也同样列出行号(类似 cat -n)；<br>    -b t ：如果有空行，空的那一行不要列出行号(默认值)；<br>-n  ：列出行号表示的方法，主要有三种：<br>    -n ln ：行号在萤幕的最左方显示；<br>    -n rn ：行号在自己栏位的最右方显示，且不加 0 ；<br>    -n rz ：行号在自己栏位的最右方显示，且加 0 ；<br>-w  ：行号栏位的占用的位数。(与-n ln 或 -n rz配合使用)<br>-p 在逻辑定界符处不重新开始计算。</p>
-<p>$ nl -n ln -w 3 test.txt<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 可翻页检视 more / less</span><br><span class="line">*两者区别在于前者不能向前翻页(管线操作),后者可以向前翻页并支持更多其它操作*</span><br><span class="line"></span><br><span class="line">- 数据撷取</span><br><span class="line">	- head 撷取前面几行</span><br><span class="line">	- tail 取出后几行,默认10行  </span><br><span class="line">	***注意:当用-f |grep 选项时,默认会有缓存区不能及时显示可加--line-buffered***</span><br></pre></td></tr></table></figure></p>
-<p>例题：<br>假如我想要显示 /etc/man_db.conf 的第 11 到第 20 行呢？<br>head -n 20 /etc/man_db.conf | tail -n 10<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- 非纯文本文件　od</span><br></pre></td></tr></table></figure></p>
-<p>选项或参数：<br>-t  ：后面可以接各种“类型 （TYPE）”的输出，例如：<br>      a       ：利用默认的字符来输出；<br>      c       ：使用 ASCII 字符来输出<br>      d[size] ：利用十进制（decimal）来输出数据，每个整数占用 size Bytes ；<br>      f[size] ：利用浮点数值（floating）来输出数据，每个数占用 size Bytes ；<br>      o[size] ：利用八进位（octal）来输出数据，每个整数占用 size Bytes ；<br>      x[size] ：利用十六进制（hexadecimal）来输出数据，每个整数占用 size Bytes ；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt; 如果对纯文本文件使用这个指令，你甚至可以发现到 ASCII 与字符的对照表！</span><br><span class="line">例题：想要立刻找到 password 这几个字的 ASCII 对照，该如何通过 od 来判断？</span><br><span class="line">答：</span><br><span class="line">echo password | od -t oCc</span><br><span class="line"></span><br><span class="line">- 文件时间</span><br><span class="line">	- modification time （mtime）：  </span><br><span class="line">当该文件的“内容数据”变更时，就会更新这个时间！内容数据指的是文件的内容，而不是文件的属性或权限喔！</span><br><span class="line">	- status time （ctime）：  </span><br><span class="line">当该文件的“状态 （status）”改变时，就会更新这个时间，举例来说，像是权限与属性被更改了，都会更新这个时间啊。 </span><br><span class="line">	- access time （atime）：  </span><br><span class="line">当“该文件的内容被取用”时，就会更新这个读取时间 （access）。举例来说，我们使用 cat 去读取 /etc/man_db.conf ， 就会更新该文件的 atime 了。</span><br><span class="line"></span><br><span class="line">- 修改文件时间 touch命令</span><br></pre></td></tr></table></figure></p>
-<p>选项与参数：<br>-a  ：仅修订 access time；<br>-c  ：仅修改文件的时间，若该文件不存在则不创建新文件；<br>-d  ：后面可以接欲修订的日期而不用目前的日期，也可以使用 –date=”日期或时间”<br>-m  ：仅修改 mtime ；<br>-t  ：后面可以接欲修订的时间而不用目前的时间，格式为[YYYYMMDDhhmm].<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">*该命令也可用来新建文件*</span><br><span class="line"></span><br><span class="line">- file命令</span><br><span class="line">*查看某个文件的基本数据类型,如:ASCII/data文件/binary文件等等信息,也可用来判断tar包文件是用哪种压缩功能打包的.*</span><br><span class="line"></span><br><span class="line">##文件与文件夹权限</span><br><span class="line">*在Linux传统的Ext2/Ext3/Ext4文件系统下，我们还可以设置其他的系统隐藏属性， 这部份可使用 chattr 来设置，而以 lsattr 来查看，最重要的属性就是可以设置其不可修改的特性！让连文件的拥有者都不能进行修改！ 这个属性可是相当重要的，尤其是在安全机制上面 （security）！比较可惜的是，在 CentOS 7.x 当中利用 xfs 作为默认文件系统， 但是 xfs 就没有支持所有的 chattr 的参数了！仅有部份参数还有支持而已！*</span><br><span class="line"></span><br><span class="line">- 文件默认权限 umask</span><br><span class="line">***umask 的分数指的是“该默认值需要减掉的权限！*** </span><br><span class="line">	- 若使用者创建为“文件”则默认“没有可执行（ x ）权限”，亦即只有 rw 这两个项目，也就是最大为 666 分，默认权限如下：-rw-rw-rw-</span><br><span class="line">	</span><br><span class="line">	- 若使用者创建为“目录”，则由于 x 与是否可以进入此目录有关，因此默认为所有权限均开放，亦即为 777 分，默认权限如下：drwxrwxrwx</span><br></pre></td></tr></table></figure></p>
-<p>[root@study ~]# umask<br>0022             &lt;==与一般权限有关的是后面三个数字！<br>[root@study ~]# umask -S<br>u=rwx,g=rx,o=rx<br>[root@study ~]# umask 022 &lt;==设置默认权限<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- 文件隐藏属性 chattr  </span><br><span class="line">*chattr指令只能在Ext2/Ext3/Ext4的 Linux 传统文件系统上面完整生效， 其他的文件系统可能就无法完整的支持这个指令了，例如 xfs 仅支持部份参数而已*</span><br></pre></td></tr></table></figure></p>
-<pre><code>[root@study ~]# chattr [+-=][ASacdistu] 文件或目录名称
-</code></pre><p>选项与参数：</p>
-<ul>
-<li>：增加某一个特殊参数，其他原本存在参数则不动。</li>
-</ul>
-<ul>
-<li>：移除某一个特殊参数，其他原本存在参数则不动。<br>=   ：设置一定，且仅有后面接的参数<br>A  ：当设置了 A 这个属性时，若你有存取此文件（或目录）时，他的存取时间 atime 将不会被修改，<br> 可避免 I/O 较慢的机器过度的存取磁盘。（目前建议使用文件系统挂载参数处理这个项目）<br>S  ：一般文件是非同步写入磁盘的（原理请参考前一章sync的说明），如果加上 S 这个属性时，当你进行任何文件的修改，该更动会“同步”写入磁盘中。<br>a  ：当设置 a 之后，这个文件将只能增加数据，而不能删除也不能修改数据，只有root 才能设置这属性<br>c  ：这个属性设置之后，将会自动的将此文件“压缩”，在读取的时候将会自动解压缩，<br> 但是在储存的时候，将会先进行压缩后再储存（看来对于大文件似乎蛮有用的！）<br>d  ：当 dump 程序被执行的时候，设置 d 属性将可使该文件（或目录）不会被 dump 备份<br>i  ：这个 i 可就很厉害了！他可以让一个文件“不能被删除、改名、设置链接也无法写入或新增数据！<br>对于系统安全性有相当大的助益！只有 root 能设置此属性<br>s  ：当文件设置了 s 属性时，如果这个文件被删除，他将会被完全的移除出这个硬盘空间，<br> 所以如果误删了，完全无法救回来了喔！<br>u  ：与 s 相反的，当使用 u 来设置文件时，如果该文件被删除了，则数据内容其实还存在磁盘中，<br> 可以使用来救援该文件喔！<br>注意1：属性设置常见的是 a 与 i 的设置值，而且很多设置值必须要身为 root 才能设置<br>注意2：xfs 文件系统仅支持 AadiS 而已<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 显示文件隐藏属性 lsattr</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>root@study ~]# lsattr [-adR] 文件或目录<br>选项与参数：<br>“-a ：将隐藏文件的属性也秀出来；<br>-d ：如果接的是目录，仅列出目录本身的属性而非目录内的文件名；<br>-R ：连同子目录的数据也一并列出来！<br>[root@study tmp]# chattr +aiS attrtest<br>[root@study tmp]# lsattr attrtest<br>–S-ia———- attrtest<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- 文件特殊权限</span><br><span class="line">	- Set UID -&gt; SUID权限</span><br><span class="line">	</span><br><span class="line">	 ```bash</span><br><span class="line">	[root@study ~]# ls -l /usr/bin/passwd</span><br><span class="line">-rwsr-xr-x. 1 root root 27832 Jun 10  2014 /usr/bin/passwd</span><br></pre></td></tr></table></figure></p>
-<pre><code>&gt; 注意:上面passwd指令,一般账号没有写入权限,为什么一般账号还能修改密码呢?
-这就是USID的功能了（注意拥有者的“s”）:
-1、dmtsai 对于 /usr/bin/passwd 这个程序来说是**具有 x 权限**的，表示 dmtsai 能执行 passwd；
-</code></pre><p>2、passwd 的拥有者是 root 这个帐号；<br>3、dmtsai 执行 passwd 的过程中，会“暂时”获得 root 的权限；<br>4、/etc/shadow 就可以被 dmtsai 所执行的 passwd 所修改。<br>如果一般用户用cat去读取/etc/shadow时,会提示权限不够,因为cat指令没有SUID权限。<strong>另外SUID只对二进制程序有用,不能用于shell脚本。</strong></p>
-<pre><code>- Set GID -&gt; SGID权限
-*与SUID类似，当s标志在文件群组的x位置时，则称为SGID*
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">	[root@study ~]# ll /usr/bin/locate /var/lib/mlocate/mlocate.db</span><br><span class="line">-rwx--s--x. 1 root slocate   40496 Jun 10  2014 /usr/bin/locate</span><br><span class="line">-rw-r-----. 1 root slocate 2349055 Jun 15 03:44 /var/lib/mlocate/mlocate.db</span><br></pre></td></tr></table></figure>
-
-&gt; 使用 dmtsai 这个帐号去执行 locate 时，那 dmtsai 将会取得 slocate 群组的支持， 因此就能够去读取 mlocate.db 啦
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">	除了 binary program 之外，事实上 SGID 也能够用在目录上，这也是非常常见的一种用途！ 当一个目录设置了 SGID 的权限后，他将具有如下的功能：</span><br><span class="line">* 使用者若对于此目录具有 r 与 x 的权限时，该使用者能够进入此目录；</span><br><span class="line">* 使用者在此目录下的有效群组（effective group）将会变成该目录的群组；</span><br><span class="line">* 用途：若使用者在此目录下具有 w 的权限（可以新建文件），则使用者所创建的新文件，该新文件的群组与此目录的群组相同。</span><br></pre></td></tr></table></figure>
-
-- Sticky Bit -&gt; SBIT权限
-*目前这个权限仅针对目录有效，对于文件已经没有效果了。在others上的t标识*
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">* 当使用者对于此目录具有 w, x 权限，亦即具有写入的权限时；</span><br><span class="line">* 当使用者在该目录下创建文件或目录时，仅有自己与 root 才有权力删除该文件</span><br><span class="line">如:/tmp 本身的权限是“drwxrwxrwt”， 在这样的权限内容下，任何人都可以在 /tmp 内新增、修改文件，但仅有该文件/目录创建者与 root 能够删除自己的目录或文件。</span><br></pre></td></tr></table></figure>
-</code></pre><ul>
-<li>SUID/SGID/SBIT 权限设置<br><strong><em>SUID : 4 SGID : 2 SBIT : 1</em></strong><br>在数字权限前面加上一个数字就表示几个特殊权限了.<blockquote>
-<p>假设要将一个文件权限改为“-rwsr-xr-x”时，由于 s 在使用者权限中，所以是 SUID ，因此， 在原先的 755 之前还要加上 4 ，也就是：“ chmod 4755 filename ”来设置！此外，还有大 S 与大 T 的产生喔！参考下面的范例啦！</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@study tmp]<span class="comment"># chmod 7666 test; ls -l test &lt;==具有空的 SUID/SGID 权限</span></span><br><span class="line">-rwSrwSrwT 1 root root 0 Jun 16 02:53 <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
-</blockquote>
-</li>
-</ul>
-<p><em>注意:上面大写SST,因为特殊权限要求必须有执行权限(上面是666),所以权限不能启作用为空权限</em></p>
-<p><strong><em>除了数字方法外,也可以通过符号来处理.其中 SUID 为 u+s ，而 SGID 为 g+s ，SBIT 则是 o+t</em></strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">#设置权限成为 -rws--x--x 的模样：</span></span><br><span class="line">[root@study tmp]<span class="comment"># chmod u=rwxs,go=x test; ls -l test</span></span><br><span class="line">-rws--x--x 1 root root 0 Jun 16 02:53 <span class="built_in">test</span></span><br><span class="line"></span><br><span class="line"> <span class="comment">#承上，加上 SGID 与 SBIT 在上述的文件权限中！</span></span><br><span class="line">[root@study tmp]<span class="comment"># chmod g+s,o+t test; ls -l test</span></span><br><span class="line">-rws--s--t 1 root root 0 Jun 16 02:53 <span class="built_in">test</span></span><br></pre></td></tr></table></figure></p>
-<p>##指令与文件的搜寻</p>
-<ul>
-<li><p>指令文件名搜寻</p>
-<ul>
-<li><p>which (寻找”可执行文件”)<br><em>默认查找PATH内所规范的目录第一个被找到的执行文件</em></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">选项参数:</span><br><span class="line">-a 将所有由 PATH 目录中可以找到的指令均列出，而不止第一个被找到的指令名称</span><br><span class="line"></span><br><span class="line">root@study ~]# which history</span><br><span class="line">/usr/bin/which: no history in （/usr/local/sbin:/usr/local/bin:/sbin:/bin:</span><br><span class="line">/usr/sbin:/usr/bin:/root/bin）</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>因为history是bash内置命令所以不能用which查找，可以通过type命令查看。^<strong>[详见bash章节]</strong></p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>文件文件名搜寻</p>
-<ul>
-<li><p>whereis (由一些特定的目录中寻找文件文件名)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">	[root@study ~]# whereis [-bmsu] 文件或目录名</span><br><span class="line">选项与参数：</span><br><span class="line">-l    :可以列出 whereis 会去查询的几个主要目录而已</span><br><span class="line">-b    :只找 binary 格式的文件</span><br><span class="line">-m    :只找在说明文档 manual 路径下的文件</span><br><span class="line">-s    :只找 source 来源文件</span><br><span class="line">-u    :搜寻不在上述三个项目当中的其他特殊文件</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>locate / updatedb<br><em>locate寻找的数据是由/var/lib/mlocate里面的数据搜索到的,所以不用搜索硬盘,速度快。但由于数据库默认每天创建一次，所以新建的文件可能搜索不到，或者已删除文件还能搜索到</em></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">	[root@study ~]# locate [-ir] keyword</span><br><span class="line">选项与参数：</span><br><span class="line">-i  ：忽略大小写的差异；</span><br><span class="line">-c  ：不输出文件名，仅计算找到的文件数量</span><br><span class="line">-l  ：仅输出几行的意思，例如输出五行则是 -l 5</span><br><span class="line">-S  ：输出 locate 所使用的数据库文件的相关信息，包括该数据库纪录的文件/目录数量等</span><br><span class="line">-r  ：后面可接正则表达式的显示方式</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>想要实时搜索就要手动更新数据库：updatedb<br><em>updatedb：根据 /etc/updatedb.conf 的设置去搜寻系统硬盘内的文件名，并更新 /var/lib/mlocate 内的数据库文件；
-</em>locate：依据 /var/lib/mlocate 内的数据库记载，找出使用者输入的关键字文件名。<br>*因为 updatedb 会去搜寻硬盘，所以当你执行 updatedb 时，可能会等待数分钟的时间喔！</p>
-</blockquote>
-<pre><code>- find
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">[root@study ~]# find [PATH] [option] [action]</span><br><span class="line">选项与参数：</span><br><span class="line">1. 与时间有关的选项：共有 -atime, -ctime 与 -mtime ，以 -mtime 说明</span><br><span class="line">   -mtime  n ：n 为数字，意义为在 n 天之前的“一天之内”被更动过内容的文件；</span><br><span class="line">   -mtime +n ：列出在 n 天之前（不含 n 天本身）被更动过内容的文件文件名；</span><br><span class="line">   -mtime -n ：列出在 n 天之内（含 n 天本身）被更动过内容的文件文件名。</span><br><span class="line">   -newer file ：file 为一个存在的文件，列出比 file 还要新的文件文件名 </span><br><span class="line">   `</span><br><span class="line">   `</span><br><span class="line">2. 与使用者或群组名称有关的参数：</span><br><span class="line">   -uid n ：n 为数字，这个数字是使用者的帐号 ID，亦即 UID ，这个 UID 是记录在/etc/passwd 里面与帐号名称对应的数字。这方面我们会在第四篇介绍。</span><br><span class="line">   -gid n ：n 为数字，这个数字是群组名称的 ID，亦即 GID，这个 GID 记录在/etc/group</span><br><span class="line">   -user name ：name 为使用者帐号名称喔！例如 dmtsai </span><br><span class="line">   -group name：name 为群组名称喔，例如 users ；</span><br><span class="line">   -nouser    ：寻找文件的拥有者不存在 /etc/passwd 的人！</span><br><span class="line">   -nogroup   ：寻找文件的拥有群组不存在于 /etc/group 的文件！</span><br><span class="line">                当你自行安装软件时，很可能该软件的属性当中并没有文件拥有者，</span><br><span class="line">                这是可能的！在这个时候，就可以使用 -nouser 与 -nogroup 搜寻。</span><br><span class="line">`</span><br><span class="line">`</span><br><span class="line">3. 与文件权限及名称有关的参数：</span><br><span class="line">	-name filename ：搜寻文件名称为 filename 的文件；</span><br><span class="line">   -size [+-]SIZE ：搜寻比 SIZE 还要大（+）或小（-）的文件。这个 SIZE 的规格有：</span><br><span class="line">		c: 代表 Byte， </span><br><span class="line">		k: 代表 1024Bytes。</span><br><span class="line">		所以，要找比50KB还要大的文件，就是“ -size +50k”</span><br><span class="line">   -type TYPE ：搜寻文件的类型为 TYPE 的，</span><br><span class="line">   类型主要有：</span><br><span class="line">   		一般正规文件（f）, </span><br><span class="line">   		设备文件（b, c）,</span><br><span class="line">     		目录（d）,</span><br><span class="line">     		链接文件（l）, </span><br><span class="line">     		socket（s）, </span><br><span class="line">     		及 FIFO（p） 等属性。</span><br><span class="line">  -perm mode ：搜寻文件权限“刚好等于” mode 的文件，这个 mode 为类似 chmod的属性值，举例来说， -rwsr-xr-x 的属性为 4755 ！</span><br><span class="line">   -perm -mode ：搜寻文件权限“必须要全部囊括 mode 的权“限”的文件。</span><br><span class="line">   -perm /mode : 任何权限位 mode 被设置了的文件。</span><br><span class="line">举例：</span><br><span class="line">[root@study ~]# find / -perm +7000 </span><br><span class="line">*所谓的 7000 就是 ---s--s--t ，那么只要含有 s 或 t 的就列出，所以当然要使用 /7000，</span><br><span class="line">*使用 -7000 表示要同时含有 ---s--s--t 的所有三个权限。而只需要任意一个，就是 /7000 ～瞭乎？</span><br><span class="line">(旧版是：-perm +7000已经被/7000替换)</span><br><span class="line">`</span><br><span class="line">`</span><br><span class="line">4. 额外可进行的动作：</span><br><span class="line">-exec command ：command 为其他指令，-exec 后面可再接额外的指令来处理搜寻到的结果。</span><br><span class="line">-print ：将结果打印到屏幕上，这个动作是默认动作！</span><br><span class="line">[root@study ~]# find / -name &quot;passwd&quot; -exec ls -l &#123;&#125; \;</span><br></pre></td></tr></table></figure>
-</code></pre><p><strong><em>-exec 后面不支持别名所以上面使用 ls -l<br>{} 代表的是“由find找到的内容”<br>由于find命令是硬盘搜索，所以速度会相对很慢</em></strong></p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/09/13/Linux/文件与目录管理/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2061,138 +1611,15 @@ dirname /usr/bin/          -&gt; &quot;/usr&quot;
 
       
         
-          
-            <p>[TOC]</p>
+          <p>[TOC]</p>
 <h2 id="文件属性"><a href="#文件属性" class="headerlink" title="文件属性"></a>文件属性</h2><p><img src="/2017/09/11/Linux/文件目录权限/QQ20170911-172829@2x.png" alt="执行命令"></p>
-<ul>
-<li><p>第一栏代表文件类型与权限</p>
-<blockquote>
-<p><strong>列表第一个字符意义:</strong><br>当为[ d ]则是目录，例如上表文件名为“.config”的那一行；<br>当为[ - ]则是文件，例如上表第三行；<br>若是[ l ]则表示为链接文件（link file）；<br>若是[ b ]则表示为设备文件里面的可供储存的周边设备（可随机存取设备）；<br>若是[ c ]则表示为设备文件里面的序列埠设备，例如键盘、鼠标（一次性读取设备）。  </p>
-</blockquote>
-</li>
-<li><p>第二栏表示有多少文件名链接到此节点上</p>
-</li>
-<li>第三栏表示这个文件“拥有者账号”</li>
-<li>第四栏表示这个文件所属群组</li>
-<li>第五栏表示这个文件大小，默认单位Bytes</li>
-<li>第六栏表示文件的创建日期或修改日期</li>
-<li>第七栏为文件名</li>
-</ul>
-<h2 id="改变文件属性与权限"><a href="#改变文件属性与权限" class="headerlink" title="改变文件属性与权限"></a>改变文件属性与权限</h2><ul>
-<li>改变文件群组</li>
-</ul>
-<blockquote>
-<p>chgrp [-R] 群组名 文件或目录</p>
-</blockquote>
-<ul>
-<li>改变文件拥有者</li>
-</ul>
-<blockquote>
-<p>chown [-R] 账号名:群组名 文件或目录</p>
-</blockquote>
-<ul>
-<li><p>改变权限<br><em>数字类型改变文件权限</em>  </p>
-<blockquote>
-<p>r:4 w:2 o:1<br>chmod [-R] 权限和 文件/文件夹  </p>
-</blockquote>
-<p><em>符号类型改变文件权限</em> </p>
-<blockquote>
-<p>user:u group:g others:o all:a<br>+加入权限 -去除权限 =设置权限<br>写法:<br>chmod [-R] u=rwx,g=rw,o=rw 文件/文件夹</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="Linux目录配置"><a href="#Linux目录配置" class="headerlink" title="Linux目录配置"></a>Linux目录配置</h2><p><img src="/2017/09/11/Linux/文件目录权限/QQ20170912-092638@2x.png" alt="Linux目录"></p>
-<h3 id="HFS要求必须存在的目录"><a href="#HFS要求必须存在的目录" class="headerlink" title="HFS要求必须存在的目录"></a>HFS要求必须存在的目录</h3><ol>
-<li><strong>/bin</strong> 放置的是单人维护模式下还能够被操作的命令。主要有：cat、chmod、chown、date、mv、mkdir、cp、bash等常用指令。  </li>
-<li><strong>/boot</strong> 此目录主要放置在开机会使用的文件,包括Linux核心文件以及开机菜单与开机所需要的配置文件等等。  </li>
-<li><strong>/dev</strong> Linux上,任何设置与周边设置都以文件形态存在于这个目录。通过读取这个目录下的文件，就等于存取这个设备。比较重要的文件有：/dev/null,/dev/zero,/dev/tty等等。</li>
-<li><p><strong>/etc</strong> 系统主要配置文件几乎都放在这个目录内,例如人员账号密码档、各种服务启动档等等。一般来说这个目录文件可以让一般用户查阅，但是只有root用户可以修改。<strong><em>FHS建议不要放置可可执行文件(binary)在这个目录中。</em></strong> 比较重要的文件有：/etc/modprobe.d/, /etc/passwd, /etc/fstab, /etc/issue  </p>
-<blockquote>
-<p>/etc/opt(必要) 这个目录放置第三方软件/opt的相关配置文件。</p>
-</blockquote>
-</li>
-<li><p><strong>/lib</strong> 放置的是开机时会用到的函数库,以及在/bin或/sbin下指令会调用的函数库.</p>
-<blockquote>
-<p><strong>/lib/modules</strong> (必要) 这个目录放置可抽换式的核心模块(驱动程序)</p>
-</blockquote>
-</li>
-<li><p><strong>/media</strong> 放置可移除设置。包括：软盘、光盘、DVD等等设置都暂时挂载于此。常见的文件名有：/media/floppy, /media/cdrom等等。</p>
-</li>
-<li><strong>/mnt</strong> 如果你想要暂时挂载某些额外的设备，一般建议你可以放置到这个目录中。 在早时候，这个目录的用途与/media相同啦！只是有了/media之后，这个目录就用来暂时挂载用了。</li>
-<li><strong>/opt</strong> 第三方协力软件放置的目录。什么是第三方协力软件啊？ 举例来说，KDE这个桌面管理系统是一个独立的计划，不过他可以安装到Linux系统中，因此KDE的软件就建议放置到此目录下了。 另外，如果你想要自行安装额外的软件（非原本的distribution提供的），那么也能够将你的软件安装到这里来。 不过，以前的Linux系统中，我们还是习惯放置在/usr/local目录下呢！  </li>
-<li><strong>/run</strong> 早期的 FHS 规定系统开机后所产生的各项信息应该要放置到 /var/run 目录下，新版的 FHS 则规范到 /run 下面。 由于 /run 可以使用内存来仿真，因此性能上会好很多！</li>
-<li><strong>/sbin</strong> 放在/sbin下面的为开机过程中所需要的，里面包括了开机、修复、还原系统所需要的指令。 至于某些服务器软件程序，一般则放置到/usr/sbin/当中。至于本机自行安装的软件所产生的系统可执行文件（system binary）， 则放置到/usr/local/sbin/当中了。常见的指令包括：fdisk, fsck, ifconfig, mkfs等等。</li>
-<li><strong>/srv</strong> srv可以视为“service”的缩写，是一些网络服务启动之后，这些服务所需要取用的数据目录。 常见的服务例如WWW, FTP等等。举例来说，WWW服务器需要的网页数据就可以放置在/srv/www/里面。 不过，系统的服务数据如果尚未要提供给网际网络任何人浏览的话，默认还是建议放置到 /var/lib 下面即可。</li>
-<li><strong>/tmp</strong> 这是让一般使用者或者是正在执行的程序暂时放置文件的地方。 这个目录是任何人都能够存取的，所以你需要定期的清理一下。当然，重要数据不可放置在此目录啊！ 因为FHS甚至建议在开机时，应该要将/tmp下的数据都删除唷！</li>
-<li><strong>/usr</strong> 第二层FHS设置,见后续…</li>
-<li><strong>/var</strong> 第二层FHS设置,见后续…</li>
-</ol>
-<h3 id="HFS要求可以存在的目录"><a href="#HFS要求可以存在的目录" class="headerlink" title="HFS要求可以存在的目录"></a>HFS要求可以存在的目录</h3><ol>
-<li><p><strong>/home</strong> 这是系统默认的使用者主文件夹（home directory）。在你新增一个一般使用者帐号时， 默认的使用者主文件夹都会规范到这里来</p>
-<blockquote>
-<p>~：代表目前这个使用者的主文件夹<br>~dmtsai ：则代表 dmtsai 的主文件夹！</p>
-</blockquote>
-</li>
-<li><p><strong>/lib\<qual></qual></strong> 用来存放与 /lib 不同的格式的二进制函数库，例如支持 64 位的 /lib64 函数库等</p>
-</li>
-<li><strong>/root</strong> 系统管理员（root）的主文件夹。之所以放在这里，是因为如果进入单人维护模式而仅挂载根目录时， 该目录就能够拥有root的主文件夹，所以我们会希望root的主文件夹与根目录放置在同一个分区中。</li>
-</ol>
-<hr>
-<p>事实上FHS针对根目录定义的标准仅有上面这些,不过Linux还有许多目录需要了解一下.下面几个目录也非常重要:</p>
-<hr>
-<ol>
-<li><strong>/lost+found</strong> 这个目录是使用标准的ext2/ext3/ext4文件系统格式才会产生的一个目录，目的在于当文件系统发生错误时， 将一些遗失的片段放置到这个目录下。不过如果使用的是 xfs 文件系统的话，就不会存在这个目录了！</li>
-<li><strong>/proc</strong> 这个目录本身是一个虚拟目录.它放置 的数据都是在内存中.例如系统核心、行程信息、周边设备状态以及网络状态等等。因为这个目录数据都在内存当中，所以本身不占任何磁盘空间。比较重要的文件例如：/proc/cpuinfo, /proc/dma, /proc/interrupts, /proc/ioports, /proc/net/* 等等。</li>
-<li><p><strong>/sys</strong> 这个目录其实跟/proc非常类似，也是一个虚拟的文件系统，主要也是记录核心与系统硬件信息较相关的信息。 包括目前已载入的核心模块与核心侦测到的硬件设备信息等等。这个目录同样不占硬盘容量喔！</p>
-<h3 id="usr目录"><a href="#usr目录" class="headerlink" title="/usr目录"></a>/usr目录</h3><blockquote>
-<p><strong>/usr</strong> 目录是Unix Software Resource的缩写， 也就是“Unix操作系统软件资源”所放置的目录，而不是使用者的数据啦！这点要注意。 FHS建议所有软件开发者，应该将他们的数据合理的分别放置到这个目录下的次目录，而不要自行创建该软件自己独立的目录。</p>
-</blockquote>
-<h4 id="FHS要求必须存在的目录"><a href="#FHS要求必须存在的目录" class="headerlink" title="FHS要求必须存在的目录"></a>FHS要求必须存在的目录</h4><ul>
-<li><strong>/usr/bin</strong> 所有一般用户使用的指令都放在这里! 目前CentOS7已经将全部指令放置于此,而使用链接文件的方式将 <strong>/bin</strong> 链接至此! 也就是说 <strong>/bin</strong> 与 <strong>/usr/bin</strong> 是一模一样了! 另外,FHS要求在此目录下不应该有子目录!</li>
-<li><strong>/usr/lib</strong> 基本上，与 /lib 功能相同，所以 /lib 就是链接到此目录中的！</li>
-<li><strong>/usr/local</strong> 系统管理员在本机自行安装自己下载的软件(非distribution默认提供者)建议安装到此目录,这样会比较方便管理. 举例来说，你的distribution提供的软件较旧，你想安装较新的软件但又不想移除旧版， 此时你可以将新版软件安装于/usr/local/目录下，可与原先的旧版软件有分别啦！ 你可以自行到/usr/local去看看，该目录下也是具有bin, etc, include, lib…的次目录喔！</li>
-<li><strong>/usr/sbin</strong> 非系统正常运行所需要的系统指令。最常见的就是某些网络服务器软件的服务指令（daemon）啰！不过基本功能与 /sbin 也差不多， 因此目前 /sbin 就是链接到此目录中的。</li>
-<li><strong>/usr/share</strong> 主要放置只读架构的数据文件，当然也包括共享文件。在这个目录下放置的数据几乎是不分硬件架构均可读取的数据， 因为几乎都是文字文件嘛！<blockquote>
-<p>常见的还有这些次目录：<br><strong>/usr/share/man</strong> 线上说明文档<br><strong>/usr/share/doc</strong> 软件杂项文件说明<br><strong>/usr/share/zoneinfo</strong> 与时区有关的时区文件</p>
-</blockquote>
-</li>
-</ul>
-<h4 id="FHS建议可以存在的目录"><a href="#FHS建议可以存在的目录" class="headerlink" title="FHS建议可以存在的目录"></a>FHS建议可以存在的目录</h4><ul>
-<li><strong>/usr/games</strong> 与游戏比较相关的数据放置处</li>
-<li><strong>/usr/include</strong> c/c++等程序语言的文件开始（header）与包含档（include）放置处，当我们以tarball方式 （*.tar.gz 的方式安装软件）安装某些数据时，会使用到里头的许多包含档喔！</li>
-<li><strong>/usr/libexec</strong> 某些不被一般使用者惯用的可执行文件或脚本（script）等等，都会放置在此目录中。例如大部分的 X 窗口下面的操作指令， 很多都是放在此目录下的。</li>
-<li>**/usr/lib\<qual> 与 /lib\<qual>/功能相同，因此目前 /lib<qual> 就是链接到此目录中</qual></qual></qual></li>
-<li><strong>/usr/src</strong> 一般源代码建议放在这里, src有source的意思. 至于核心源代码建议放到 <strong>/usr/src/linux</strong> 目录下.<h3 id="var目录"><a href="#var目录" class="headerlink" title="/var目录"></a>/var目录</h3><blockquote>
-<p>如果 <strong>/usr</strong> 是安装时会占用较大硬盘容量的目录，那么 <strong>/var</strong> 就是在系统运行后才会渐渐占用硬盘容量的目录。 因为 <strong>/var</strong> 目录主要针对常态性变动的文件，包括高速缓存（cache）、登录文件（log file）以及某些软件运行所产生的文件， 包括程序文件（lock file, run file），或者例如MySQL数据库的文件等等</p>
-<ul>
-<li>FHS要求必须存在的目录</li>
-</ul>
-</blockquote>
-</li>
-<li><strong>/var/cache</strong> 应用程序运行中会产生的一些暂存盘</li>
-<li><strong>/var/lib</strong> 程序本身执行的过程中，需要使用到的数据文件放置的目录。在此目录下各自的软件应该要有各自的目录。 举例来说，MySQL的数据库放置到/var/lib/mysql/而rpm的数据库则放到/var/lib/rpm去！</li>
-<li><strong>/var/lock</strong> 某些设备或者是文件资源一次只能被一个应用程序所使用，如果同时有两个程序使用该设备时， 就可能产生一些错误的状况，因此就得要将该设备上锁（lock），以确保该设备只会给单一软件所使用。 举例来说，烧录机正在烧录一块光盘，你想一下，会不会有两个人同时在使用一个烧录机烧片？ 如果两个人同时烧录，那片子写入的是谁的数据？所以当第一个人在烧录时该烧录机就会被上锁， 第二个人就得要该设备被解除锁定（就是前一个人用完了）才能够继续使用啰。目前此目录也已经挪到 <em>/run/lock</em> 中</li>
-<li><strong>/var/log</strong> 重要到不行！这是登录文件放置的目录！里面比较重要的文件如 <strong>/var/log/messages</strong> ,  <strong>/var/log/wtmp</strong>（记录登陆者的信息）等。</li>
-<li><strong>/var/mail</strong> 放置个人电子邮件信箱的目录，不过这个目录也被放置到 <strong>/var/spool/mail/</strong> 目录中！ 通常这两个目录是互为链接文件啦！</li>
-<li><strong>/var/run</strong> 某些程序或者服务启动后, 会将它们的PID放置在这个目录下! 与 <strong>/run</strong> 相同，这个目录链接到 <strong>/run</strong> 去了！</li>
-<li><strong>/var/spool</strong> 这个目录通常放置一些伫列数据，所谓的“伫列”就是排队等待其他程序使用的数据啦！ 这些数据被使用后通常都会被删除。举例来说，系统收到新信会放置到/var/spool/mail/中， 但使用者收下该信件后该封信原则上就会被删除。信件如果暂时寄不出去会被放到/var/spool/mqueue/中， 等到被送出后就被删除。如果是工作调度数据（crontab），就会被放置到/var/spool/cron/目录中！</li>
-</ul>
-</li>
-</ol>
-<h2 id="CentOS观察"><a href="#CentOS观察" class="headerlink" title="CentOS观察"></a>CentOS观察</h2><ul>
-<li>uname</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[dmtsai@study ~]$ uname -r   # 查看核心版本</span><br><span class="line">3.10.0-229.el7.x86_64</span><br><span class="line">[dmtsai@study ~]$ uname -m   # 查看操作系统的位版本</span><br><span class="line">x86_64</span><br></pre></td></tr></table></figure>
-<ul>
-<li>lsb_release指令已经不是默认安装软件了.使用前需要安装</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@study ~]# dnf install redhat-lsb</span><br><span class="line">[root@study ~]# lsb_release -a</span><br><span class="line">LSB Version:	:core-4.1-amd64:core-4.1-noarch:cxx-4.1-amd64:cxx-4.1-noarch:desktop-4.1-amd64:desktop-4.1-noarch:languages-4.1-amd64:languages-4.1-noarch:printing-4.1-amd64:printing-4.1-noarch</span><br><span class="line">Distributor ID:	CentOS</span><br><span class="line">Description:	CentOS Linux release 7.3.1611 (Core)</span><br><span class="line">Release:	7.3.1611</span><br><span class="line">Codename:	Core</span><br></pre></td></tr></table></figure>
-<ul>
-<li>/etc/*</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@study ~]# cat /etc/issue</span><br><span class="line">CentOS release 5.5 (Final)</span><br><span class="line">Kernel r on an m</span><br><span class="line">[root@study ~]# cat /etc/redhat-release</span><br></pre></td></tr></table></figure>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/09/11/Linux/文件目录权限/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2331,30 +1758,17 @@ dirname /usr/bin/          -&gt; &quot;/usr&quot;
 
       
         
-          
-            <p>[TOC]</p>
+          <p>[TOC]</p>
 <h2 id="重要热键"><a href="#重要热键" class="headerlink" title="重要热键"></a>重要热键</h2><blockquote>
-<p>Tab 自动补全<br>Ctrl+C 中断目前程序<br>Ctrl+d 键盘输入结束<br>Shift+Page [Up][Down] 上下翻页<br>[Ctrl] + [Alt] + [F1]~[F6]的组合按钮 终端切换</p>
+<p>Tab 自动补全<br>Ctrl+C 中断目前程序<br>Ctrl+d 键盘输入结束<br>Shift+Page [Up][Down] 上下翻页<br>[Ctrl] + [Alt] + [F1]~[F6]的组合按钮 终端切换 </p>
 </blockquote>
-<h2 id="开关机"><a href="#开关机" class="headerlink" title="开关机"></a>开关机</h2><ul>
-<li><p>shutdown [-krhc] [时间] [警告讯息]　<em>关机命令</em></p>
-<blockquote>
-<p>-k     ： 不要真的关机，只是发送警告讯息出去！<br>-r     ： 在将系统的服务停掉之后就重新开机（常用）<br>-h     ： 将系统的服务停掉后，立即关机。 （常用）<br>-c     ： 取消已经在进行的 shutdown 指令内容。<br>时间   ： 指定系统关机的时间！时间的范例下面会说明。若没有这个项目，则默认 1 分钟后自动进行。</p>
-</blockquote>
-</li>
-<li><p>reboot　<em>重新开机命令</em></p>
-<blockquote>
-<p>sync;reboot<br>实际开关机命令默认都会执行sync命令,但为了保险起见还是手动执行一下此命令。</p>
-</blockquote>
-</li>
-<li><p>实际使用关机管理工具<br>systemctl  [指令]<br>　<em>上面提到的开关机命令实际都是调用此命令执行开关机</em>  </p>
-<blockquote>
-<p>halt       进入系统停止的模式，屏幕可能会保留一些讯息，这与你的电源管理模式有关<br>poweroff   进入系统关机模式，直接关机没有提供电力喔！<br>reboot     直接重新开机<br>suspend    进入休眠模式<br>[root@study ~]# systemctl reboot    # 系统重新开机<br>[root@study ~]# systemctl poweroff  # 系统关机  </p>
-</blockquote>
-</li>
-</ul>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/09/11/Linux/开关机/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

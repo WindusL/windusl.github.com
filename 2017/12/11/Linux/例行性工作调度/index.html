@@ -106,18 +106,18 @@
 
 
 
-  <meta name="description" content="[TOC] 循环性执行的例行性工作高度循环执行的例行性工作调度由cron(crond)服务 控制.Lnux上有非常多的例行性工作,因此这个服务是默认启动的.  使用者的设置    123/etc/cron.allow 允许使用crontab的用户/etc/cron.deny 不允许使用crontab的用户allow优先级优于deny  当用户使用crontab指令创建工作调度之后,该项工作被纪录到">
+  <meta name="description" content="[TOC] 循环性执行的例行性工作高度循环执行的例行性工作调度由cron(crond)服务 控制.Lnux上有非常多的例行性工作,因此这个服务是默认启动的.  使用者的设置    123/etc/cron.allow 允许使用crontab的用户/etc/cron.deny 不允许使用crontab的用户allow优先级优于deny">
 <meta name="keywords" content="学习笔记,Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="例行性工作调度">
 <meta property="og:url" content="http://fcwalkers.com/2017/12/11/Linux/例行性工作调度/index.html">
 <meta property="og:site_name" content="风尘">
-<meta property="og:description" content="[TOC] 循环性执行的例行性工作高度循环执行的例行性工作调度由cron(crond)服务 控制.Lnux上有非常多的例行性工作,因此这个服务是默认启动的.  使用者的设置    123/etc/cron.allow 允许使用crontab的用户/etc/cron.deny 不允许使用crontab的用户allow优先级优于deny  当用户使用crontab指令创建工作调度之后,该项工作被纪录到">
+<meta property="og:description" content="[TOC] 循环性执行的例行性工作高度循环执行的例行性工作调度由cron(crond)服务 控制.Lnux上有非常多的例行性工作,因此这个服务是默认启动的.  使用者的设置    123/etc/cron.allow 允许使用crontab的用户/etc/cron.deny 不允许使用crontab的用户allow优先级优于deny">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-23T17:31:05.000Z">
+<meta property="og:updated_time" content="2018-03-23T17:35:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="例行性工作调度">
-<meta name="twitter:description" content="[TOC] 循环性执行的例行性工作高度循环执行的例行性工作调度由cron(crond)服务 控制.Lnux上有非常多的例行性工作,因此这个服务是默认启动的.  使用者的设置    123/etc/cron.allow 允许使用crontab的用户/etc/cron.deny 不允许使用crontab的用户allow优先级优于deny  当用户使用crontab指令创建工作调度之后,该项工作被纪录到">
+<meta name="twitter:description" content="[TOC] 循环性执行的例行性工作高度循环执行的例行性工作调度由cron(crond)服务 控制.Lnux上有非常多的例行性工作,因此这个服务是默认启动的.  使用者的设置    123/etc/cron.allow 允许使用crontab的用户/etc/cron.deny 不允许使用crontab的用户allow优先级优于deny">
 
 
 
@@ -421,6 +421,7 @@
 <li>使用者的设置  </li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/etc/cron.allow 允许使用crontab的用户</span><br><span class="line">/etc/cron.deny 不允许使用crontab的用户</span><br><span class="line">allow优先级优于deny</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <blockquote>
 <p>当用户使用crontab指令创建工作调度之后,该项工作被纪录到/var/spool/cron里,而且是以账号作为判别的.如:用Windus使用后会纪录到/var/spool/cron/Windus<code>注意:不要使用vim编辑该文件,可能由于输入法错误导致无法执行cron</code><br>另外,cron执行的每一项任务都纪录到/var/log/cron中.</p>
 </blockquote>

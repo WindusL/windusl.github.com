@@ -106,18 +106,18 @@
 
 
 
-  <meta name="description" content="[TOC] 基础正则表达式基础正则字符包括:^ $ . \ * [] [n1-n2] [^] \{n,m\}   语系对正则表达式的影响由于不同语系的编码数据并不相同，所以就会造成数据撷取结果的差异。 123456789C和zh_TW.big5语系下,英文大小写的编码顺序:LANG=C     时：0 1 2 3 4 ... A B C D ... Z a b c d ...zLANG=zh_TW">
+  <meta name="description" content="[TOC] 基础正则表达式基础正则字符包括:^ $ . \ * [] [n1-n2] [^] \{n,m\}   语系对正则表达式的影响由于不同语系的编码数据并不相同，所以就会造成数据撷取结果的差异。">
 <meta name="keywords" content="学习笔记,Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux正则与文件格式化">
 <meta property="og:url" content="http://fcwalkers.com/2018/03/21/Linux/Linux正则与文件格式化/index.html">
 <meta property="og:site_name" content="风尘">
-<meta property="og:description" content="[TOC] 基础正则表达式基础正则字符包括:^ $ . \ * [] [n1-n2] [^] \{n,m\}   语系对正则表达式的影响由于不同语系的编码数据并不相同，所以就会造成数据撷取结果的差异。 123456789C和zh_TW.big5语系下,英文大小写的编码顺序:LANG=C     时：0 1 2 3 4 ... A B C D ... Z a b c d ...zLANG=zh_TW">
+<meta property="og:description" content="[TOC] 基础正则表达式基础正则字符包括:^ $ . \ * [] [n1-n2] [^] \{n,m\}   语系对正则表达式的影响由于不同语系的编码数据并不相同，所以就会造成数据撷取结果的差异。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-23T17:30:58.000Z">
+<meta property="og:updated_time" content="2018-03-23T17:35:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux正则与文件格式化">
-<meta name="twitter:description" content="[TOC] 基础正则表达式基础正则字符包括:^ $ . \ * [] [n1-n2] [^] \{n,m\}   语系对正则表达式的影响由于不同语系的编码数据并不相同，所以就会造成数据撷取结果的差异。 123456789C和zh_TW.big5语系下,英文大小写的编码顺序:LANG=C     时：0 1 2 3 4 ... A B C D ... Z a b c d ...zLANG=zh_TW">
+<meta name="twitter:description" content="[TOC] 基础正则表达式基础正则字符包括:^ $ . \ * [] [n1-n2] [^] \{n,m\}   语系对正则表达式的影响由于不同语系的编码数据并不相同，所以就会造成数据撷取结果的差异。">
 
 
 
@@ -418,6 +418,7 @@
         <p>[TOC]</p>
 <h2 id="基础正则表达式"><a href="#基础正则表达式" class="headerlink" title="基础正则表达式"></a>基础正则表达式</h2><p>基础正则字符包括:<code>^</code> <code>$</code> <code>.</code> <code>\</code> <code>*</code> <code>[]</code> <code>[n1-n2]</code> <code>[^]</code> <code>\{n,m\}</code>  </p>
 <h3 id="语系对正则表达式的影响"><a href="#语系对正则表达式的影响" class="headerlink" title="语系对正则表达式的影响"></a>语系对正则表达式的影响</h3><p>由于不同语系的编码数据并不相同，所以就会造成数据撷取结果的差异。</p>
+<a id="more"></a>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">C和zh_TW.big5语系下,英文大小写的编码顺序:</span><br><span class="line">LANG=C     时：0 1 2 3 4 ... A B C D ... Z a b c d ...z</span><br><span class="line">LANG=zh_TW 时：0 1 2 3 4 ... a A b B c C d D ... z Z</span><br><span class="line"></span><br><span class="line"># C语系</span><br><span class="line">$ ll -d /etc/[^a-z]* # 正确显示</span><br><span class="line"></span><br><span class="line"># zh_TW.big5语系(测试zh_CN.UTF-8语系可以正确显示)</span><br><span class="line">$ ll -d /etc/[^a-z]* # 显示混乱</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>上面由于C语系字母是连续的所以正则表达式可以进行匹配,而zh_CN.UTF-8语系字母是非连续排列所以找不到该文件.<strong>由于一般正则表达式，使用的是相容于 POSIX 的标准，因此就使用“ C ”这个语系,所以通常使用正则将系统语系设置成C后使用.</strong></p>

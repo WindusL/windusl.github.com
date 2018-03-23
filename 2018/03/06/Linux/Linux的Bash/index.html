@@ -106,18 +106,18 @@
 
 
 
-  <meta name="description" content="[TOC] Shell/etc/shells记录系统所有shell Bash shell 功能命令编修能力 默认指令记忆功能可以达到1000个记录位置~/.bash_history(当前指令用户指令在内存中,登出后才记录到文件此内)   命令与文件实例功能(tab补全) 命令别名设置功能 工作控制/前景背景控制 程序化脚本shell script 万用字符(*)  type指令type 这个指令我">
+  <meta name="description" content="[TOC] Shell/etc/shells记录系统所有shell Bash shell 功能命令编修能力 默认指令记忆功能可以达到1000个记录位置~/.bash_history(当前指令用户指令在内存中,登出后才记录到文件此内)   命令与文件实例功能(tab补全) 命令别名设置功能 工作控制/前景背景控制 程序化脚本shell script 万用字符(*)">
 <meta name="keywords" content="学习笔记,Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux的Bash">
 <meta property="og:url" content="http://fcwalkers.com/2018/03/06/Linux/Linux的Bash/index.html">
 <meta property="og:site_name" content="风尘">
-<meta property="og:description" content="[TOC] Shell/etc/shells记录系统所有shell Bash shell 功能命令编修能力 默认指令记忆功能可以达到1000个记录位置~/.bash_history(当前指令用户指令在内存中,登出后才记录到文件此内)   命令与文件实例功能(tab补全) 命令别名设置功能 工作控制/前景背景控制 程序化脚本shell script 万用字符(*)  type指令type 这个指令我">
+<meta property="og:description" content="[TOC] Shell/etc/shells记录系统所有shell Bash shell 功能命令编修能力 默认指令记忆功能可以达到1000个记录位置~/.bash_history(当前指令用户指令在内存中,登出后才记录到文件此内)   命令与文件实例功能(tab补全) 命令别名设置功能 工作控制/前景背景控制 程序化脚本shell script 万用字符(*)">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-23T17:31:01.000Z">
+<meta property="og:updated_time" content="2018-03-23T17:35:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux的Bash">
-<meta name="twitter:description" content="[TOC] Shell/etc/shells记录系统所有shell Bash shell 功能命令编修能力 默认指令记忆功能可以达到1000个记录位置~/.bash_history(当前指令用户指令在内存中,登出后才记录到文件此内)   命令与文件实例功能(tab补全) 命令别名设置功能 工作控制/前景背景控制 程序化脚本shell script 万用字符(*)  type指令type 这个指令我">
+<meta name="twitter:description" content="[TOC] Shell/etc/shells记录系统所有shell Bash shell 功能命令编修能力 默认指令记忆功能可以达到1000个记录位置~/.bash_history(当前指令用户指令在内存中,登出后才记录到文件此内)   命令与文件实例功能(tab补全) 命令别名设置功能 工作控制/前景背景控制 程序化脚本shell script 万用字符(*)">
 
 
 
@@ -427,6 +427,7 @@
 <li>程序化脚本shell script</li>
 <li>万用字符(*)</li>
 </ul>
+<a id="more"></a>
 <h3 id="type指令"><a href="#type指令" class="headerlink" title="type指令"></a>type指令</h3><p>type 这个指令我们可以知道每个指令是否为 bash 的内置指令。 此外，type只能查找可执行文件.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[dmtsai@study ~]$ type [-tpa] name</span><br><span class="line">选项与参数：</span><br><span class="line">    ：不加任何选项与参数时，type 会显示出 name 是外部指令还是 bash 内置指令</span><br><span class="line">-t  ：当加入 -t 参数时，type 会将 name 以下面这些字眼显示出他的意义：</span><br><span class="line">      file    ：表示为外部指令；</span><br><span class="line">      alias   ：表示该指令为命令别名所设置的名称；</span><br><span class="line">      builtin ：表示该指令为 bash 内置的指令功能；</span><br><span class="line">-p  ：如果后面接的 name 为外部指令时，才会显示完整文件名；</span><br><span class="line">-a  ：会由 PATH 变量定义的路径中，将所有含 name 的指令都列出来，包含 alias</span><br></pre></td></tr></table></figure>
 <h3 id="快速编辑"><a href="#快速编辑" class="headerlink" title="快速编辑"></a>快速编辑</h3><ul>

@@ -106,20 +106,20 @@
 
 
 
-  <meta name="description" content="[TOC] EXT2文件系统  data block 用来放置文件内容数据的地方.在EXT2文件系统中支持block大小有1k 2k 4k.    每个block大小在与数量在格式化完成后就确定,不能再改变了.(除非格        式化或使用resize2fs等指令变更文件系统大小)每个block最多只能放一个文件如果文件大于block大小,那文件会占用多个block如果文件大小小于block,">
+  <meta name="description" content="[TOC] EXT2文件系统">
 <meta name="keywords" content="学习笔记,Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="磁盘与文件管理">
 <meta property="og:url" content="http://fcwalkers.com/2017/09/29/Linux/磁盘与文件管理/index.html">
 <meta property="og:site_name" content="风尘">
-<meta property="og:description" content="[TOC] EXT2文件系统  data block 用来放置文件内容数据的地方.在EXT2文件系统中支持block大小有1k 2k 4k.    每个block大小在与数量在格式化完成后就确定,不能再改变了.(除非格        式化或使用resize2fs等指令变更文件系统大小)每个block最多只能放一个文件如果文件大于block大小,那文件会占用多个block如果文件大小小于block,">
+<meta property="og:description" content="[TOC] EXT2文件系统">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://fcwalkers.com/2017/09/29/Linux/磁盘与文件管理/QQ20180117-095156@2x.png">
 <meta property="og:image" content="http://fcwalkers.com/2017/09/29/Linux/磁盘与文件管理/QQ20180109-160713@2x.png">
-<meta property="og:updated_time" content="2018-03-23T17:31:13.000Z">
+<meta property="og:updated_time" content="2018-03-23T17:35:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="磁盘与文件管理">
-<meta name="twitter:description" content="[TOC] EXT2文件系统  data block 用来放置文件内容数据的地方.在EXT2文件系统中支持block大小有1k 2k 4k.    每个block大小在与数量在格式化完成后就确定,不能再改变了.(除非格        式化或使用resize2fs等指令变更文件系统大小)每个block最多只能放一个文件如果文件大于block大小,那文件会占用多个block如果文件大小小于block,">
+<meta name="twitter:description" content="[TOC] EXT2文件系统">
 <meta name="twitter:image" content="http://fcwalkers.com/2017/09/29/Linux/磁盘与文件管理/QQ20180117-095156@2x.png">
 
 
@@ -420,6 +420,7 @@
       
         <p>[TOC]</p>
 <h2 id="EXT2文件系统"><a href="#EXT2文件系统" class="headerlink" title="EXT2文件系统"></a>EXT2文件系统</h2><p><img src="/2017/09/29/Linux/磁盘与文件管理/QQ20180117-095156@2x.png" alt="ext2文件系统示意图"></p>
+<a id="more"></a>
 <ul>
 <li><p>data block 用来放置文件内容数据的地方.在EXT2文件系统中支持block大小有1k 2k 4k.  </p>
 <blockquote>
