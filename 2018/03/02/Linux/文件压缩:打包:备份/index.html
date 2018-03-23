@@ -107,15 +107,16 @@
 
 
   <meta name="description" content="[TOC] 压缩文件的技术压缩文件简单原理:目前我们使用的计算机系统中都是使用所谓的 Bytes 单位来计量的！不过，事实上，计算机最小的计量单位应该是 bits 才对啊。此外，我们也知道 1 Byte = 8 bits 。但是如果今天我们只是记忆一个数字，亦即是 1 这个数字呢?由于我们记录数字是 1 ，考虑计算机所谓的二进制喔，如此一来， 1 会在最右边占据 1 个 bit ，而其他的 7 个">
+<meta name="keywords" content="学习笔记,Linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="风尘">
+<meta property="og:title" content="文件压缩&#x2F;打包&#x2F;备份">
 <meta property="og:url" content="http://fcwalkers.com/2018/03/02/Linux/文件压缩:打包:备份/index.html">
 <meta property="og:site_name" content="风尘">
 <meta property="og:description" content="[TOC] 压缩文件的技术压缩文件简单原理:目前我们使用的计算机系统中都是使用所谓的 Bytes 单位来计量的！不过，事实上，计算机最小的计量单位应该是 bits 才对啊。此外，我们也知道 1 Byte = 8 bits 。但是如果今天我们只是记忆一个数字，亦即是 1 这个数字呢?由于我们记录数字是 1 ，考虑计算机所谓的二进制喔，如此一来， 1 会在最右边占据 1 个 bit ，而其他的 7 个">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-06T09:23:21.000Z">
+<meta property="og:updated_time" content="2018-03-23T17:31:03.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="风尘">
+<meta name="twitter:title" content="文件压缩&#x2F;打包&#x2F;备份">
 <meta name="twitter:description" content="[TOC] 压缩文件的技术压缩文件简单原理:目前我们使用的计算机系统中都是使用所谓的 Bytes 单位来计量的！不过，事实上，计算机最小的计量单位应该是 bits 才对啊。此外，我们也知道 1 Byte = 8 bits 。但是如果今天我们只是记忆一个数字，亦即是 1 这个数字呢?由于我们记录数字是 1 ，考虑计算机所谓的二进制喔，如此一来， 1 会在最右边占据 1 个 bit ，而其他的 7 个">
 
 
@@ -133,7 +134,7 @@
   };
 </script>
 
-  <title> | 风尘</title>
+  <title>文件压缩/打包/备份 | 风尘</title>
   
 
 
@@ -339,7 +340,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline"></h2>
+          <h2 class="post-title" itemprop="name headline">文件压缩/打包/备份</h2>
         
 
         <div class="post-meta">
@@ -360,6 +361,24 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/软件开发/" itemprop="url" rel="index"><span itemprop="name">软件开发</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -448,7 +467,7 @@
     <strong>本文作者： </strong>Windus</li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://fcwalkers.com/2018/03/02/Linux/文件压缩:打包:备份/" title="">http://fcwalkers.com/2018/03/02/Linux/文件压缩:打包:备份/</a>
+    <a href="http://fcwalkers.com/2018/03/02/Linux/文件压缩:打包:备份/" title="文件压缩/打包/备份">http://fcwalkers.com/2018/03/02/Linux/文件压缩:打包:备份/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
@@ -459,6 +478,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
 
       
       
@@ -468,8 +495,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/11/Linux/例行性工作调度/" rel="next" title="">
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/2017/12/11/Linux/例行性工作调度/" rel="next" title="例行性工作调度">
+                <i class="fa fa-chevron-left"></i> 例行性工作调度
               </a>
             
           </div>

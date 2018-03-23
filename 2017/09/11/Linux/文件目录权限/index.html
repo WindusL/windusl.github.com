@@ -107,17 +107,18 @@
 
 
   <meta name="description" content="[TOC] 文件属性  第一栏代表文件类型与权限  列表第一个字符意义:当为[ d ]则是目录，例如上表文件名为“.config”的那一行；当为[ - ]则是文件，例如上表第三行；若是[ l ]则表示为链接文件（link file）；若是[ b ]则表示为设备文件里面的可供储存的周边设备（可随机存取设备）；若是[ c ]则表示为设备文件里面的序列埠设备，例如键盘、鼠标（一次性读取设备）。">
+<meta name="keywords" content="学习笔记,Linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="风尘">
+<meta property="og:title" content="文件目录权限">
 <meta property="og:url" content="http://fcwalkers.com/2017/09/11/Linux/文件目录权限/index.html">
 <meta property="og:site_name" content="风尘">
 <meta property="og:description" content="[TOC] 文件属性  第一栏代表文件类型与权限  列表第一个字符意义:当为[ d ]则是目录，例如上表文件名为“.config”的那一行；当为[ - ]则是文件，例如上表第三行；若是[ l ]则表示为链接文件（link file）；若是[ b ]则表示为设备文件里面的可供储存的周边设备（可随机存取设备）；若是[ c ]则表示为设备文件里面的序列埠设备，例如键盘、鼠标（一次性读取设备）。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://fcwalkers.com/2017/09/11/Linux/文件目录权限/QQ20170911-172829@2x.png">
 <meta property="og:image" content="http://fcwalkers.com/2017/09/11/Linux/文件目录权限/QQ20170912-092638@2x.png">
-<meta property="og:updated_time" content="2017-11-08T06:14:27.000Z">
+<meta property="og:updated_time" content="2018-03-23T17:31:33.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="风尘">
+<meta name="twitter:title" content="文件目录权限">
 <meta name="twitter:description" content="[TOC] 文件属性  第一栏代表文件类型与权限  列表第一个字符意义:当为[ d ]则是目录，例如上表文件名为“.config”的那一行；当为[ - ]则是文件，例如上表第三行；若是[ l ]则表示为链接文件（link file）；若是[ b ]则表示为设备文件里面的可供储存的周边设备（可随机存取设备）；若是[ c ]则表示为设备文件里面的序列埠设备，例如键盘、鼠标（一次性读取设备）。">
 <meta name="twitter:image" content="http://fcwalkers.com/2017/09/11/Linux/文件目录权限/QQ20170911-172829@2x.png">
 
@@ -136,7 +137,7 @@
   };
 </script>
 
-  <title> | 风尘</title>
+  <title>文件目录权限 | 风尘</title>
   
 
 
@@ -342,7 +343,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline"></h2>
+          <h2 class="post-title" itemprop="name headline">文件目录权限</h2>
         
 
         <div class="post-meta">
@@ -363,6 +364,24 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/软件开发/" itemprop="url" rel="index"><span itemprop="name">软件开发</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -549,7 +568,7 @@
     <strong>本文作者： </strong>Windus</li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://fcwalkers.com/2017/09/11/Linux/文件目录权限/" title="">http://fcwalkers.com/2017/09/11/Linux/文件目录权限/</a>
+    <a href="http://fcwalkers.com/2017/09/11/Linux/文件目录权限/" title="文件目录权限">http://fcwalkers.com/2017/09/11/Linux/文件目录权限/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
@@ -560,6 +579,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
 
       
       
@@ -569,8 +596,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/11/Linux/开关机/" rel="next" title="">
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/2017/09/11/Linux/开关机/" rel="next" title="开关机">
+                <i class="fa fa-chevron-left"></i> 开关机
               </a>
             
           </div>
@@ -579,8 +606,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/09/13/Linux/文件与目录管理/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/09/13/Linux/文件与目录管理/" rel="prev" title="文件与目录管理">
+                文件与目录管理 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

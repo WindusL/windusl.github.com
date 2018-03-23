@@ -107,17 +107,18 @@
 
 
   <meta name="description" content="[TOC] EXT2文件系统  data block 用来放置文件内容数据的地方.在EXT2文件系统中支持block大小有1k 2k 4k.    每个block大小在与数量在格式化完成后就确定,不能再改变了.(除非格        式化或使用resize2fs等指令变更文件系统大小)每个block最多只能放一个文件如果文件大于block大小,那文件会占用多个block如果文件大小小于block,">
+<meta name="keywords" content="学习笔记,Linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="风尘">
+<meta property="og:title" content="磁盘与文件管理">
 <meta property="og:url" content="http://fcwalkers.com/2017/09/29/Linux/磁盘与文件管理/index.html">
 <meta property="og:site_name" content="风尘">
 <meta property="og:description" content="[TOC] EXT2文件系统  data block 用来放置文件内容数据的地方.在EXT2文件系统中支持block大小有1k 2k 4k.    每个block大小在与数量在格式化完成后就确定,不能再改变了.(除非格        式化或使用resize2fs等指令变更文件系统大小)每个block最多只能放一个文件如果文件大于block大小,那文件会占用多个block如果文件大小小于block,">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://fcwalkers.com/2017/09/29/Linux/磁盘与文件管理/QQ20180117-095156@2x.png">
 <meta property="og:image" content="http://fcwalkers.com/2017/09/29/Linux/磁盘与文件管理/QQ20180109-160713@2x.png">
-<meta property="og:updated_time" content="2018-03-02T06:50:24.000Z">
+<meta property="og:updated_time" content="2018-03-23T17:31:13.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="风尘">
+<meta name="twitter:title" content="磁盘与文件管理">
 <meta name="twitter:description" content="[TOC] EXT2文件系统  data block 用来放置文件内容数据的地方.在EXT2文件系统中支持block大小有1k 2k 4k.    每个block大小在与数量在格式化完成后就确定,不能再改变了.(除非格        式化或使用resize2fs等指令变更文件系统大小)每个block最多只能放一个文件如果文件大于block大小,那文件会占用多个block如果文件大小小于block,">
 <meta name="twitter:image" content="http://fcwalkers.com/2017/09/29/Linux/磁盘与文件管理/QQ20180117-095156@2x.png">
 
@@ -136,7 +137,7 @@
   };
 </script>
 
-  <title> | 风尘</title>
+  <title>磁盘与文件管理 | 风尘</title>
   
 
 
@@ -342,7 +343,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline"></h2>
+          <h2 class="post-title" itemprop="name headline">磁盘与文件管理</h2>
         
 
         <div class="post-meta">
@@ -363,6 +364,24 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/软件开发/" itemprop="url" rel="index"><span itemprop="name">软件开发</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -464,7 +483,7 @@
     <strong>本文作者： </strong>Windus</li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://fcwalkers.com/2017/09/29/Linux/磁盘与文件管理/" title="">http://fcwalkers.com/2017/09/29/Linux/磁盘与文件管理/</a>
+    <a href="http://fcwalkers.com/2017/09/29/Linux/磁盘与文件管理/" title="磁盘与文件管理">http://fcwalkers.com/2017/09/29/Linux/磁盘与文件管理/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
@@ -475,6 +494,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
 
       
       
@@ -484,8 +511,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/13/Linux/文件与目录管理/" rel="next" title="">
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/2017/09/13/Linux/文件与目录管理/" rel="next" title="文件与目录管理">
+                <i class="fa fa-chevron-left"></i> 文件与目录管理
               </a>
             
           </div>
