@@ -48,6 +48,10 @@
 
 
 
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
 
 
 
@@ -85,7 +89,7 @@
     scheme: 'Mist',
     version: '6.0.6',
     sidebar: {"display":"hide","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
-    fancybox: false,
+    fancybox: true,
     fastclick: false,
     lazyload: false,
     tabs: true,
@@ -114,7 +118,7 @@
 <meta property="og:site_name" content="风尘">
 <meta property="og:description" content="[TOC] 目录相关操作 .         代表此层目录..        代表上一层目录    代表前一个工作目录~         代表“目前使用者身份”所在的主文件夹~account  代表 account 这个使用者的主文件夹（account是个帐号名称）">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-24T13:17:01.000Z">
+<meta property="og:updated_time" content="2018-03-24T15:55:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="文件与目录管理">
 <meta name="twitter:description" content="[TOC] 目录相关操作 .         代表此层目录..        代表上一层目录    代表前一个工作目录~         代表“目前使用者身份”所在的主文件夹~account  代表 account 这个使用者的主文件夹（account是个帐号名称）">
@@ -228,6 +232,33 @@
         
         
           
+  <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+</li>
+
+      
+        
+        
+          
   <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
@@ -249,6 +280,28 @@
 
   
     
+
+    
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+    
+
+  
+
 
   
 
@@ -381,8 +434,6 @@
             </span>
           
 
-          
-            
           
 
           
@@ -528,6 +579,35 @@
     
 
     
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/20180324_233908.png" alt="Windus 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/20180324_233651.jpg" alt="Windus 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
 
     
       <div>
@@ -628,9 +708,7 @@
 
           </div>
           
-
-  
-
+<br/>有问题请<a href="/about">留言</a>
 
 
         </div>
@@ -691,14 +769,14 @@
                 
                 
                 <div class="site-state-item site-state-categories">
-                  
+                  <a href="/categories/index.html">
                     
                     
                       
                     
                     <span class="site-state-item-count">1</span>
                     <span class="site-state-item-name">分类</span>
-                  
+                  </a>
                 </div>
               
 
@@ -706,7 +784,7 @@
                 
                 
                 <div class="site-state-item site-state-tags">
-                  
+                  <a href="/tags/index.html">
                     
                     
                       
@@ -717,7 +795,7 @@
                     
                     <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">标签</span>
-                  
+                  </a>
                 </div>
               
             </nav>
@@ -862,6 +940,8 @@
 
 
 
+  
+
 
 
 
@@ -889,6 +969,11 @@
   
   
     <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
   
 
 

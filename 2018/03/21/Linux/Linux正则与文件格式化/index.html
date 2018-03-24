@@ -48,6 +48,10 @@
 
 
 
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
 
 
 
@@ -85,7 +89,7 @@
     scheme: 'Mist',
     version: '6.0.6',
     sidebar: {"display":"hide","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
-    fancybox: false,
+    fancybox: true,
     fastclick: false,
     lazyload: false,
     tabs: true,
@@ -114,7 +118,7 @@
 <meta property="og:site_name" content="风尘">
 <meta property="og:description" content="[TOC] 基础正则表达式基础正则字符包括:^ $ . \ * [] [n1-n2] [^] \{n,m\}   语系对正则表达式的影响由于不同语系的编码数据并不相同，所以就会造成数据撷取结果的差异。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-23T17:35:57.000Z">
+<meta property="og:updated_time" content="2018-03-24T15:55:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux正则与文件格式化">
 <meta name="twitter:description" content="[TOC] 基础正则表达式基础正则字符包括:^ $ . \ * [] [n1-n2] [^] \{n,m\}   语系对正则表达式的影响由于不同语系的编码数据并不相同，所以就会造成数据撷取结果的差异。">
@@ -228,6 +232,33 @@
         
         
           
+  <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+</li>
+
+      
+        
+        
+          
   <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
@@ -249,6 +280,28 @@
 
   
     
+
+    
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+    
+
+  
+
 
   
 
@@ -382,8 +435,6 @@
           
 
           
-            
-          
 
           
           
@@ -515,6 +566,35 @@
     
 
     
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/20180324_233908.png" alt="Windus 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/20180324_233651.jpg" alt="Windus 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
 
     
       <div>
@@ -611,9 +691,7 @@
 
           </div>
           
-
-  
-
+<br/>有问题请<a href="/about">留言</a>
 
 
         </div>
@@ -674,14 +752,14 @@
                 
                 
                 <div class="site-state-item site-state-categories">
-                  
+                  <a href="/categories/index.html">
                     
                     
                       
                     
                     <span class="site-state-item-count">1</span>
                     <span class="site-state-item-name">分类</span>
-                  
+                  </a>
                 </div>
               
 
@@ -689,7 +767,7 @@
                 
                 
                 <div class="site-state-item site-state-tags">
-                  
+                  <a href="/tags/index.html">
                     
                     
                       
@@ -700,7 +778,7 @@
                     
                     <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">标签</span>
-                  
+                  </a>
                 </div>
               
             </nav>
@@ -845,6 +923,8 @@
 
 
 
+  
+
 
 
 
@@ -872,6 +952,11 @@
   
   
     <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
   
 
 
