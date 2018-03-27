@@ -110,18 +110,18 @@
 
 
 
-  <meta name="description" content="[TOC] vi编辑器的模式 一般指令模式  用vi 打开一个文件就直接进入一般指令模式,在一般指令模式中可以进行删除、复制、贴上等等的动作.  * 移动光标方法  ---  |按键|说明| :----:|---- h（←）|向左移动一个字符 j（↓）|向下移动一个字符 k（↑）|向上移动一个字符 l（→）|向右移动一个字符 Ctrl+f|屏幕向下移动一页[PageDown] Ctrl+b|屏幕向">
+  <meta name="description" content="[TOC] vi编辑器的模式 一般指令模式  用vi 打开一个文件就直接进入一般指令模式,在一般指令模式中可以进行删除、复制、贴上等等的动作.  移动光标方法     |按键|说明|  :—-:|—-  h（←）|向左移动一个字符  j（↓）|向下移动一个字符  k（↑）|向上移动一个字符  l（→）|向右移动一个字符  Ctrl+f|屏幕向下移动一页[PageDown]  Ctrl+b|屏幕向上">
 <meta name="keywords" content="学习笔记,Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vim编辑器">
 <meta property="og:url" content="http://fcwalkers.com/2018/03/27/Linux/vim编辑器/index.html">
 <meta property="og:site_name" content="风尘">
-<meta property="og:description" content="[TOC] vi编辑器的模式 一般指令模式  用vi 打开一个文件就直接进入一般指令模式,在一般指令模式中可以进行删除、复制、贴上等等的动作.  * 移动光标方法  ---  |按键|说明| :----:|---- h（←）|向左移动一个字符 j（↓）|向下移动一个字符 k（↑）|向上移动一个字符 l（→）|向右移动一个字符 Ctrl+f|屏幕向下移动一页[PageDown] Ctrl+b|屏幕向">
+<meta property="og:description" content="[TOC] vi编辑器的模式 一般指令模式  用vi 打开一个文件就直接进入一般指令模式,在一般指令模式中可以进行删除、复制、贴上等等的动作.  移动光标方法     |按键|说明|  :—-:|—-  h（←）|向左移动一个字符  j（↓）|向下移动一个字符  k（↑）|向上移动一个字符  l（→）|向右移动一个字符  Ctrl+f|屏幕向下移动一页[PageDown]  Ctrl+b|屏幕向上">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-27T09:25:04.000Z">
+<meta property="og:updated_time" content="2018-03-27T09:28:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vim编辑器">
-<meta name="twitter:description" content="[TOC] vi编辑器的模式 一般指令模式  用vi 打开一个文件就直接进入一般指令模式,在一般指令模式中可以进行删除、复制、贴上等等的动作.  * 移动光标方法  ---  |按键|说明| :----:|---- h（←）|向左移动一个字符 j（↓）|向下移动一个字符 k（↑）|向上移动一个字符 l（→）|向右移动一个字符 Ctrl+f|屏幕向下移动一页[PageDown] Ctrl+b|屏幕向">
+<meta name="twitter:description" content="[TOC] vi编辑器的模式 一般指令模式  用vi 打开一个文件就直接进入一般指令模式,在一般指令模式中可以进行删除、复制、贴上等等的动作.  移动光标方法     |按键|说明|  :—-:|—-  h（←）|向左移动一个字符  j（↓）|向下移动一个字符  k（↑）|向上移动一个字符  l（→）|向右移动一个字符  Ctrl+f|屏幕向下移动一页[PageDown]  Ctrl+b|屏幕向上">
 
 
 
@@ -468,51 +468,21 @@
       
         <p>[TOC]</p>
 <h2 id="vi编辑器的模式"><a href="#vi编辑器的模式" class="headerlink" title="vi编辑器的模式"></a>vi编辑器的模式</h2><ul>
-<li>一般指令模式<br>  用vi 打开一个文件就直接进入一般指令模式,在一般指令模式中可以进行删除、复制、贴上等等的动作.</li>
+<li><p>一般指令模式<br>  用vi 打开一个文件就直接进入一般指令模式,在一般指令模式中可以进行删除、复制、贴上等等的动作.</p>
+<ul>
+<li>移动光标方法</li>
 </ul>
-<pre><code>* 移动光标方法
-
----
-
-|按键|说明|
-:----:|----
-h（←）|向左移动一个字符
-j（↓）|向下移动一个字符
-k（↑）|向上移动一个字符
-l（→）|向右移动一个字符
-Ctrl+f|屏幕向下移动一页[PageDown]
-Ctrl+b|屏幕向上移动一页[PageUp]
-Ctrl+d|屏幕向下移动半页
-Ctrl+u|屏幕向上移动半页
-\+        |光标移动到非空白字符的下一列
-\-        |光标移动到非空白字符的上一列
-n&lt;space&gt;|按下数字再按空格键向后移动n个字符
-0        |移动到当前行最前字符处
-$        |移动到当前行最后字符处
-H        |移动到屏幕最上行
-M        |移动到屏幕中央一行
-L        |移动到屏幕最下行
-G        |移动到文件最后一行
-nG        |移动到第n行
-gg        |移动到文件第一行(相当于1G)
-n[Enter]|向下移动n行
-
-
-* 搜寻与取代
-
----
-
-|按键|说明|
-:----:|----
-/word    |向下搜索字符串
-?word    |向上搜索字符串
-n        |重复上面搜索动作
-N        |反向重复上面搜索动作
-:n1,n2s/word1/word2/g|在n1到n2行之间寻找word1字符串,  并将该字符串取代为word2(n2可以换成\$  表示到最后一行)
-:n1,n2s/word1/word2/gc|与上面区别在于替换前加入提示(c--&gt;confirm)
-
-
-* 删除/复制/粘贴
+<hr>
+<p>  |按键|说明|<br>  :—-:|—-<br>  h（←）|向左移动一个字符<br>  j（↓）|向下移动一个字符<br>  k（↑）|向上移动一个字符<br>  l（→）|向右移动一个字符<br>  Ctrl+f|屏幕向下移动一页[PageDown]<br>  Ctrl+b|屏幕向上移动一页[PageUp]<br>  Ctrl+d|屏幕向下移动半页<br>  Ctrl+u|屏幕向上移动半页<br>  +        |光标移动到非空白字符的下一列<br>  -        |光标移动到非空白字符的上一列<br>  n<space>|按下数字再按空格键向后移动n个字符<br>  0        |移动到当前行最前字符处<br>  $        |移动到当前行最后字符处<br>  H        |移动到屏幕最上行<br>  M        |移动到屏幕中央一行<br>  L        |移动到屏幕最下行<br>  G        |移动到文件最后一行<br>  nG        |移动到第n行<br>  gg        |移动到文件第一行(相当于1G)<br>  n[Enter]|向下移动n行</space></p>
+  <a id="more"></a>
+<ul>
+<li>搜寻与取代</li>
+</ul>
+<hr>
+<p>  |按键|说明|<br>  :—-:|—-<br>  /word    |向下搜索字符串<br>  ?word    |向上搜索字符串<br>  n        |重复上面搜索动作<br>  N        |反向重复上面搜索动作<br>  :n1,n2s/word1/word2/g|在n1到n2行之间寻找word1字符串,  并将该字符串取代为word2(n2可以换成\$  表示到最后一行)<br>  :n1,n2s/word1/word2/gc|与上面区别在于替换前加入提示(c–&gt;confirm)</p>
+</li>
+</ul>
+<pre><code>* 删除/复制/粘贴
 
 ---
 
