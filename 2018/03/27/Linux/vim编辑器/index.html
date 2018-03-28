@@ -118,7 +118,7 @@
 <meta property="og:site_name" content="风尘">
 <meta property="og:description" content="[TOC] vi编辑器的模式一般指令模式用vi 打开一个文件就直接进入一般指令模式,在一般指令模式中可以进行删除、复制、贴上等等的动作.  移动光标方法      按键 说明     h（←） 向左移动一个字符   j（↓） 向下移动一个字符   k（↑） 向上移动一个字符   l（→） 向右移动一个字符   Ctrl+f 屏幕向下移动一页[PageDown]   Ctrl+b 屏幕向上移动一页[">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-27T10:19:39.000Z">
+<meta property="og:updated_time" content="2018-03-28T01:30:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vim编辑器">
 <meta name="twitter:description" content="[TOC] vi编辑器的模式一般指令模式用vi 打开一个文件就直接进入一般指令模式,在一般指令模式中可以进行删除、复制、贴上等等的动作.  移动光标方法      按键 说明     h（←） 向左移动一个字符   j（↓） 向下移动一个字符   k（↑） 向上移动一个字符   l（→） 向右移动一个字符   Ctrl+f 屏幕向下移动一页[PageDown]   Ctrl+b 屏幕向上移动一页[">
@@ -520,49 +520,10 @@
 <td style="text-align:center">-</td>
 <td>光标移动到非空白字符的上一列</td>
 </tr>
-<tr>
-<td style="text-align:center">n<space></space></td>
-<td>按下数字再按空格键向后移动n个字符</td>
-</tr>
-<tr>
-<td style="text-align:center">0</td>
-<td>移动到当前行最前字符处</td>
-</tr>
-<tr>
-<td style="text-align:center">$</td>
-<td>移动到当前行最后字符处</td>
-</tr>
-<tr>
-<td style="text-align:center">H</td>
-<td>移动到屏幕最上行</td>
-</tr>
-<tr>
-<td style="text-align:center">M</td>
-<td>移动到屏幕中央一行</td>
-</tr>
-<tr>
-<td style="text-align:center">L</td>
-<td>移动到屏幕最下行</td>
-</tr>
-<tr>
-<td style="text-align:center">G</td>
-<td>移动到文件最后一行</td>
-</tr>
-<tr>
-<td style="text-align:center">nG</td>
-<td>移动到第n行</td>
-</tr>
-<tr>
-<td style="text-align:center">gg</td>
-<td>移动到文件第一行(相当于1G)</td>
-</tr>
-<tr>
-<td style="text-align:center">n[Enter]</td>
-<td>向下移动n行</td>
-</tr>
 </tbody>
 </table>
 <a id="more"></a>
+<p>n<space>|按下数字再按空格键向后移动n个字符<br>0        |移动到当前行最前字符处<br>$        |移动到当前行最后字符处<br>H        |移动到屏幕最上行<br>M        |移动到屏幕中央一行<br>L        |移动到屏幕最下行<br>G        |移动到文件最后一行<br>nG        |移动到第n行<br>gg        |移动到文件第一行(相当于1G)<br>n[Enter]|向下移动n行</space></p>
 <ul>
 <li>搜寻与取代</li>
 </ul>
@@ -593,7 +554,7 @@
 </tr>
 <tr>
 <td style="text-align:center">:n1,n2s/word1/word2/g</td>
-<td>在n1到n2行之间寻找word1字符串,  并将该字符串取代为word2(n2可以换成\$  表示到最后一行)</td>
+<td>在n1到n2行之间寻找word1字符串,  并将该字符串取代为word2(n2可以换成$  表示到最后一行)</td>
 </tr>
 <tr>
 <td style="text-align:center">:n1,n2s/word1/word2/gc</td>
