@@ -110,18 +110,18 @@
 
 
 
-  <meta name="description" content="[TOC] vi编辑器的模式一般指令模式用vi 打开一个文件就直接进入一般指令模式,在一般指令模式中可以进行删除、复制、贴上等等的动作.  移动光标方法      按键 说明     h（←） 向左移动一个字符   j（↓） 向下移动一个字符   k（↑） 向上移动一个字符   l（→） 向右移动一个字符   Ctrl+f 屏幕向下移动一页[PageDown]   Ctrl+b 屏幕向上移动一页[">
+  <meta name="description" content="[TOC] vi编辑器的模式一般指令模式用vi 打开一个文件就直接进入一般指令模式,在一般指令模式中可以进行删除、复制、贴上等等的动作.  移动光标方法      按键 说明     h（←） 向左移动一个字符   j（↓） 向下移动一个字符   k（↑） 向上移动一个字符   l（→） 向右移动一个字符">
 <meta name="keywords" content="学习笔记,Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vim编辑器">
 <meta property="og:url" content="http://fcwalkers.com/2018/03/27/Linux/vim编辑器/index.html">
 <meta property="og:site_name" content="风尘">
-<meta property="og:description" content="[TOC] vi编辑器的模式一般指令模式用vi 打开一个文件就直接进入一般指令模式,在一般指令模式中可以进行删除、复制、贴上等等的动作.  移动光标方法      按键 说明     h（←） 向左移动一个字符   j（↓） 向下移动一个字符   k（↑） 向上移动一个字符   l（→） 向右移动一个字符   Ctrl+f 屏幕向下移动一页[PageDown]   Ctrl+b 屏幕向上移动一页[">
+<meta property="og:description" content="[TOC] vi编辑器的模式一般指令模式用vi 打开一个文件就直接进入一般指令模式,在一般指令模式中可以进行删除、复制、贴上等等的动作.  移动光标方法      按键 说明     h（←） 向左移动一个字符   j（↓） 向下移动一个字符   k（↑） 向上移动一个字符   l（→） 向右移动一个字符">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-28T01:30:59.000Z">
+<meta property="og:updated_time" content="2018-03-28T01:35:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vim编辑器">
-<meta name="twitter:description" content="[TOC] vi编辑器的模式一般指令模式用vi 打开一个文件就直接进入一般指令模式,在一般指令模式中可以进行删除、复制、贴上等等的动作.  移动光标方法      按键 说明     h（←） 向左移动一个字符   j（↓） 向下移动一个字符   k（↑） 向上移动一个字符   l（→） 向右移动一个字符   Ctrl+f 屏幕向下移动一页[PageDown]   Ctrl+b 屏幕向上移动一页[">
+<meta name="twitter:description" content="[TOC] vi编辑器的模式一般指令模式用vi 打开一个文件就直接进入一般指令模式,在一般指令模式中可以进行删除、复制、贴上等等的动作.  移动光标方法      按键 说明     h（←） 向左移动一个字符   j（↓） 向下移动一个字符   k（↑） 向上移动一个字符   l（→） 向右移动一个字符">
 
 
 
@@ -494,7 +494,7 @@
 </tr>
 <tr>
 <td style="text-align:center">l（→）</td>
-<td>向右移动一个字符</td>
+<td>向右移动一个字符 <a id="more"></a></td>
 </tr>
 <tr>
 <td style="text-align:center">Ctrl+f</td>
@@ -514,16 +514,54 @@
 </tr>
 <tr>
 <td style="text-align:center">+</td>
-<td>光标移动到非空白字符的下一列</td>
+<td>光标移动到非空白字符的下一行</td>
 </tr>
 <tr>
 <td style="text-align:center">-</td>
-<td>光标移动到非空白字符的上一列</td>
+<td>光标移动到非空白字符的上一行</td>
+</tr>
+<tr>
+<td style="text-align:center">n<space></space></td>
+<td>按下数字再按空格键向后移动n个字符</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td>移动到当前行最前字符处</td>
+</tr>
+<tr>
+<td style="text-align:center">$</td>
+<td>移动到当前行最后字符处</td>
+</tr>
+<tr>
+<td style="text-align:center">H</td>
+<td>移动到屏幕最上行</td>
+</tr>
+<tr>
+<td style="text-align:center">M</td>
+<td>移动到屏幕中央一行</td>
+</tr>
+<tr>
+<td style="text-align:center">L</td>
+<td>移动到屏幕最下行</td>
+</tr>
+<tr>
+<td style="text-align:center">G</td>
+<td>移动到文件最后一行</td>
+</tr>
+<tr>
+<td style="text-align:center">nG</td>
+<td>移动到第n行</td>
+</tr>
+<tr>
+<td style="text-align:center">gg</td>
+<td>移动到文件第一行(相当于1G)</td>
+</tr>
+<tr>
+<td style="text-align:center">n[Enter]</td>
+<td>向下移动n行</td>
 </tr>
 </tbody>
 </table>
-<a id="more"></a>
-<p>n<space>|按下数字再按空格键向后移动n个字符<br>0        |移动到当前行最前字符处<br>$        |移动到当前行最后字符处<br>H        |移动到屏幕最上行<br>M        |移动到屏幕中央一行<br>L        |移动到屏幕最下行<br>G        |移动到文件最后一行<br>nG        |移动到第n行<br>gg        |移动到文件第一行(相当于1G)<br>n[Enter]|向下移动n行</space></p>
 <ul>
 <li>搜寻与取代</li>
 </ul>
@@ -667,15 +705,15 @@
 <tbody>
 <tr>
 <td style="text-align:center">i,I</td>
-<td>进入插入模式（Insert mode）： i 为“从目前光标所在处插入”， I 为“在目前所在列的第一个非空白字符处开始插入”。</td>
+<td>进入插入模式（Insert mode）： i 为“从目前光标所在处插入”， I 为“在目前所在行的第一个非空白字符处开始插入”。</td>
 </tr>
 <tr>
 <td style="text-align:center">a,A</td>
-<td>进入插入模式（Insert mode）：a 为“从目前光标所在的下一个字符处开始插入”， A 为“从光标所在列的最后一个字符处开始插入”。</td>
+<td>进入插入模式（Insert mode）：a 为“从目前光标所在的下一个字符处开始插入”， A 为“从光标所在行的最后一个字符处开始插入”。</td>
 </tr>
 <tr>
 <td style="text-align:center">o,O</td>
-<td>进入插入模式（Insert mode）：这是英文字母 o 的大小写。o 为“在目前光标所在的下一列处插入新的一列”； O 为在目前光标所在处的上一列插入新的一列！</td>
+<td>进入插入模式（Insert mode）：这是英文字母 o 的大小写。o 为“在目前光标所在的下一行处插入新的一行”； O 为在目前光标所在处的上一行插入新的一行！</td>
 </tr>
 <tr>
 <td style="text-align:center">r,R</td>
@@ -722,7 +760,7 @@
 </tr>
 <tr>
 <td style="text-align:center">:r [filename]</td>
-<td>在编辑数据中读入另一个文件的数据.亦将filename文件内容加到光标所在列的后面.</td>
+<td>在编辑数据中读入另一个文件的数据.亦将filename文件内容加到光标所在行的后面.</td>
 </tr>
 <tr>
 <td style="text-align:center">:n1,n2 w [filename]</td>
