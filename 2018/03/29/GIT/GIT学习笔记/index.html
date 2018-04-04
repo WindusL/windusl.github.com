@@ -110,22 +110,22 @@
 
 
 
-  <meta name="description" content="第一次安装设置123#因为git是分布式,这些就是你在提交commit时的签名。(--global全局设置,不加则设置当前版本库)$ git config [--global] user.name &amp;quot;Your Name&amp;quot;$ git config [--global] user.email &amp;quot;email@example.com&amp;quot;">
-<meta name="keywords" content="学习笔记,GIT">
+  <meta name="description" content="[TOC] 第一次安装设置123#因为git是分布式,这些就是你在提交commit时的签名。(--global全局设置,不加则设置当前版本库)$ git config [--global] user.name &amp;quot;Your Name&amp;quot;$ git config [--global] user.email &amp;quot;email@example.com&amp;quot;">
+<meta name="keywords" content="GIT,学习笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GIT学习笔记">
 <meta property="og:url" content="http://fcwalkers.com/2018/03/29/GIT/GIT学习笔记/index.html">
 <meta property="og:site_name" content="风尘">
-<meta property="og:description" content="第一次安装设置123#因为git是分布式,这些就是你在提交commit时的签名。(--global全局设置,不加则设置当前版本库)$ git config [--global] user.name &amp;quot;Your Name&amp;quot;$ git config [--global] user.email &amp;quot;email@example.com&amp;quot;">
+<meta property="og:description" content="[TOC] 第一次安装设置123#因为git是分布式,这些就是你在提交commit时的签名。(--global全局设置,不加则设置当前版本库)$ git config [--global] user.name &amp;quot;Your Name&amp;quot;$ git config [--global] user.email &amp;quot;email@example.com&amp;quot;">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://fcwalkers.com/2018/03/29/GIT/GIT学习笔记/QQ20171117-112922@2x.png">
 <meta property="og:image" content="http://fcwalkers.com/2018/03/29/GIT/GIT学习笔记/QQ20171117-112940@2x.png">
 <meta property="og:image" content="http://fcwalkers.com/2018/03/29/GIT/GIT学习笔记/QQ20171117-115013@2x.png">
 <meta property="og:image" content="http://fcwalkers.com/2018/03/29/GIT/GIT学习笔记/QQ20171118223701.png">
-<meta property="og:updated_time" content="2018-03-29T09:50:56.000Z">
+<meta property="og:updated_time" content="2018-04-04T05:51:34.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GIT学习笔记">
-<meta name="twitter:description" content="第一次安装设置123#因为git是分布式,这些就是你在提交commit时的签名。(--global全局设置,不加则设置当前版本库)$ git config [--global] user.name &amp;quot;Your Name&amp;quot;$ git config [--global] user.email &amp;quot;email@example.com&amp;quot;">
+<meta name="twitter:description" content="[TOC] 第一次安装设置123#因为git是分布式,这些就是你在提交commit时的签名。(--global全局设置,不加则设置当前版本库)$ git config [--global] user.name &amp;quot;Your Name&amp;quot;$ git config [--global] user.email &amp;quot;email@example.com&amp;quot;">
 <meta name="twitter:image" content="http://fcwalkers.com/2018/03/29/GIT/GIT学习笔记/QQ20171117-112922@2x.png">
 
 
@@ -471,7 +471,8 @@
       
 
       
-        <h2 id="第一次安装设置"><a href="#第一次安装设置" class="headerlink" title="第一次安装设置"></a>第一次安装设置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#因为git是分布式,这些就是你在提交commit时的签名。(--global全局设置,不加则设置当前版本库)</span><br><span class="line">$ git config [--global] user.name &quot;Your Name&quot;</span><br><span class="line">$ git config [--global] user.email &quot;email@example.com&quot;</span><br></pre></td></tr></table></figure>
+        <p>[TOC]</p>
+<h2 id="第一次安装设置"><a href="#第一次安装设置" class="headerlink" title="第一次安装设置"></a>第一次安装设置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#因为git是分布式,这些就是你在提交commit时的签名。(--global全局设置,不加则设置当前版本库)</span><br><span class="line">$ git config [--global] user.name &quot;Your Name&quot;</span><br><span class="line">$ git config [--global] user.email &quot;email@example.com&quot;</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <h2 id="创建版本仓库"><a href="#创建版本仓库" class="headerlink" title="创建版本仓库"></a>创建版本仓库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git init #创建版本仓库  </span><br><span class="line">$ git add #添加文件到版本仓库(可同时添加多个文件空格分割)</span><br><span class="line">$ git commit -m &apos;注释内容&apos; #提交版本  </span><br><span class="line">$ git commit (-v) #提交版本,启动编辑器编写注释(-v显示详细变更信息)</span><br><span class="line">$ git commit -a #提交版本,跳过使用暂存区(不用git add)</span><br></pre></td></tr></table></figure>
 <h2 id="版本比对"><a href="#版本比对" class="headerlink" title="版本比对"></a>版本比对</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git status (-s/--short) #查看版本库状态以及文件修改状态(显示简单信息)</span><br><span class="line">1.未修改状态:nothing to commit,working tree clean</span><br><span class="line">2.修改后文件已在缓存区:Changes to be commited</span><br><span class="line">3.新增文件状态:Untracked files</span><br><span class="line">4.修改后文件未在缓存区:Changes not staged for commit</span><br><span class="line">3与4状态区别在于3无法用git commit –am命令将文件添加到本地仓库</span><br></pre></td></tr></table></figure>
@@ -594,6 +595,18 @@
 <h3 id="忽略文件"><a href="#忽略文件" class="headerlink" title="忽略文件"></a>忽略文件</h3><p>一般情况,可以使用.gitignore文件添加忽略文件.如果当前文件是已经commit ,push到远程仓库后了，.gitignore里面再配置是不起作用了.此时解决办法有两种:   </p>
 <p>一种方法是移除文件跟踪,然后将文件添加到.gitignore文件中去(此种方法对其他人影响较大).<br>另一种方法是仅在自己本地忽略:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git update-index --assume-unchanged 文件名 #忽略文件</span><br><span class="line">$ git update-index --no-assume-unchanged 文件名 #取消忽略文件</span><br><span class="line">$ git ls-files -v | grep h\&lt;space&gt; #显示本地忽略文件列表(&lt;space&gt; 是表示空格)</span><br><span class="line"></span><br><span class="line">更多信息使用 --help 自行查阅</span><br></pre></td></tr></table></figure>
+<h3 id="命令自动补全"><a href="#命令自动补全" class="headerlink" title="命令自动补全"></a>命令自动补全</h3><ul>
+<li>第一步 下载git官方提供的自动补全git-completion.bash脚本到自己的家目录并重命名为.git-completion.bash</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash</span><br></pre></td></tr></table></figure>
+<ul>
+<li>第二步 将下载的脚本添加到~/.bash_profile文件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if [ -f ~/.git-completion.bash ]; then </span><br><span class="line">. ~/.git-completion.bash </span><br><span class="line">fi </span><br><span class="line"># . 符号可以换成source</span><br></pre></td></tr></table></figure>
+<ul>
+<li>第三步 编译~/.bash_profile使其立即生效</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bash_profile</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -674,9 +687,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/学习笔记/" rel="tag"><i class="fa fa-tag"></i> 学习笔记</a>
-          
             <a href="/tags/GIT/" rel="tag"><i class="fa fa-tag"></i> GIT</a>
+          
+            <a href="/tags/学习笔记/" rel="tag"><i class="fa fa-tag"></i> 学习笔记</a>
           
         </div>
       
@@ -698,6 +711,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/30/spring/Spring boot/" rel="prev" title="spring boot 2.0">
+                spring boot 2.0 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -798,7 +815,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -844,7 +861,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">7</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -895,7 +916,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一次安装设置"><span class="nav-number">1.</span> <span class="nav-text">第一次安装设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建版本仓库"><span class="nav-number">2.</span> <span class="nav-text">创建版本仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#版本比对"><span class="nav-number">3.</span> <span class="nav-text">版本比对</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#版本回退"><span class="nav-number">4.</span> <span class="nav-text">版本回退</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工作区和暂存区"><span class="nav-number">5.</span> <span class="nav-text">工作区和暂存区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#撤销修改"><span class="nav-number">6.</span> <span class="nav-text">撤销修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除文件"><span class="nav-number">7.</span> <span class="nav-text">删除文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件移动"><span class="nav-number">8.</span> <span class="nav-text">文件移动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程仓库"><span class="nav-number">9.</span> <span class="nav-text">远程仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支管理"><span class="nav-number">10.</span> <span class="nav-text">分支管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分支-变基"><span class="nav-number">10.1.</span> <span class="nav-text">分支-变基</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分支管理策略"><span class="nav-number">10.2.</span> <span class="nav-text">分支管理策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bug分支"><span class="nav-number">10.3.</span> <span class="nav-text">Bug分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Feature分支"><span class="nav-number">10.4.</span> <span class="nav-text">Feature分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预发布分支"><span class="nav-number">10.5.</span> <span class="nav-text">预发布分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#推送分支-同远程仓库"><span class="nav-number">10.6.</span> <span class="nav-text">推送分支(同远程仓库)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#跟踪分支"><span class="nav-number">10.7.</span> <span class="nav-text">跟踪分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多人协作"><span class="nav-number">10.8.</span> <span class="nav-text">多人协作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标签管理"><span class="nav-number">11.</span> <span class="nav-text">标签管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日志-git-log"><span class="nav-number">12.</span> <span class="nav-text">日志 git log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-show"><span class="nav-number">13.</span> <span class="nav-text">git show</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#比较-git-diff"><span class="nav-number">14.</span> <span class="nav-text">比较 git diff</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GIT工具"><span class="nav-number">15.</span> <span class="nav-text">GIT工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#交互式暂存"><span class="nav-number">15.1.</span> <span class="nav-text">交互式暂存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#清理-git-clean"><span class="nav-number">15.2.</span> <span class="nav-text">清理 git clean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搜索-git-grep"><span class="nav-number">15.3.</span> <span class="nav-text">搜索 git grep</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志搜索"><span class="nav-number">15.4.</span> <span class="nav-text">日志搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#忽略文件"><span class="nav-number">15.5.</span> <span class="nav-text">忽略文件</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一次安装设置"><span class="nav-number">1.</span> <span class="nav-text">第一次安装设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建版本仓库"><span class="nav-number">2.</span> <span class="nav-text">创建版本仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#版本比对"><span class="nav-number">3.</span> <span class="nav-text">版本比对</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#版本回退"><span class="nav-number">4.</span> <span class="nav-text">版本回退</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工作区和暂存区"><span class="nav-number">5.</span> <span class="nav-text">工作区和暂存区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#撤销修改"><span class="nav-number">6.</span> <span class="nav-text">撤销修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除文件"><span class="nav-number">7.</span> <span class="nav-text">删除文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件移动"><span class="nav-number">8.</span> <span class="nav-text">文件移动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程仓库"><span class="nav-number">9.</span> <span class="nav-text">远程仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支管理"><span class="nav-number">10.</span> <span class="nav-text">分支管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分支-变基"><span class="nav-number">10.1.</span> <span class="nav-text">分支-变基</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分支管理策略"><span class="nav-number">10.2.</span> <span class="nav-text">分支管理策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bug分支"><span class="nav-number">10.3.</span> <span class="nav-text">Bug分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Feature分支"><span class="nav-number">10.4.</span> <span class="nav-text">Feature分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预发布分支"><span class="nav-number">10.5.</span> <span class="nav-text">预发布分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#推送分支-同远程仓库"><span class="nav-number">10.6.</span> <span class="nav-text">推送分支(同远程仓库)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#跟踪分支"><span class="nav-number">10.7.</span> <span class="nav-text">跟踪分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多人协作"><span class="nav-number">10.8.</span> <span class="nav-text">多人协作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标签管理"><span class="nav-number">11.</span> <span class="nav-text">标签管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日志-git-log"><span class="nav-number">12.</span> <span class="nav-text">日志 git log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-show"><span class="nav-number">13.</span> <span class="nav-text">git show</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#比较-git-diff"><span class="nav-number">14.</span> <span class="nav-text">比较 git diff</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GIT工具"><span class="nav-number">15.</span> <span class="nav-text">GIT工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#交互式暂存"><span class="nav-number">15.1.</span> <span class="nav-text">交互式暂存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#清理-git-clean"><span class="nav-number">15.2.</span> <span class="nav-text">清理 git clean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搜索-git-grep"><span class="nav-number">15.3.</span> <span class="nav-text">搜索 git grep</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志搜索"><span class="nav-number">15.4.</span> <span class="nav-text">日志搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#忽略文件"><span class="nav-number">15.5.</span> <span class="nav-text">忽略文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令自动补全"><span class="nav-number">15.6.</span> <span class="nav-text">命令自动补全</span></a></li></ol></li></ol></div>
             
 
           </div>
