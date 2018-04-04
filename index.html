@@ -375,186 +375,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://fcwalkers.com/2018/03/30/spring/Spring boot/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Windus">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="风尘">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/30/spring/Spring boot/" itemprop="url">spring boot 2.0</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-30T15:54:18+08:00">2018-03-30</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/软件开发/" itemprop="url" rel="index"><span itemprop="name">软件开发</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>[TOC]</p>
-<h2 id="Starters"><a href="#Starters" class="headerlink" title="Starters"></a>Starters</h2><p>starters是一个依赖描述集合,它不需要你再额外引入其它依赖,对所有spring应用达到一站式关联技术. 如:spring-boot-starter-web<br>官方的starters的命名前缀是<strong>spring-boot-starter-*</strong></p>
-<p><a href="https://docs.spring.io/spring-boot/docs/2.0.0.RELEASE/reference/htmlsingle/#using-boot-starter" target="_blank" rel="noopener">更多内容参考官方文档</a></p>
-<p>自定义starters建议以<strong>工程名-spring-boot-starter</strong></p>
-<p>继承spring-boot-starter-parent包含一些预设行为:   </p>
-<ul>
-<li>使用jdk 1.8编译代码  </li>
-<li>采用UTF-8默认编码  </li>
-<li>资源文件过滤行为</li>
-<li>插件配置行为((exec plugin, Git commit ID, shade)</li>
-<li>对application.properties 和 application.yml文件属性替换为pom文件中的profile对应的属性.(maven过滤从使用${…}被改变成使用@...@点位符</li>
-</ul>
-<h2 id="代码结构"><a href="#代码结构" class="headerlink" title="代码结构"></a>代码结构</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">com</span><br><span class="line"> +- example</span><br><span class="line">     +- myapplication</span><br><span class="line">         +- Application.java</span><br><span class="line">         |</span><br><span class="line">         +- customer</span><br><span class="line">         |   +- Customer.java</span><br><span class="line">         |   +- CustomerController.java</span><br><span class="line">         |   +- CustomerService.java</span><br><span class="line">         |   +- CustomerRepository.java</span><br><span class="line">         |</span><br><span class="line">         +- order</span><br><span class="line">             +- Order.java</span><br><span class="line">             +- OrderController.java</span><br><span class="line">             +- OrderService.java</span><br><span class="line">             +- OrderRepository.java</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableAutoConfiguration</span></span><br><span class="line"><span class="meta">@ComponentScan</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		SpringApplication.run(Application.class, args);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>spring一般推荐你main方法的Application类位于其它类之上的根目录,如上所示.<br>可以使用@SpringBootApplication可代替@Configuration、@EnableAutoConfiguration、 @ComponentScan　三个注解。</p>
-<h3 id="Configuration"><a href="#Configuration" class="headerlink" title="@Configuration"></a>@Configuration</h3><p>spring boot支持基于java注解的配置.尽管可以通过spring xml配置,但通常建议通过@Configuration在定义了main方法的类上配置.</p>
-<h3 id="Import"><a href="#Import" class="headerlink" title="@Import"></a>@Import</h3><p>有时不需要把所有的配置通过@Configuration放到一个类里,可心使用@Import导入额外的配置类.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//配置类一</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServiceConfig</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> TransferService <span class="title">transferService</span><span class="params">(AccountRepository accountRepository)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> TransferServiceImpl(accountRepository);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//配置类二</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RepositoryConfig</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> AccountRepository <span class="title">accountRepository</span><span class="params">(DataSource dataSource)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> JdbcAccountRepository(dataSource);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//引用配置</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@Import</span>(&#123;ServiceConfig.class, RepositoryConfig.class&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SystemTestConfig</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> DataSource <span class="title">dataSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// return new DataSource</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//调用</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    ApplicationContext ctx = <span class="keyword">new</span> AnnotationConfigApplicationContext(SystemTestConfig.class);</span><br><span class="line">    <span class="comment">// everything wires up across configuration classes...</span></span><br><span class="line">    TransferService transferService = ctx.getBean(TransferService.class);</span><br><span class="line">    transferService.transfer(<span class="number">100.00</span>, <span class="string">"A123"</span>, <span class="string">"C456"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="ImportResource"><a href="#ImportResource" class="headerlink" title="@ImportResource"></a>@ImportResource</h3><p>如果一定要使用基于xml的配置方式,推荐继续在类上加入@Configuration注解,然后可以通过@ImportResource来加载xml配置文件.</p>
-<h3 id="EnableAutoConfiguration"><a href="#EnableAutoConfiguration" class="headerlink" title="@EnableAutoConfiguration"></a>@EnableAutoConfiguration</h3><p>此注解会让spring boot尝试根据已加入的jar包依赖自动的配置spring应用</p>
-<blockquote>
-<p>此注解只能加入一次,通常建议加入到主@Configuration配置</p>
-</blockquote>
-<h3 id="逐步替换Auto-configuration"><a href="#逐步替换Auto-configuration" class="headerlink" title="逐步替换Auto-configuration"></a>逐步替换Auto-configuration</h3><p>Auto-configuration是非入侵式的.任何时候都可以定义自己的配置替换指定的Auto-configuration部分(查看目前依赖加–debug).</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar myproject-0.0.1-SNAPSHOT.jar --debug</span><br></pre></td></tr></table></figure>
-<h3 id="禁止指定的Auto-configuration配置类"><a href="#禁止指定的Auto-configuration配置类" class="headerlink" title="禁止指定的Auto-configuration配置类"></a>禁止指定的Auto-configuration配置类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableAutoConfiguration</span>(exclude=&#123;DataSourceAutoConfiguration.class&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyConfiguration</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>除了exclude外也可以通过属性文件配置spring.autoconfigure.exclude排除自动配置类的列表.</p>
-<h2 id="spring-bean和依赖注入"><a href="#spring-bean和依赖注入" class="headerlink" title="spring bean和依赖注入"></a>spring bean和依赖注入</h2><p>通常使用@ComponentScan来扫描你注册的bean,作用@Autowired(可用@Resource代替)注入构造函数.<br>所有的应用组件(@Component, @Service, @Repository, @Controller)都可以自动注册为spring bean.</p>
-<h2 id="远程调试"><a href="#远程调试" class="headerlink" title="远程调试"></a>远程调试</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8000,suspend=n \</span><br><span class="line">-jar target/myapplication-0.0.1-SNAPSHOT.jar</span><br></pre></td></tr></table></figure>
-<h2 id="Developer-Tools"><a href="#Developer-Tools" class="headerlink" title="Developer Tools"></a>Developer Tools</h2><p>Spring boot包含了一个附加的工具集,它能使应用开发中更愉快<br><a href="https://docs.spring.io/spring-boot/docs/2.0.0.RELEASE/reference/htmlsingle/#using-boot-devtools" target="_blank" rel="noopener">更多内容参考官方文档</a>.</p>
-<h2 id="额外配置"><a href="#额外配置" class="headerlink" title="额外配置"></a>额外配置</h2><p><a href="https://docs.spring.io/spring-boot/docs/2.0.0.RELEASE/reference/htmlsingle/#boot-features-external-config" target="_blank" rel="noopener">参考官方文档</a></p>
-<h2 id="使用YAML代替properties"><a href="#使用YAML代替properties" class="headerlink" title="使用YAML代替properties"></a>使用YAML代替properties</h2><p>YAML是JSON的一个超集,因此它对层级配置数据是一种比较方便的形式:</p>
-<p>YAML配置:<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">environments:</span></span><br><span class="line">	<span class="attr">dev:</span></span><br><span class="line">		<span class="attr">url:</span> <span class="attr">http://dev.example.com</span></span><br><span class="line">		<span class="attr">name:</span> <span class="string">Developer</span> <span class="string">Setup</span></span><br><span class="line">	<span class="attr">prod:</span></span><br><span class="line">		<span class="attr">url:</span> <span class="attr">http://another.example.com</span></span><br><span class="line">		<span class="attr">name:</span> <span class="string">My</span> <span class="string">Cool</span> <span class="string">App</span></span><br><span class="line">		</span><br><span class="line"><span class="attr">my:</span></span><br><span class="line"><span class="attr">servers:</span></span><br><span class="line">	<span class="bullet">-</span> <span class="string">dev.example.com</span></span><br><span class="line">	<span class="bullet">-</span> <span class="string">another.example.com</span></span><br></pre></td></tr></table></figure></p>
-<p>properties配置:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">environments.dev.url=http://dev.example.com</span><br><span class="line">environments.dev.name=Developer Setup</span><br><span class="line">environments.prod.url=http://another.example.com</span><br><span class="line">environments.prod.name=My Cool App</span><br><span class="line"></span><br><span class="line">my.servers[0]=dev.example.com</span><br><span class="line">my.servers[1]=another.example.com</span><br></pre></td></tr></table></figure></p>
-<h3 id="ConfigurationProperties"><a href="#ConfigurationProperties" class="headerlink" title="@ConfigurationProperties"></a>@ConfigurationProperties</h3><p>为了绑定属性可以使用Spring数据绑定工具类,如上面servers你需要一个List(或Set)来绑定:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@ConfigurationProperties(prefix=&quot;my&quot;)</span><br><span class="line">public class Config &#123;</span><br><span class="line"></span><br><span class="line">	private List&lt;String&gt; servers = new ArrayList&lt;String&gt;();</span><br><span class="line"></span><br><span class="line">	public List&lt;String&gt; getServers() &#123;</span><br><span class="line">		return this.servers;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>也可以使用@Value注解占位符语法接受属性的值: <strong>@Value(“${property}”)</strong></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-	
-	<div>
-	
-	</div>
-
-    
-	
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://fcwalkers.com/2018/03/29/GIT/GIT学习笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1178,6 +998,156 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://fcwalkers.com/2018/03/02/Linux/文件压缩:打包:备份/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Windus">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="风尘">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/02/Linux/文件压缩:打包:备份/" itemprop="url">文件压缩/打包/备份</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-02T14:57:55+08:00">2018-03-02</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/软件开发/" itemprop="url" rel="index"><span itemprop="name">软件开发</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>[TOC]</p>
+<h2 id="压缩文件的技术"><a href="#压缩文件的技术" class="headerlink" title="压缩文件的技术"></a>压缩文件的技术</h2><p>压缩文件简单原理:目前我们使用的计算机系统中都是使用所谓的 Bytes 单位来计量的！不过，事实上，计算机最小的计量单位应该是 bits 才对啊。此外，我们也知道 1 Byte = 8 bits 。但是如果今天我们只是记忆一个数字，亦即是 1 这个数字呢?由于我们记录数字是 1 ，考虑计算机所谓的二进制喔，如此一来， 1 会在最右边占据 1 个 bit ，而其他的 7 个 bits 将会自动的被填上 0 啰！你看看，其实在这样的例子中，那 7 个 bits 应该是“空的”才对！不过，为了要满足目前我们的操作系统数据的存取，所以就会将该数据转为 Byte 的型态来记录了！而一些聪明的计算机工程师就利用一些复杂的计算方式， 将这些没有使用到的空间“丢”出来，以让文件占用的空间变小！这就是压缩的技术啦！ </p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/02/Linux/文件压缩:打包:备份/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+	
+	<div>
+	
+	</div>
+
+    
+	
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1229,7 +1199,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1275,11 +1245,7 @@
                     
                       
                     
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
