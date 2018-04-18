@@ -122,7 +122,7 @@
 <meta property="og:image" content="http://fcwalkers.com/2018/03/29/GIT/GIT学习笔记/QQ20171117-112940@2x.png">
 <meta property="og:image" content="http://fcwalkers.com/2018/03/29/GIT/GIT学习笔记/QQ20171117-115013@2x.png">
 <meta property="og:image" content="http://fcwalkers.com/2018/03/29/GIT/GIT学习笔记/QQ20171118223701.png">
-<meta property="og:updated_time" content="2018-04-04T05:51:34.000Z">
+<meta property="og:updated_time" content="2018-04-18T08:48:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GIT学习笔记">
 <meta name="twitter:description" content="[TOC] 第一次安装设置123#因为git是分布式,这些就是你在提交commit时的签名。(--global全局设置,不加则设置当前版本库)$ git config [--global] user.name &amp;quot;Your Name&amp;quot;$ git config [--global] user.email &amp;quot;email@example.com&amp;quot;">
@@ -541,8 +541,9 @@
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ git stash #储藏工作区(储藏后再用git status查看就是干净的, 除非是没有被git管理的文件)</span><br><span class="line">$ git stash save (--keep-index|-u|--patch)注释 #储藏工作区并添加注释</span><br><span class="line">(</span><br><span class="line">--keep-index #不储藏任何通过 git add 命令已暂存的;</span><br><span class="line">-u #储藏任何创建的未跟踪文件</span><br><span class="line">--patch #不会储藏所有修改过的任何东西，但是会交互式地提示哪些改动想要储藏、哪些改动需要保存在工作目录中。</span><br><span class="line">)</span><br><span class="line">$ git stash list #查看stash列表</span><br><span class="line">$ git stash apply #恢复stash，但stash不删除</span><br><span class="line">$ git stash pop #恢复stash，同时删除stash</span><br><span class="line">$ git stash drop #移除stash (会删除储存所有修改,谨慎使用)</span><br><span class="line">$ git stash show (-p/--patch) #查看stash(详细)修改</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>如果多次执行stash后，恢复stash就加上stash名，如：git stash pop/apply stash@{0}</p>
+<p>如果多次执行stash后，恢复stash就加上stash名，如：git stash pop/apply stash@{0}<br>默认情况,stash不会存储Untracked files.如果想要存储,要先git add添加到版本库或者使用git stash -u选项,如下:</p>
 </blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash -u (--include-untracked) # 存储工作空间包括Untracked files</span><br></pre></td></tr></table></figure>
 <h3 id="Feature分支"><a href="#Feature分支" class="headerlink" title="Feature分支"></a>Feature分支</h3><blockquote>
 <p>开发新功能时最好创建一个新的分支(命名:feature-x)。</p>
 </blockquote>
@@ -595,6 +596,9 @@
 <h3 id="忽略文件"><a href="#忽略文件" class="headerlink" title="忽略文件"></a>忽略文件</h3><p>一般情况,可以使用.gitignore文件添加忽略文件.如果当前文件是已经commit ,push到远程仓库后了，.gitignore里面再配置是不起作用了.此时解决办法有两种:   </p>
 <p>一种方法是移除文件跟踪,然后将文件添加到.gitignore文件中去(此种方法对其他人影响较大).<br>另一种方法是仅在自己本地忽略:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git update-index --assume-unchanged 文件名 #忽略文件</span><br><span class="line">$ git update-index --no-assume-unchanged 文件名 #取消忽略文件</span><br><span class="line">$ git ls-files -v | grep h\&lt;space&gt; #显示本地忽略文件列表(&lt;space&gt; 是表示空格)</span><br><span class="line"></span><br><span class="line">更多信息使用 --help 自行查阅</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>–assume-unchanged与–skip-worktree 的区别<br>前者 忽略更改文件,当索引中文件条目变化时则失效（即，此文件变化自上游）<br>后者 忽略更改文件,索引中文件条目变化仍起作用(直至此索引被放弃)</p>
+</blockquote>
 <h3 id="命令自动补全"><a href="#命令自动补全" class="headerlink" title="命令自动补全"></a>命令自动补全</h3><ul>
 <li>第一步 下载git官方提供的自动补全git-completion.bash脚本到自己的家目录并重命名为.git-completion.bash</li>
 </ul>
