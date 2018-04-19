@@ -111,14 +111,14 @@
 
 
   <meta name="description" content="[TOC] 循环性执行的例行性工作高度循环执行的例行性工作调度由cron(crond)服务 控制.Lnux上有非常多的例行性工作,因此这个服务是默认启动的.  使用者的设置    123/etc/cron.allow 允许使用crontab的用户/etc/cron.deny 不允许使用crontab的用户allow优先级优于deny">
-<meta name="keywords" content="学习笔记,Linux">
+<meta name="keywords" content="Linux,学习笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="例行性工作调度">
 <meta property="og:url" content="http://fcwalkers.com/2017/12/11/Linux/例行性工作调度/index.html">
 <meta property="og:site_name" content="风尘">
 <meta property="og:description" content="[TOC] 循环性执行的例行性工作高度循环执行的例行性工作调度由cron(crond)服务 控制.Lnux上有非常多的例行性工作,因此这个服务是默认启动的.  使用者的设置    123/etc/cron.allow 允许使用crontab的用户/etc/cron.deny 不允许使用crontab的用户allow优先级优于deny">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-24T15:55:09.000Z">
+<meta property="og:updated_time" content="2018-04-19T07:50:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="例行性工作调度">
 <meta name="twitter:description" content="[TOC] 循环性执行的例行性工作高度循环执行的例行性工作调度由cron(crond)服务 控制.Lnux上有非常多的例行性工作,因此这个服务是默认启动的.  使用者的设置    123/etc/cron.allow 允许使用crontab的用户/etc/cron.deny 不允许使用crontab的用户allow优先级优于deny">
@@ -477,12 +477,13 @@
 <p>当用户使用crontab指令创建工作调度之后,该项工作被纪录到/var/spool/cron里,而且是以账号作为判别的.如:用Windus使用后会纪录到/var/spool/cron/Windus<code>注意:不要使用vim编辑该文件,可能由于输入法错误导致无法执行cron</code><br>另外,cron执行的每一项任务都纪录到/var/log/cron中.</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@study ~]# crontab [-u username] [-l|-e|-r]</span><br><span class="line">选项与参数：</span><br><span class="line">-u  ：只有 root 才能进行这个任务，亦即帮其他使用者创建/移除 crontab 工作调度；</span><br><span class="line">-e  ：编辑 crontab 的工作内容</span><br><span class="line">-l  ：查阅 crontab 的工作内容</span><br><span class="line">-r  ：移除所有的 crontab 的工作内容，若仅要移除一项，请用 -e 去编辑。</span><br></pre></td></tr></table></figure>
-<p><strong>每项工作格式都有六个字段,意义为:</strong>  </p>
+<p><strong>每项工作格式都有六个字段,意义为:</strong></p>
 <table style="width:100%;"><br><tr><br>    <th>代表意义</th><br>    <td>分</td><br>    <td>时</td><br>    <td>日期</td><br>    <td>月</td><br>    <td>周</td><br>    <td>指令</td><br></tr><br><tr><br>    <th>数字范围</th><br>    <td>0~59</td><br>    <td>0~23</td><br>    <td>1~31</td><br>    <td>1~12</td><br>    <td>0~7</td><br>    <td>执行指令</td><br></tr><br></table>
 
-<table style="width:100%;"><br><thead><br>    <tr><br>        <th colspan="2" style="text-align:center;">特殊字符</th><br>    </tr><br></thead><br><tr><br>    <th style="text-align:center">字符</th><br>    <th style="text-align:center">意义</th><br></tr><br><tr><br>    <th><em>(星号)</em></th><br>    <td>代表任何时刻都接受的意思！举例来说，范例一内那个日、月、周都是  ， 就代表着“不论何月、何日的礼拜几的 12:00 都执行后续指令”的意思！<br>    </td><br></tr><br><tr><br>    <th>,(逗号)</th><br>    <td>代表分隔时段的意思。举例来说，如果要下达的工作是 3:00 与 6:00 时，就会是：0 3,6 <em> </em> <em> command<br>时间参数还是有五栏，不过第二栏是 3,6 ，代表 3 与 6 都适用！<br>    </em></td><br></tr><br><tr><br>    <th>-(减号)</th><br>    <td>代表一段时间范围内，举例来说， 8 点到 12 点之间的每小时的 20 分都进行一项工作：20 8-12  <em> </em> command<br>仔细看到第二栏变成 8-12 喔！代表 8,9,10,11,12 都适用的意思！<br>    </td><br></tr><br><tr><br>    <th>/n(斜线)</th><br>    <td>那个 n 代表数字，亦即是“每隔 n 单位间隔”的意思，例如每五分钟进行一次，则：<em>/5 </em> <em> </em> <em> command 用 </em> 与 /5 来搭配，也可以写成 0-59/5 ，相同意思!<br>    </td><br></tr><br></table>
+<p><code>注意:周指令0和7都代表星期天</code></p>
+<table style="width:100%;"><br><thead><br>    <tr><br>        <th colspan="2" style="text-align:center;">特殊字符</th><br>    </tr><br></thead><br><tr><br>    <th style="text-align:center">字符</th><br>    <th style="text-align:center">意义</th><br></tr><br><tr><br>    <th>*(星号)</th><br>    <td>代表任何时刻都接受的意思！举例来说，范例一内那个日、月、周都是 <em> ， 就代表着“不论何月、何日的礼拜几的 12:00 都执行后续指令”的意思！<br>    </em></td><br></tr><br><tr><br>    <th>,(逗号)</th><br>    <td>代表分隔时段的意思。举例来说，如果要下达的工作是 3:00 与 6:00 时，就会是：0 3,6  <em> </em> command<br>时间参数还是有五栏，不过第二栏是 3,6 ，代表 3 与 6 都适用！<br>    </td><br></tr><br><tr><br>    <th>-(减号)</th><br>    <td>代表一段时间范围内，举例来说， 8 点到 12 点之间的每小时的 20 分都进行一项工作：20 8-12 <em> </em> <em> command<br>仔细看到第二栏变成 8-12 喔！代表 8,9,10,11,12 都适用的意思！<br>    </em></td><br></tr><br><tr><br>    <th>/n(斜线)</th><br>    <td>那个 n 代表数字，亦即是“每隔 n 单位间隔”的意思，例如每五分钟进行一次，则：/5 <em> </em> <em> </em> command 用 * 与 /5 来搭配，也可以写成 0-59/5 ，相同意思!<br>    </td><br></tr><br></table> 
 
-<p><code>注意:周指令0和7都代表星期天</code>  </p>
+
 <ul>
 <li>crond服务读取配置文件位置  </li>
 </ul>
@@ -567,9 +568,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/学习笔记/" rel="tag"><i class="fa fa-tag"></i> 学习笔记</a>
-          
             <a href="/tags/Linux/" rel="tag"><i class="fa fa-tag"></i> Linux</a>
+          
+            <a href="/tags/学习笔记/" rel="tag"><i class="fa fa-tag"></i> 学习笔记</a>
           
         </div>
       
@@ -695,7 +696,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -741,7 +742,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">7</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
