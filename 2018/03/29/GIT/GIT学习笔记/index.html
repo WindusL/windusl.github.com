@@ -111,7 +111,7 @@
 
 
   <meta name="description" content="[TOC] 第一次安装设置123#因为git是分布式,这些就是你在提交commit时的签名。(--global全局设置,不加则设置当前版本库)$ git config [--global] user.name &amp;quot;Your Name&amp;quot;$ git config [--global] user.email &amp;quot;email@example.com&amp;quot;">
-<meta name="keywords" content="学习笔记,GIT">
+<meta name="keywords" content="GIT,学习笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GIT学习笔记">
 <meta property="og:url" content="http://fcwalkers.com/2018/03/29/GIT/GIT学习笔记/index.html">
@@ -122,7 +122,7 @@
 <meta property="og:image" content="http://fcwalkers.com/2018/03/29/GIT/GIT学习笔记/QQ20171117-112940@2x.png">
 <meta property="og:image" content="http://fcwalkers.com/2018/03/29/GIT/GIT学习笔记/QQ20171117-115013@2x.png">
 <meta property="og:image" content="http://fcwalkers.com/2018/03/29/GIT/GIT学习笔记/QQ20171118223701.png">
-<meta property="og:updated_time" content="2018-04-18T08:48:50.000Z">
+<meta property="og:updated_time" content="2018-04-24T09:33:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GIT学习笔记">
 <meta name="twitter:description" content="[TOC] 第一次安装设置123#因为git是分布式,这些就是你在提交commit时的签名。(--global全局设置,不加则设置当前版本库)$ git config [--global] user.name &amp;quot;Your Name&amp;quot;$ git config [--global] user.email &amp;quot;email@example.com&amp;quot;">
@@ -506,7 +506,7 @@
 <blockquote>
 <p>关联后第一次推送仓库的所有内容使用命令:git push -u origin master<br>此后,每次推送本地修改内容可以使用命令:git push origin master</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git clone 远程仓库地址 #克隆远程仓库到本地</span><br><span class="line">$ git fetch 远程仓库名 #从服务器上抓取本地没有的数据，它并不会修改工作目录中的内容, 它只会获取数据然后让你自己合并.</span><br><span class="line">$ git pull (--allow-unrelated-histories) #从服务器抓取分支数据并然后尝试合并.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git clone [-b 分支名] 远程仓库地址 #克隆远程仓库到本地(-b指定分支)</span><br><span class="line">$ git fetch 远程仓库名 #从服务器上抓取本地没有的数据，它并不会修改工作目录中的内容, 它只会获取数据然后让你自己合并.</span><br><span class="line">$ git pull (--allow-unrelated-histories) #从服务器抓取分支数据并然后尝试合并.</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>由于git pull命令经常让人困惑,所以通常单独显式地使用 git fetch 与git merge 命令会更好一些。</p>
 </blockquote>
@@ -579,7 +579,7 @@
 <p>检出标签</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#在 Git 中你并不能真的检出一个标签，因为它们并不能像分支一样来回移动。</span><br><span class="line">#如果你想要工作目录与仓库中特定的标签版本完全一样，可以使在特定的标签上创建一个新分支：</span><br><span class="line"></span><br><span class="line">语法:git checkout -b [branchname] [tagname]</span><br></pre></td></tr></table></figure>
-<h2 id="日志-git-log"><a href="#日志-git-log" class="headerlink" title="日志 git log"></a>日志 git log</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ git log --stat #显示在每个提交(commit)中哪些文件被修改了</span><br><span class="line">$ git log -p #显示每次提交的内容差异</span><br><span class="line">$ git log -n #显示最近几条日志</span><br><span class="line">$ git log --pretty=oneline|format</span><br><span class="line">$ git log --graph #展示分支、合并历史</span><br><span class="line">$ git log --author #仅显示指定作者相关的提交。</span><br><span class="line">$ git log --committer #仅显示指定提交者相关的提交。</span><br><span class="line">$ git log --grep #仅显示含指定关键字的提交</span><br></pre></td></tr></table></figure>
+<h2 id="日志-git-log"><a href="#日志-git-log" class="headerlink" title="日志 git log"></a>日志 git log</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ git log --stat #显示在每个提交(commit)中哪些文件被修改了</span><br><span class="line">$ git log -p #显示每次提交的内容差异</span><br><span class="line">$ git log -n #显示最近几条日志</span><br><span class="line">$ git log --pretty=oneline|format</span><br><span class="line">$ git log --graph #展示分支、合并历史</span><br><span class="line">$ git log --author #仅显示指定作者相关的提交。</span><br><span class="line">$ git log --committer #仅显示指定提交者相关的提交。</span><br><span class="line">$ git log --grep #仅显示含指定关键字的提交</span><br><span class="line">$ git log 文件名 #仅显示指定文件提交历史</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>提交区间</p>
 </blockquote>
@@ -691,9 +691,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/学习笔记/" rel="tag"><i class="fa fa-tag"></i> 学习笔记</a>
-          
             <a href="/tags/GIT/" rel="tag"><i class="fa fa-tag"></i> GIT</a>
+          
+            <a href="/tags/学习笔记/" rel="tag"><i class="fa fa-tag"></i> 学习笔记</a>
           
         </div>
       
