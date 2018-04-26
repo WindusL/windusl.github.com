@@ -773,6 +773,32 @@
 
 
 
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+    
+  
+  <script src="https://cdn.jsdelivr.net/npm/valine@1.1.8/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: true,
+        appId: 'DT0c6B3N0f8LSeaMCR4T8tAS-gzGzoHsz',
+        appKey: 'lFs9R36F1tvTYeFptG8h2azk',
+        placeholder: '请留下你脚印...',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
 
 
   
