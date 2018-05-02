@@ -21,8 +21,8 @@
         <category>软件开发</category>
       </categories>
       <tags>
+        <tag>Linux学习笔记</tag>
         <tag>GIT</tag>
-        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -33,8 +33,8 @@
         <category>软件开发</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
         <tag>Linux</tag>
+        <tag>Linux学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -45,8 +45,8 @@
         <category>软件开发</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
         <tag>Linux</tag>
+        <tag>Linux学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -57,8 +57,8 @@
         <category>软件开发</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
         <tag>Linux</tag>
+        <tag>Linux学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -69,8 +69,8 @@
         <category>软件开发</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
         <tag>Linux</tag>
+        <tag>Linux学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -81,8 +81,8 @@
         <category>软件开发</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
         <tag>Linux</tag>
+        <tag>Linux学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -93,8 +93,8 @@
         <category>软件开发</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
         <tag>Linux</tag>
+        <tag>Linux学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -105,8 +105,8 @@
         <category>软件开发</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
         <tag>Linux</tag>
+        <tag>Linux学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -117,8 +117,8 @@
         <category>软件开发</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
         <tag>Linux</tag>
+        <tag>Linux学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -129,8 +129,265 @@
         <category>软件开发</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
         <tag>Linux</tag>
+        <tag>Linux学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[React学习笔记——深入React组件(v15.5)]]></title>
+    <url>%2F2017%2F05%2F04%2FReact%2FReact%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E6%B7%B1%E5%85%A5React%E7%BB%84%E4%BB%B6(v15.5)%2F</url>
+    <content type="text"><![CDATA[[TOC] 组件让UI独立，可重复利用，并且单独解决每块问题。React.Component是由React提供的。 React.Component是一个抽象的基类，因此它很少的被直接使用。反而，你会用一个有代表性的子类，并且至少定义一个render()方法。 使用JavaScript定义一个简单的类组件： 12345class Greeting extends React.Component &#123; render() &#123; return &lt;h1&gt;Hello, &#123;this.props.name&#125;&lt;/h1&gt;; &#125;&#125; 如果你没有使用ES6，你需要使用react-create-class模块创建。可以参考React中不使用ES6。 组件生命周期每个组件都有几个生命周期，你可重写它们并在特定时间，它们会被执行。前缀是will的方法会在行为发生前被调用;前缀为did的方法会在行为发生后被调用。 Mounting当一个组件实例被创建并且插入到DOM时，这些方法被调用： constructor()componentWillMount()render()componentDidMount() Updating可能由props或state引发的更新。当组件被重新渲染时，这些方法被调用： componentWillReceiveProps()shouldComponentUpdate()componentWillUpdate()render()componentDidUpdate() Unmounting当组件被移出DOM时，这个方法被调用： componentWillUnmount() 其它API每个组件也提供一些其它API。 setState()forceUpdate() 类属性 defaultPropsdisplayName 实例属性 propsstate 方法使用说明render()这个方法是必须存在的方法。 当被调用时，它会检查props和state，并且返回单一的React元素。这个元素可以是一个本地DOM组件，如\，也可以是一个自定义的合成组件。 你也可以返回null或者false，表示你不想要任何渲染。当返回的是null或者false时，ReactDOM.findDOMNode(this)返回的是null。 这个方法是纯粹的，也就是说它不能更新state，每次调用返回相同的结果，并且它不直接与浏览器交互。 注意：如果shouldComponentUpdate()方法返回false，render()不会被调用。 constructor()构造函数是初始化state的正确位置。如果你不需要初始化state并且也不绑定方法，那就不需要实现构造函数。 123456constructor(props) &#123; super(props); this.state = &#123; color: props.initialColor &#125;;&#125; componentWillUpdate()这个方法在mounting发生前调用，并且在render()方法之前调用。因此，在这个方法设置state同步，不会触发重新渲染。避免了任副作用和订阅。 这仅仅是 服务器渲染时调用的生命周期的钩子。一般推荐使用constructor()代替。 componentDidMount()这个方法mounting发生后调用。在这个方法设置state会触发重新渲染。可以在这里初始化必要的DOM，如果需要加载远程数据，这里是发起请求的好地方。 componentWillReceiveProps()这个方法在一个已加载的组件接收新prop前调用。在这个方法里可以使用setState()比较this.props和nextProps。 注意：即使props没有改变，React也可能调用这个方法。因此，请确保比较当前值和即将改变的值。 在mounting期间初始化props，React不会调用这个方法。它只在组件props被更新时调用。调用setState()通常不会触发此方法。 shouldComponentUpdate()此方法默认行为是，当state改变时组件重新渲染。 当props或state 被接收到时，这个方法将在render()之前调用。当初始化渲染和使用forceUpdate()方法时，此方法不被调用。 此方法返回false时，并不能阻止子组件由于state改变后重新渲染。 目前，此方法返回false时componentWillUpdate()、render() 和 componentDidUpdate()方法不会被调用。注意，这在将来可能只是一个提示，而不是严格的指令，也就是说即使该方法返回false，仍然会重新渲染组件。 componentWillUpdate()此方法被调用在prop和state被接收后组件渲染前，组件初始化渲染不调用此方法。 注意： 1、你不能在这个方法中调用this.setState()，如果你想在props变化后更新state请使用componentWillReceiveProps()代替。 2、如果shouldComponentUpdate()方法返回false，此方法不会被调用。 componentDidUpdate()这个方法在updating发生后立即调用，并且在组件初始化渲染时也不调用。 在组件更新后，在这个方法中操作DOM是个很好的机会。这也是一个做网络请求的好地方。 注意：如果shouldComponentUpdate()方法返回false，此方法不会被调用。 componentWillUnmount()此方法会在组件被卸载和销毁之前立即调用。在这个方法可以执行必要的清理工作。如：无效的定时器、取消网络请求或者清理componentDidMount()创建的DOM元素。 forceUpdate()默认情况下，当组件的state或props改变时就会重新渲染。如果你的render()方法需要依赖一此其它数据，你可以通过调用forceUpdate()方法告诉React组件需要重新渲染。 调用forceUpdate()，会引起render()直接调用，而跳过shouldComponentUpdate()。但是它会正常触发每一个子组件的生命周期方法。 通常应该避免使用此方法。]]></content>
+      <categories>
+        <category>软件开发</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+        <tag>JavaScript</tag>
+        <tag>NodeJs</tag>
+        <tag>HTML</tag>
+        <tag>React学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[React学习笔记——使用PropTypes类型检查(v15.5)]]></title>
+    <url>%2F2017%2F05%2F03%2FReact%2FReact%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8PropTypes%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%9F%A5(v15.5)%2F</url>
+    <content type="text"><![CDATA[[TOC] React v15.5中React.PropTypes已经被废弃了，建议使用prop-types库代替。 随着应用的增长，可能遇到越来越多的类型检查方面的bug，对于一些应用，你可以使用JavaScript的扩展如：flow、typescript来检查你整个应用。但是，对于React来说，即使你不使用这些，其也内置了一些类型检查能力。要使用类型检查作用于组件，你可以指定一个特殊的属性proptypes： 12345678910111213import PropTypes from 'prop-types';class Greeting extends React.Component &#123; render() &#123; return ( &lt;h1&gt;Hello, &#123;this.props.name&#125;&lt;/h1&gt; ); &#125;&#125;Greeting.propTypes = &#123; name: PropTypes.string&#125;; 下面是React对不同类型检查的示例： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980import PropTypes from 'prop-types';MyComponent.propTypes = &#123; // You can declare that a prop is a specific JS primitive. By default, these // are all optional. optionalArray: PropTypes.array, optionalBool: PropTypes.bool, optionalFunc: PropTypes.func, optionalNumber: PropTypes.number, optionalObject: PropTypes.object, optionalString: PropTypes.string, optionalSymbol: PropTypes.symbol, // Anything that can be rendered: numbers, strings, elements or an array // (or fragment) containing these types. optionalNode: PropTypes.node, // A React element. optionalElement: PropTypes.element, // You can also declare that a prop is an instance of a class. This uses // JS's instanceof operator. optionalMessage: PropTypes.instanceOf(Message), // You can ensure that your prop is limited to specific values by treating // it as an enum. optionalEnum: PropTypes.oneOf(['News', 'Photos']), // An object that could be one of many types optionalUnion: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.instanceOf(Message) ]), // An array of a certain type optionalArrayOf: PropTypes.arrayOf(PropTypes.number), // An object with property values of a certain type optionalObjectOf: PropTypes.objectOf(PropTypes.number), // An object taking on a particular shape optionalObjectWithShape: PropTypes.shape(&#123; color: PropTypes.string, fontSize: PropTypes.number &#125;), // You can chain any of the above with `isRequired` to make sure a warning // is shown if the prop isn't provided. requiredFunc: PropTypes.func.isRequired, // A value of any data type requiredAny: PropTypes.any.isRequired, // You can also specify a custom validator. It should return an Error // object if the validation fails. Don't `console.warn` or throw, as this // won't work inside `oneOfType`. customProp: function(props, propName, componentName) &#123; if (!/matchme/.test(props[propName])) &#123; return new Error( 'Invalid prop `' + propName + '` supplied to' + ' `' + componentName + '`. Validation failed.' ); &#125; &#125;, // You can also supply a custom validator to `arrayOf` and `objectOf`. // It should return an Error object if the validation fails. The validator // will be called for each key in the array or object. The first two // arguments of the validator are the array or object itself, and the // current item's key. customArrayProp: PropTypes.arrayOf(function(propValue, key, componentName, location, propFullName) &#123; if (!/matchme/.test(propValue[key])) &#123; return new Error( 'Invalid prop `' + propFullName + '` supplied to' + ' `' + componentName + '`. Validation failed.' ); &#125; &#125;)&#125;; 需要一个子元素 使用Proptypes.element，你可以指定只有一个子元素可以被传入组件中。 1234567891011121314151617import PropTypes from 'prop-types';class MyComponent extends React.Component &#123; render() &#123; // This must be exactly one element or it will warn. const children = this.props.children; return ( &lt;div&gt; &#123;children&#125; &lt;/div&gt; ); &#125;&#125;MyComponent.propTypes = &#123; children: PropTypes.element.isRequired&#125;; prop默认值你可以通过指定一个特殊的属性defaultProps，来设定prop的默认值。 123456789101112131415161718class Greeting extends React.Component &#123; render() &#123; return ( &lt;h1&gt;Hello, &#123;this.props.name&#125;&lt;/h1&gt; ); &#125;&#125;// Specifies the default values for props:Greeting.defaultProps = &#123; name: 'Stranger'&#125;;// Renders "Hello, Stranger":ReactDOM.render( &lt;Greeting /&gt;, document.getElementById('example'));]]></content>
+      <categories>
+        <category>软件开发</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+        <tag>JavaScript</tag>
+        <tag>NodeJs</tag>
+        <tag>HTML</tag>
+        <tag>React学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[React学习笔记——引用和DOM(v15.5)]]></title>
+    <url>%2F2017%2F05%2F03%2FReact%2FReact%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%BC%95%E7%94%A8%E5%92%8CDOM(v15.5)%2F</url>
+    <content type="text"><![CDATA[[TOC] 在典型的React数据流中，props是父组件与子组件交互的唯一方式。想要修改子组件的，你需要重新渲染父组件的props。然而，有一些种情况是你需要在典型数据流的外面立即修改子组件。要修改的子组件可以是React组件的实例或者是一个DOM元素。对于这两种情况，React 提供了一个解决方案。 何时使用Refs 1、管理焦点、选中或者是媒体重放。2、触发命令动画。3、与第三方DOM库集成。 避免在可声明的事物上使用refs。例如：不在Dialog组件上暴露open()和close()方法，而是传递一个isOpen属性。 在DOM元素上添加一个refReact支持在任何组件上添加一个特殊的属性。ref属性接收一个回调函数，并且这个函数在组件mounted和unmounted时会立即执行。 当ref属性被用在一个HTML元素上时，ref回调函数接收的是基础的DOM元素作为它的参数。 12345678910111213141516171819202122232425262728class CustomTextInput extends React.Component &#123; constructor(props) &#123; super(props); this.focus = this.focus.bind(this); &#125; focus() &#123; // 明确文本框使用的原始DOM API focus this.textInput.focus(); &#125; render() &#123; // ref回调函数存储文本框DOM // element in an instance field (for example, this.textInput). return ( &lt;div&gt; &lt;input type="text" ref=&#123;(input) =&gt; &#123; this.textInput = input; &#125;&#125; /&gt; &lt;input type="button" value="Focus the text input" onClick=&#123;this.focus&#125; /&gt; &lt;/div&gt; ); &#125;&#125; 当组件mounts时，React会调用ref回调函数，并向其传入DOM元素;当组件unmounts时，React调用ref回调函数，并向其传入null。 使用ref回调函数为类设置一个属性，访问DOM元素是一种常见的方式。首先的方法就是向上面一样在ref回调函数中设置一个属性。有一个更简单的写法是：ref={input =&gt; this.textInput = input} 在类的组件上添加一个ref当ref属性被添加到一个以类方式定义的组件上时，它的回调函数接收的是已mount组件的实例作为实例。例如：想要模拟组件在mount后直接被点击： 123456789101112class AutoFocusTextInput extends React.Component &#123; componentDidMount() &#123; this.textInput.focus(); &#125; render() &#123; return ( &lt;CustomTextInput ref=&#123;(input) =&gt; &#123; this.textInput = input; &#125;&#125; /&gt; ); &#125;&#125; 注意：只有组件以类的方式定义才有效。 Refs和函数式组件不能在函数式组件上使用ref属性，因为函数式组件没有实例 12345678910111213function MyFunctionalComponent() &#123; return &lt;input /&gt;;&#125;class Parent extends React.Component &#123; render() &#123; // This will *not* work! return ( &lt;MyFunctionalComponent ref=&#123;(input) =&gt; &#123; this.textInput = input; &#125;&#125; /&gt; ); &#125;&#125; 如果你需要使用它，你应该将组件转换为类，就像你需要使用生命周期或者状态时候一样。 但是，你可以在函数式组件内部使用ref属性，只要是DOM元素或类组件上就可以。 123456789101112131415161718192021function CustomTextInput(props) &#123; // textInput must be declared here so the ref callback can refer to it let textInput = null; function handleClick() &#123; textInput.focus(); &#125; return ( &lt;div&gt; &lt;input type="text" ref=&#123;(input) =&gt; &#123; textInput = input; &#125;&#125; /&gt; &lt;input type="button" value="Focus the text input" onClick=&#123;handleClick&#125; /&gt; &lt;/div&gt; ); &#125; 暴露DOM Refs到父组件在极少的情况下，你可能想要在一个父组件中接收子组件的DOM节点。这种做法通常是不推荐的，但是对于触发焦点和测试DOM的大小或位置，它偶尔也是有用的。 虽然，可以在子组件上添加一个ref属性，但这不理想的解决方案，你只会得到一个组件的实例，而不是组件的DOM节点。此外，这也不会在函数式组件上工作。 相反，在这种情况下，我们希望暴露一个特殊的prop在子组件上。子组件接收一个任意名字的函数作为prop，并且在一DOM节点上加上一个ref属性。这让父组件通过中间件传递ref回调函数到子组件的DOM节点上。 它在类组件和函数式组件上都可以工作。 1234567891011121314151617function CustomTextInput(props) &#123; return ( &lt;div&gt; &lt;input ref=&#123;props.inputRef&#125; /&gt; &lt;/div&gt; );&#125;class Parent extends React.Component &#123; render() &#123; return ( &lt;CustomTextInput inputRef=&#123;el =&gt; this.inputElement = el&#125; /&gt; ); &#125;&#125; 在上面的例子中，结果this.inputElement在Parent组件中被设置为CustomTextInput组件input元素相应的DOM节点。 这种模式的好处是，它可以纵向深入使用。例如：Parent组件不需要DOM节点，但是另一个组件渲染Parent组件的需要DOM节点（我们叫它GrandParent），我们可以在GrandParent组件中传递inputRef到Parent组件，并且让Parent组件向下传递它到CustomTextInput组件。 1234567891011121314151617181920212223242526function CustomTextInput(props) &#123; return ( &lt;div&gt; &lt;input ref=&#123;props.inputRef&#125; /&gt; &lt;/div&gt; );&#125;function Parent(props) &#123; return ( &lt;div&gt; My input: &lt;CustomTextInput inputRef=&#123;props.inputRef&#125; /&gt; &lt;/div&gt; );&#125;class Grandparent extends React.Component &#123; render() &#123; return ( &lt;Parent inputRef=&#123;el =&gt; this.inputElement = el&#125; /&gt; ); &#125;&#125; 注意，如果此种方法需要在子组件中添加代码，如果你对子组件没有绝对的控制权，那么你只能使用findDOMNode()，但是它是不被鼓励使用的。 不要过渡使用Refs你可能倾向使用ref来解决问题应用中的问题，如果是这种情况，请花费一些时间考虑一下，状态应该在组件的层次结构什么位置。通常，拥有该状态的适当位置应该是更高层级的组件上。参考状态提升示例。 旧版API：字符串Refs如果你之前使用过React，你可能会熟悉一个较旧的API,其中ref属性是一个字符串，如像”textInput”,DOM节点被这样访问this.refs.textInput。我们建议不这样使用。因为字符串引用有一些被认为是遗留的问题，并且可能在未来的一个版本中被删除。如果你目前正在使用this.refs.textInput访问refs,我们建议你使用回调模式。 注意 如果ref回调被定义为内联函数，它将在更新期间被调用两次，第一次调用传入null,第二次调用传入DOM 元素。这是因为函数的新实例是通过每次渲染创建的，因此React需要清除旧的引用并设置新的引用。你可以通过将ref回调定义为类上的绑定方法来避免这种情况，但请注意，在大多数情况下它不重要。]]></content>
+      <categories>
+        <category>软件开发</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+        <tag>JavaScript</tag>
+        <tag>NodeJs</tag>
+        <tag>HTML</tag>
+        <tag>React学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[React学习笔记——深入理解JSX(v15.5)]]></title>
+    <url>%2F2017%2F05%2F02%2FReact%2FReact%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JSX(v15.5)%2F</url>
+    <content type="text"><![CDATA[[TOC] 从根本上讲，React语法仅仅是React.createElement(component, props, …children)方法的语法糖。 12345678910111213141516171819202122//JSX代码&lt;MyButton color="blue" shadowSize=&#123;2&#125;&gt; Click Me&lt;/MyButton&gt;//编译后：React.createElement( MyButton, &#123;color: 'blue', shadowSize: 2&#125;, 'Click Me')如果标签没有子元素，可以使用闭口标签。//JSX代码&lt;div className="sidebar" /&gt;//编译后React.createElement( 'div', &#123;className: 'sidebar'&#125;, null) 指定React元素类型react必须在作用域里由于JSX编译后调用的是React.createElement方法，因此React库必须始终在JSX代码作用域中。 1234567import React from 'react';import CustomButton from './CustomButton';function WarningButton() &#123; // return React.createElement(CustomButton, &#123;color: 'red'&#125;, null); return &lt;CustomButton color="red" /&gt;;&#125; 如果不使用JavaScript打包工具并且已经使用\标签引入React。它就已经在全局作用域中了。 JSX类型使用点表达式你也可以在JSX中使用点表达式引用组件。如果有一个模块导出很多组件的时候，这是很方便的。例如：MyComponents.DatePicker是一个组件，你可以直接在JSX中使用它： 1234567891011import React from 'react';const MyComponents = &#123; DatePicker: function DatePicker(props) &#123; return &lt;div&gt;Imagine a &#123;props.color&#125; datepicker here.&lt;/div&gt;; &#125;&#125;function BlueDatePicker() &#123; return &lt;MyComponents.DatePicker color="blue" /&gt;;&#125; 用户定义组件必须大写当一个元素以小写字母开始，它指的就是一个内建组件，如：\或者\，结果就会将’div’或’span’被传入React.createElement方法。而大写字母开始的组件如会编译成React.createElement(Foo)，并且它符合一个组件的定义。 我们推荐使用大写字母定义一个组件。如果你有一个组件是使用小写字母开始，在JSX中使用它前把它赋值给一个大写变量。 例如，下面代码不会如期运行： 1234567891011121314151617181920212223242526import React from 'react';// 错误！这是一个组件应该产首字母大写function hello(props) &#123; // 正确! 这使用的是&lt;div&gt;标签，因为它是一个有效的HTML标签 return &lt;div&gt;Hello &#123;props.toWhat&#125;&lt;/div&gt;;&#125;function HelloWorld() &#123; // 错误! Reac认为 &lt;hello /&gt; 是一个HTML标签，因为它首字母是小写 return &lt;hello toWhat="World" /&gt;;&#125;修复这些问题，重命名hello为Hello，并且在涉及到它的地方使用&lt;Hello/&gt;：import React from 'react';// Correct! This is a component and should be capitalized:function Hello(props) &#123; // Correct! This use of &lt;div&gt; is legitimate because div is a valid HTML tag: return &lt;div&gt;Hello &#123;props.toWhat&#125;&lt;/div&gt;;&#125;function HelloWorld() &#123; // Correct! React knows &lt;Hello /&gt; is a component because it's capitalized. return &lt;Hello toWhat="World" /&gt;;&#125; 运行时选择类型你不能使用普通表达式作为React元素的类型。如果你想使用普通表达式表明元素的类型，首先将其赋值给一个大写变量。这种情况经常出现在你想依据prop渲染不同组件的时候。 123456789101112131415161718192021222324252627import React from 'react';import &#123; PhotoStory, VideoStory &#125; from './stories';const components = &#123; photo: PhotoStory, video: VideoStory&#125;;function Story(props) &#123; // 错误! JSX 类型不能使用表达式 return &lt;components[props.storyType] story=&#123;props.story&#125; /&gt;;&#125;修复这个，首先将其赋值给一个大写变量：import React from 'react';import &#123; PhotoStory, VideoStory &#125; from './stories';const components = &#123; photo: PhotoStory, video: VideoStory&#125;;function Story(props) &#123; // 正确! JSX 类型可以使用一个大写变量代替. const SpecificStory = components[props.storyType]; return &lt;SpecificStory story=&#123;props.story&#125; /&gt;;&#125; JSX的PropsJavaScript表达式作为 Props你可以通过{}传递任何表达式作为prop。例如： 1&lt;MyComponent foo=&#123;1 + 2 + 3 + 4&#125; /&gt; if表达式和for循环在JavaScript中不是表达式，因此不能直接在JSX中使用。你可以把它们放在周围代码中： 123456789function NumberDescriber(props) &#123; let description; if (props.number % 2 == 0) &#123; description = &lt;strong&gt;even&lt;/strong&gt;; &#125; else &#123; description = &lt;i&gt;odd&lt;/i&gt;; &#125; return &lt;div&gt;&#123;props.number&#125; is an &#123;description&#125; number&lt;/div&gt;;&#125; 字符串你可以传递一个字符串作为prop。这两个JSX表达式是等价的： 123&lt;MyComponent message="hello world" /&gt;&lt;MyComponent message=&#123;'hello world'&#125; /&gt; 当你传递一个字符串时，它的值是未转义的HTML。这两个表达式是等价的： 123&lt;MyComponent message="&amp;lt;3" /&gt;&lt;MyComponent message=&#123;'&lt;3'&#125; /&gt; Props默认值true如果你传递一个没有值的prop，它默认传递的是true。这两个表达式是等价的： 123&lt;MyTextBox autocomplete /&gt;&lt;MyTextBox autocomplete=&#123;true&#125; /&gt; 一般来说，不建议使用默认值，因为ES6的语法中对象简写{foo}等价于{foo:foo}而不是{foo:true}，所以这样写容易混淆。只有这个行为和HTML行相同的时候才能这么使用。 扩展属性如果你已经有一个props的对象，并且希望这个props传递给JSX中。可以使用…作为扩展运算符传递整个props对象。下面两个组件是相等的： 12345678function App1() &#123; return &lt;Greeting firstName="Ben" lastName="Hector" /&gt;;&#125;function App2() &#123; const props = &#123;firstName: 'Ben', lastName: 'Hector'&#125;; return &lt;Greeting &#123;...props&#125; /&gt;;&#125; 当你创建通用的容器时，扩展属性是很有用的。然而，它也能使你的代码产品混乱，它很容易使组件产生很多无关紧要的props。我们建议很少使用这个语法。 JSX子元素在JSX表达式中包含一个开始标签和一个结束标签，标签中内容通过一个特殊的prop：props.children传递。有几种不同方法传递子元素 字符串你可以在开始和结束标签之间放一字符串，这样props.children的值就是一个字符串。这对于很多内置的HTML元素来说是很有用的： 1&lt;MyComponent&gt;Hello world!&lt;/MyComponent&gt; JSX子元素你可以提供更多的JSX元素作为子元素，这对于显示嵌套组件是很有用的： 1234&lt;MyContainer&gt; &lt;MyFirstComponent /&gt; &lt;MySecondComponent /&gt;&lt;/MyContainer&gt; 你可以混合不同类型的子元素，因此你可以使用字符串在JSX子元素中，这是另一种方式的JSX，看起来就像HTML，所以这既是有效的JSX，也是有效的HTML： 1234567&lt;div&gt; Here is a list: &lt;ul&gt; &lt;li&gt;Item 1&lt;/li&gt; &lt;li&gt;Item 2&lt;/li&gt; &lt;/ul&gt;&lt;/div&gt; 一个React组件不能同时返回多个React元素，但是一个JSX表达式可以有多个子元素。因此，如果你想要一个组件呈现多个事情的时候，你可以像上面一样将它包裹在一个div里。 JavaScript表达式作为子元素你可以通过{}传递任何JavaScript表达式作为子元素。例如：这些表达式是相等的： 123&lt;MyComponent&gt;foo&lt;/MyComponent&gt;&lt;MyComponent&gt;&#123;'foo'&#125;&lt;/MyComponent&gt; 这对于渲染任意长度的JSX表达式列表是很有用的。 123456789101112function Item(props) &#123; return &lt;li&gt;&#123;props.message&#125;&lt;/li&gt;;&#125;function TodoList() &#123; const todos = ['finish doc', 'submit pr', 'nag dan to review']; return ( &lt;ul&gt; &#123;todos.map((message) =&gt; &lt;Item key=&#123;message&#125; message=&#123;message&#125; /&gt;)&#125; &lt;/ul&gt; );&#125; JavaScript表达式可以和其它类型混合成子元素。这在字符串模板里是很有用的。 123function Hello(props) &#123; return &lt;div&gt;Hello &#123;props.addressee&#125;!&lt;/div&gt;;&#125; 函数作为子元素通常，JavaScript表达式插入到JSX中得到一个字符串，一个React元素或者是那些东西的列表。然而，props.children就像其它prop一样可以传递任何类型的数据，不仅仅是React知道如何渲染的类型。例如，如果你有一个自定义组件，你可以让它带一个回调函数作为props.children： 12345678910111213141516// Calls the children callback numTimes to produce a repeated componentfunction Repeat(props) &#123; let items = []; for (let i = 0; i &lt; props.numTimes; i++) &#123; items.push(props.children(i)); &#125; return &lt;div&gt;&#123;items&#125;&lt;/div&gt;;&#125;function ListOfTenThings() &#123; return ( &lt;Repeat numTimes=&#123;10&#125;&gt; &#123;(index) =&gt; &lt;div key=&#123;index&#125;&gt;This is item &#123;index&#125; in the list&lt;/div&gt;&#125; &lt;/Repeat&gt; );&#125; 子元素可以通过自定义组件传递任何类型。 被忽略的Boolean、Null和Undefined fase、null、undefined和true是有效的子元素。它们只是不渲染。下面JSX表达式呈现的效果是一样的： 1234567891011&lt;div /&gt;&lt;div&gt;&lt;/div&gt;&lt;div&gt;&#123;false&#125;&lt;/div&gt;&lt;div&gt;&#123;null&#125;&lt;/div&gt;&lt;div&gt;&#123;undefined&#125;&lt;/div&gt;&lt;div&gt;&#123;true&#125;&lt;/div&gt; 这些在条件渲染React元素的时候是有用的。下面代码，如果showHeader是true则渲染组件： 1234&lt;div&gt; &#123;showHeader &amp;&amp; &lt;Header /&gt;&#125; &lt;Content /&gt;&lt;/div&gt; 但请注意，一些“falsy” 值，诸如数字0，仍然会被渲染。例如：下面代码不会得到预期的行为，因为props.messages为空值的时候会打印0 12345&lt;div&gt; &#123;props.messages.length &amp;&amp; &lt;MessageList messages=&#123;props.messages&#125; /&gt; &#125;&lt;/div&gt; 修复上面代码，确保表达式&amp;&amp;前总是布尔值 12345&lt;div&gt; &#123;props.messages.length &gt; 0 &amp;&amp; &lt;MessageList messages=&#123;props.messages&#125; /&gt; &#125;&lt;/div&gt; 相反地，如果你想要打印出false、true、null或者undefined，你必须先把它转换成一个字符串： 123&lt;div&gt; My JavaScript variable is &#123;String(myVariable)&#125;.&lt;/div&gt;]]></content>
+      <categories>
+        <category>软件开发</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+        <tag>JavaScript</tag>
+        <tag>NodeJs</tag>
+        <tag>HTML</tag>
+        <tag>React学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[React学习笔记——组合与继承(v15.5)]]></title>
+    <url>%2F2017%2F04%2F25%2FReact%2FReact%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E7%BB%84%E5%90%88%E4%B8%8E%E7%BB%A7%E6%89%BF(v15.5)%2F</url>
+    <content type="text"><![CDATA[[TOC] React有一个强大的组合模型，并且推荐组合代替继承，在组件间重用代码。 一些组件不能提前知道它们的子组件。它些问题在一些公共组件尤其明显。如：侧边栏或者弹出框等组件。 我们推荐这样的组件使用prop的特殊属性children，直接传递子元素到它们的输出中。 123456789101112131415161718192021function FancyBorder(props) &#123; return ( &lt;div className=&#123;'FancyBorder FancyBorder-' + props.color&#125;&gt; &#123;props.children&#125; &lt;/div&gt; );&#125;//传递JSX中嵌套的任意子元素function WelcomeDialog() &#123; return ( &lt;FancyBorder color="blue"&gt; &lt;h1 className="Dialog-title"&gt; Welcome &lt;/h1&gt; &lt;p className="Dialog-message"&gt; Thank you for visiting our spacecraft! &lt;/p&gt; &lt;/FancyBorder&gt; );&#125; JSX标签内任何内容通过prop children参数传递到FancyBorder组件中。由于，FancyBorder组件把{prop.children}渲染在一个\中，所以传入的元素最终被输入在这里。 虽然这种情况是不常见的，很多时候，我们需要的是在一个组件的多个地方，使用这种嵌套。在这种情况下，我们得自己定义规则来代替使用chidren。 123456789101112131415161718192021222324function SplitPane(props) &#123; return ( &lt;div className="SplitPane"&gt; &lt;div className="SplitPane-left"&gt; &#123;props.left&#125; &lt;/div&gt; &lt;div className="SplitPane-right"&gt; &#123;props.right&#125; &lt;/div&gt; &lt;/div&gt; );&#125;function App() &#123; return ( &lt;SplitPane left=&#123; &lt;Contacts /&gt; &#125; right=&#123; &lt;Chat /&gt; &#125; /&gt; );&#125; React元素像\和\只是对象，所以可以像其它任何数据一样作为prop传递它们。 有时候，我们认为组件是其它组件的“特殊实例”。例如，我们可能说组件WelcomeDialog是组件Dialog它的特殊实例。 在React中，这也可以通过组合完成。 1234567891011121314151617181920function Dialog(props) &#123; return ( &lt;FancyBorder color="blue"&gt; &lt;h1 className="Dialog-title"&gt; &#123;props.title&#125; &lt;/h1&gt; &lt;p className="Dialog-message"&gt; &#123;props.message&#125; &lt;/p&gt; &lt;/FancyBorder&gt; );&#125;function WelcomeDialog() &#123; return ( &lt;Dialog title="Welcome" message="Thank you for visiting our spacecraft!" /&gt; );&#125; 组合对于类定义的组件同样有效。 12345678910111213141516171819202122232425262728293031323334353637383940414243function Dialog(props) &#123; return ( &lt;FancyBorder color="blue"&gt; &lt;h1 className="Dialog-title"&gt; &#123;props.title&#125; &lt;/h1&gt; &lt;p className="Dialog-message"&gt; &#123;props.message&#125; &lt;/p&gt; &#123;props.children&#125; &lt;/FancyBorder&gt; );&#125;class SignUpDialog extends React.Component &#123; constructor(props) &#123; super(props); this.handleChange = this.handleChange.bind(this); this.handleSignUp = this.handleSignUp.bind(this); this.state = &#123;login: ''&#125;; &#125; render() &#123; return ( &lt;Dialog title="Mars Exploration Program" message="How should we refer to you?"&gt; &lt;input value=&#123;this.state.login&#125; onChange=&#123;this.handleChange&#125; /&gt; &lt;button onClick=&#123;this.handleSignUp&#125;&gt; Sign Me Up! &lt;/button&gt; &lt;/Dialog&gt; ); &#125; handleChange(e) &#123; this.setState(&#123;login: e.target.value&#125;); &#125; handleSignUp() &#123; alert(`Welcome aboard, $&#123;this.state.login&#125;!`); &#125;&#125;]]></content>
+      <categories>
+        <category>软件开发</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+        <tag>JavaScript</tag>
+        <tag>NodeJs</tag>
+        <tag>HTML</tag>
+        <tag>React学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[React学习笔记——提升state(v15.5)]]></title>
+    <url>%2F2017%2F04%2F25%2FReact%2FReact%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E6%8F%90%E5%8D%87state(v15.5)%2F</url>
+    <content type="text"><![CDATA[[TOC] 通常几个组件需要反映相同数据变化，我们推荐提升共享的state到它们最近的共同祖先元素。实现如下： 创建一个温度计算器来计算，给定温度的水是否会沸腾。 我们将从一个BoilingVerdict组件开始，它接收一个celsius作为prop参数，并且打印水温度。 123456function BoilingVerdict(props) &#123; if (props.celsius &gt;= 100) &#123; return &lt;p&gt;The water would boil.&lt;/p&gt;; &#125; return &lt;p&gt;The water would not boil.&lt;/p&gt;;&#125; 接下来，创建一个Calculator组件，它渲染一个\用来输入一个摄氏温度，并且保存它的值在this.state.temperature之中。 此外，它根据输入的值来渲染BoilingVerdict组件 12345678910111213141516171819202122232425class Calculator extends React.Component &#123; constructor(props) &#123; super(props); this.handleChange = this.handleChange.bind(this); this.state = &#123;temperature: ''&#125;; &#125; handleChange(e) &#123; this.setState(&#123;temperature: e.target.value&#125;); &#125; render() &#123; const temperature = this.state.temperature; return ( &lt;fieldset&gt; &lt;legend&gt;Enter temperature in Celsius:&lt;/legend&gt; &lt;input value=&#123;temperature&#125; onChange=&#123;this.handleChange&#125; /&gt; &lt;BoilingVerdict celsius=&#123;parseFloat(temperature)&#125; /&gt; &lt;/fieldset&gt; ); &#125;&#125; 添加第二个输入框 我们的新要求是，除了一个摄氏度输入外，再提供一个华氏度输入，并且它们保持同步。 我们可以从Calculator组件提取一个TemperatureInput组件，增加一个scale prop参数，它可的取值可以是“c”或者“f”: 12345678910111213141516171819202122232425262728const scaleNames = &#123; c: 'Celsius', f: 'Fahrenheit'&#125;;class TemperatureInput extends React.Component &#123; constructor(props) &#123; super(props); this.handleChange = this.handleChange.bind(this); this.state = &#123;temperature: ''&#125;; &#125; handleChange(e) &#123; this.setState(&#123;temperature: e.target.value&#125;); &#125; render() &#123; const temperature = this.state.temperature; const scale = this.props.scale; return ( &lt;fieldset&gt; &lt;legend&gt;Enter temperature in &#123;scaleNames[scale]&#125;:&lt;/legend&gt; &lt;input value=&#123;temperature&#125; onChange=&#123;this.handleChange&#125; /&gt; &lt;/fieldset&gt; ); &#125;&#125; 现在，修改Calculator组件，渲染两个不同的温度输入： 12345678910class Calculator extends React.Component &#123; render() &#123; return ( &lt;div&gt; &lt;TemperatureInput scale="c" /&gt; &lt;TemperatureInput scale="f" /&gt; &lt;/div&gt; ); &#125;&#125; 现在已经实现了两个输入框，接下来实现输入其中一个，另一个同时更新功能。 编写转换函数首先，我们写两个函数用于在摄氏度和华氏度之间的单位转换： 1234567function toCelsius(fahrenheit) &#123; return (fahrenheit - 32) * 5 / 9;&#125;function toFahrenheit(celsius) &#123; return (celsius * 9 / 5) + 32;&#125; 这两个是转换数字的函数，我们将另外写一个函数，它接收一个字符串temperature参数和一个converter函数作为参数，并返回一个字符串。我们使用它基于一个输入框的值计算出另一个输入框的值。 当它接收一个无效的temperature参数时返回空字符串，并且它保证输出到小数点后三位。 123456789function tryConvert(temperature, convert) &#123; const input = parseFloat(temperature); if (Number.isNaN(input)) &#123; return ''; &#125; const output = convert(input); const rounded = Math.round(output * 1000) / 1000; return rounded.toString();&#125; 例如，tryConvert(‘abc’, toCelsius)返回一个空字符串; tryConvert(‘10.22’, toFahrenheit) 返回 ‘50.396’。 提升state一般的，TemperatureInput组件的值独立保存到它们的局部state上，然而我们想让两个输入框同步，就需要将共享state移动到需要它的最近共同的祖先组件上。这就叫做“提升state”。 我们将移除TemperatureInput组件局部state到Calculator组件上。 具体步骤： 1.把TemperatureInput组件的 this.state.temperature 换成 this.props.temperature 1234render() &#123; // 修改前: const temperature = this.state.temperature; const temperature = this.props.temperature;｝ 我们知道props是只读的。当temperature在局部state时，可以能setState()修改。然而，现在temperature作为一个prop从父类传过来，TemperatureInput组件无法再控制它。 在React中，通常用组件来解决这种控制问题。就像Dom元素\接收一个value和一个onChange作为prop参数一样，因此可以自定义TemperatureInput组件接收temperature和onTemperatureChange作为prop参数，从它的父组件Calculator中传过来。 现在当TemperatureInput组件想要更新它的temperature时，它可以调用this.props.onTemperatureChange： 1234handleChange(e) &#123; // 修改前: this.setState(&#123;temperature: e.target.value&#125;); this.props.onTemperatureChange(e.target.value);｝ 注意此处的temperature 或者 onTemperatureChange仅仅作为prop参数名，没有什么特殊的涵义。我们可以定义任意自己喜欢的名字，像value和onChange这种通用的惯例。 onTemperatureChange和temperature作为prop参数由父组件Calculator提供。它将通过修改局部state时行改变，因此两个input的值被重新呈现。修改后的完整代码： 12345678910111213141516171819202122class TemperatureInput extends React.Component &#123; constructor(props) &#123; super(props); this.handleChange = this.handleChange.bind(this); &#125; handleChange(e) &#123; this.props.onTemperatureChange(e.target.value); &#125; render() &#123; const temperature = this.props.temperature; const scale = this.props.scale; return ( &lt;fieldset&gt; &lt;legend&gt;Enter temperature in &#123;scaleNames[scale]&#125;:&lt;/legend&gt; &lt;input value=&#123;temperature&#125; onChange=&#123;this.handleChange&#125; /&gt; &lt;/fieldset&gt; ); &#125;&#125; 实现Calculator组件我们会将input里的temperature 和 scale存储到Calulator组件的局部state，这个state是从inputs中提升来的，并且作为它们的数据源。这是我们为了显示两个input值所需要知道的最小条件。 例如，我们摄氏度input中输入37，Calculator组件的state应为 1234&#123;temperature: '37',scale: 'c'&#125; 如果在华氏度的input中输入212，Calculator组件的state应为 1234&#123;temperature: '212',scale: 'f'&#125; 我们可以同时保存两个input的值，但它是不必要的。我们可以根据temperature 和 scale值推断出，其它输入框的值。 两个input保持同步的原因在于，它们的计算来自同一个state： 1234567891011121314151617181920212223242526272829303132333435363738class Calculator extends React.Component &#123; constructor(props) &#123; super(props); this.handleCelsiusChange = this.handleCelsiusChange.bind(this); this.handleFahrenheitChange = this.handleFahrenheitChange.bind(this); this.state = &#123;temperature: '', scale: 'c'&#125;; &#125; handleCelsiusChange(temperature) &#123; this.setState(&#123;scale: 'c', temperature&#125;); &#125; handleFahrenheitChange(temperature) &#123; this.setState(&#123;scale: 'f', temperature&#125;); &#125; render() &#123; const scale = this.state.scale; const temperature = this.state.temperature; const celsius = scale === 'f' ? tryConvert(temperature, toCelsius) : temperature; const fahrenheit = scale === 'c' ? tryConvert(temperature, toFahrenheit) : temperature; return ( &lt;div&gt; &lt;TemperatureInput scale="c" temperature=&#123;celsius&#125; onTemperatureChange=&#123;this.handleCelsiusChange&#125; /&gt; &lt;TemperatureInput scale="f" temperature=&#123;fahrenheit&#125; onTemperatureChange=&#123;this.handleFahrenheitChange&#125; /&gt; &lt;BoilingVerdict celsius=&#123;parseFloat(celsius)&#125; /&gt; &lt;/div&gt; ); &#125;&#125; 整体流程：1、React在Dom的\上通过onChange事件调用指定方法。在上面示例中是TemperatureInput组件中的handleChange方法。 2、方法handleChange中通过输入的值e.target.value调用this.props.onTemperatureChange()方法，它是父组件Calculator传递过来的一个prop。 3、当它被渲染的时候，父组件Calculator已经为TemperatureInput组件onTemperatureChange属性指定了摄氏度handleCelsiusChange和华氏度handleFahrenheitChange方法。它会依据被编辑的输入框，决定调用哪个方法。 4、在这些方法内部，Calculator组件通过input输入的值和scale来调用setState()方法修改state。 5、React调用Calculator组件的render方法，通过当前state，调用转换方法进行温度转换。 6、React在render方法中通过新的prop参数逐个调用TemperatureInput组件。 7、React更新匹配的input值，被编辑的input值保持不变，其它的input同步更新转换后的值。 每次更新都保持相同的步骤，所以input保持同步。]]></content>
+      <categories>
+        <category>软件开发</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+        <tag>JavaScript</tag>
+        <tag>NodeJs</tag>
+        <tag>HTML</tag>
+        <tag>React学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[React学习笔记——表单(v15.5)]]></title>
+    <url>%2F2017%2F04%2F24%2FReact%2FReact%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E8%A1%A8%E5%8D%95(v15.5)%2F</url>
+    <content type="text"><![CDATA[[TOC] React中的HTML表单元素有点不同于其它DOM元素，因为表单元素天生具备一些内部状态。 1234567&lt;form&gt; &lt;label&gt; Name: &lt;input type="text" name="name" /&gt; &lt;/label&gt; &lt;input type="submit" value="Submit" /&gt;&lt;/form&gt; 这个表单具有HTML默认行为，当用户提交表单后跳转到一个新页面。如果你想要在React中实现这种行为，它是有效的。但是，大多数情况是，使用一个JavaScript函数来处理表单提交以及对用户输入表单的数据操作是很方便的。实现这一标准的方法是一种称为“控制组件”的技术。 控制组件在HTML表单元素中，诸如\、 \ 和 \元素，通常保持着它们自己的状态并且根据用户的输入而更新。在React中可变的状态通常保存在组件的state属性中，并且只能使用setState()来更新它们。 我们可以这两个结合起来，使React state成为单一数据源。然后React组件渲染表单并且控制用户后的输入。这种React控制表单元素值的方法被叫做“控制组件”。 例如，前面示例提交表单记录Name时，我们可以把表单写成一个控制组件： 123456789101112131415161718192021222324252627282930class NameForm extends React.Component &#123; constructor(props) &#123; super(props); this.state = &#123;value: ''&#125;; this.handleChange = this.handleChange.bind(this); this.handleSubmit = this.handleSubmit.bind(this); &#125; handleChange(event) &#123; this.setState(&#123;value: event.target.value&#125;); &#125; handleSubmit(event) &#123; alert('A name was submitted: ' + this.state.value); event.preventDefault(); &#125; render() &#123; return ( &lt;form onSubmit=&#123;this.handleSubmit&#125;&gt; &lt;label&gt; Name: &lt;input type="text" value=&#123;this.state.value&#125; onChange=&#123;this.handleChange&#125; /&gt; &lt;/label&gt; &lt;input type="submit" value="Submit" /&gt; &lt;/form&gt; ); &#125;&#125; 由于表单元素上设置有value属性，显示的值永远this.state.value的值。 textarea标签在HTML中textarea标签的文本内容写在标签里面 123&lt;textarea&gt; Hello there, this is some text in a text area&lt;/textarea&gt; 但是在React中使用value属性代替 1234567891011121314151617181920212223242526272829303132class EssayForm extends React.Component &#123; constructor(props) &#123; super(props); this.state = &#123; value: 'Please write an essay about your favorite DOM element.' &#125;; this.handleChange = this.handleChange.bind(this); this.handleSubmit = this.handleSubmit.bind(this); &#125; handleChange(event) &#123; this.setState(&#123;value: event.target.value&#125;); &#125; handleSubmit(event) &#123; alert('An essay was submitted: ' + this.state.value); event.preventDefault(); &#125; render() &#123; return ( &lt;form onSubmit=&#123;this.handleSubmit&#125;&gt; &lt;label&gt; Name: &lt;textarea value=&#123;this.state.value&#125; onChange=&#123;this.handleChange&#125; /&gt; &lt;/label&gt; &lt;input type="submit" value="Submit" /&gt; &lt;/form&gt; ); &#125;&#125; 处理多个Input如果想处理多个input元素，可以给每个元素加上name属性，并让事件处理函数依据event.targe.name选择处理。 123456789101112131415161718192021222324252627282930313233343536373839404142434445class Reservation extends React.Component &#123; constructor(props) &#123; super(props); this.state = &#123; isGoing: true, numberOfGuests: 2 &#125;; this.handleInputChange = this.handleInputChange.bind(this); &#125; handleInputChange(event) &#123; const target = event.target; const value = target.type === 'checkbox' ? target.checked : target.value; const name = target.name; this.setState(&#123; [name]: value &#125;); &#125; render() &#123; return ( &lt;form&gt; &lt;label&gt; Is going: &lt;input name="isGoing" type="checkbox" checked=&#123;this.state.isGoing&#125; onChange=&#123;this.handleInputChange&#125; /&gt; &lt;/label&gt; &lt;br /&gt; &lt;label&gt; Number of guests: &lt;input name="numberOfGuests" type="number" value=&#123;this.state.numberOfGuests&#125; onChange=&#123;this.handleInputChange&#125; /&gt; &lt;/label&gt; &lt;/form&gt; ); &#125;&#125; 注意，示例18行使用了ES6的计算属性语法，如果用ES5语法实现如下： 123var partialState = &#123;&#125;;partialState[name] = value;this.setState(partialState);]]></content>
+      <categories>
+        <category>软件开发</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+        <tag>JavaScript</tag>
+        <tag>NodeJs</tag>
+        <tag>HTML</tag>
+        <tag>React学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[React学习笔记——列表和Keys(v15.5)]]></title>
+    <url>%2F2017%2F04%2F21%2FReact%2FReact%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%88%97%E8%A1%A8%E5%92%8CKeys(v15.5)%2F</url>
+    <content type="text"><![CDATA[[TOC] 渲染多个组件你可以创建一个元素集合，通过‘{}’在JSX中使用 1234567891011//创建元素集合const numbers = [1, 2, 3, 4, 5];const listItems = numbers.map((number) =&gt; &lt;li&gt;&#123;number&#125;&lt;/li&gt;);//使用集合放到ul标签ReactDOM.render( &lt;ul&gt;&#123;listItems&#125;&lt;/ul&gt;, document.getElementById('root')); 基础列表组件 通常希望在一个组件内部渲染列表，修改上面的示例： 1234567891011121314151617function NumberList(props) &#123; const numbers = props.numbers; const listItems = numbers.map((number) =&gt; &lt;li key=&#123;number.toString()&#125;&gt; &#123;number&#125; &lt;/li&gt; ); return ( &lt;ul&gt;&#123;listItems&#125;&lt;/ul&gt; );&#125;const numbers = [1, 2, 3, 4, 5];ReactDOM.render( &lt;NumberList numbers=&#123;numbers&#125; /&gt;, document.getElementById('root')); Keys注意上面示例第4行的‘key’，它是一个特殊的字符串属性，当创建一个列表元素是必须要包含它，否则会有如下警告： a warning that a key should be provided for list items Keys是帮助React识别哪些项目被修改、添加、删除。主键将给数组中的元素一个稳定的身份。 最好的方式使用一个在列表同级元素中唯一的字符串作为key。例如我们经常使用数据中的IDs作为Keys,但是不建议在没其它办法的情况下使用元素索引作为key,因为如果数据被重新排序，那么对于React来说，识别变动的元素仍然是很慢的。 使用Keys提取组件Keys中有在数组的上下文中才有意义。例如：抽取一个ListItem组件，你应该保持key在数据中的\元素上，而不是在ListItem自己的根元素\上。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152function ListItem(props) &#123; const value = props.value; return ( // 错误！此处不需要key &lt;li key=&#123;value.toString()&#125;&gt; &#123;value&#125; &lt;/li&gt; );&#125;function NumberList(props) &#123; const numbers = props.numbers; const listItems = numbers.map((number) =&gt; // 错误！此处应该指定key &lt;ListItem value=&#123;number&#125; /&gt; ); return ( &lt;ul&gt; &#123;listItems&#125; &lt;/ul&gt; );&#125;const numbers = [1, 2, 3, 4, 5];ReactDOM.render( &lt;NumberList numbers=&#123;numbers&#125; /&gt;, document.getElementById('root'));function ListItem(props) &#123; //正确！此处没有key return &lt;li&gt;&#123;props.value&#125;&lt;/li&gt;;&#125;function NumberList(props) &#123; const numbers = props.numbers; const listItems = numbers.map((number) =&gt; // 正确！key被放在了数组里面 &lt;ListItem key=&#123;number.toString()&#125; value=&#123;number&#125; /&gt; ); return ( &lt;ul&gt; &#123;listItems&#125; &lt;/ul&gt; );&#125;const numbers = [1, 2, 3, 4, 5];ReactDOM.render( &lt;NumberList numbers=&#123;numbers&#125; /&gt;, document.getElementById('root')); Keys同级元素间必须是唯一的如同上面提过的key在数组内部的同级元素间必须唯一，但是并不需要全局唯一，可以在两个不同的数组中使用相同的key: 123456789101112131415161718192021222324252627282930313233function Blog(props) &#123; const sidebar = ( &lt;ul&gt; &#123;props.posts.map((post) =&gt; &lt;li key=&#123;post.id&#125;&gt; &#123;post.title&#125; &lt;/li&gt; )&#125; &lt;/ul&gt; ); const content = props.posts.map((post) =&gt; &lt;div key=&#123;post.id&#125;&gt; &lt;h3&gt;&#123;post.title&#125;&lt;/h3&gt; &lt;p&gt;&#123;post.content&#125;&lt;/p&gt; &lt;/div&gt; ); return ( &lt;div&gt; &#123;sidebar&#125; &lt;hr /&gt; &#123;content&#125; &lt;/div&gt; );&#125;const posts = [ &#123;id: 1, title: 'Hello World', content: 'Welcome to learning React!'&#125;, &#123;id: 2, title: 'Installation', content: 'You can install React from npm.'&#125;];ReactDOM.render( &lt;Blog posts=&#123;posts&#125; /&gt;, document.getElementById('root')); Keys作为React的一个提示服务，不会传递到组件内部。如果需要在组件内部使用，必须明确的使用不同的名字作为pops传入组件： 123456const content = posts.map((post) =&gt; &lt;Post key=&#123;post.id&#125; id=&#123;post.id&#125; title=&#123;post.title&#125; /&gt;); 在JSX中嵌入mapJSX允许在‘{}’中嵌入任意表达式，因此可以内联使用map() 1234567891011function NumberList(props) &#123; const numbers = props.numbers; return ( &lt;ul&gt; &#123;numbers.map((number) =&gt; &lt;ListItem key=&#123;number.toString()&#125; value=&#123;number&#125; /&gt; )&#125; &lt;/ul&gt; );&#125;]]></content>
+      <categories>
+        <category>软件开发</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+        <tag>JavaScript</tag>
+        <tag>NodeJs</tag>
+        <tag>HTML</tag>
+        <tag>React学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[React学习笔记——条件渲染(v15.5)]]></title>
+    <url>%2F2017%2F04%2F21%2FReact%2FReact%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E6%9D%A1%E4%BB%B6%E6%B8%B2%E6%9F%93(v15.5)%2F</url>
+    <content type="text"><![CDATA[[TOC] React条件渲染和JavaScript的条件工作方式是一样的。 使用JavaScript中if或者条件运算符来创建一个代表当前状态的元素，然后让React来更新匹配的UI。 12345678910111213141516171819202122232425//创建登陆用户后组件function UserGreeting(props) &#123; return &lt;h1&gt;Welcome back!&lt;/h1&gt;;&#125;//创建访客组件function GuestGreeting(props) &#123; return &lt;h1&gt;Please sign up.&lt;/h1&gt;;&#125;//创建Greeting组件来动态显示登陆用户或访客组件function Greeting(props) &#123; const isLoggedIn = props.isLoggedIn; if (isLoggedIn) &#123; return &lt;UserGreeting /&gt;; &#125; return &lt;GuestGreeting /&gt;;&#125;//渲染Greeting组件ReactDOM.render( // Try changing to isLoggedIn=&#123;true&#125;: &lt;Greeting isLoggedIn=&#123;false&#125; /&gt;, document.getElementById('root')); 元素变量可以使用变量保存元素，这可有条件的渲染组件的一部分，输出的其余部分保持不变。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657//创建LoginButton按钮组件function LoginButton(props) &#123; return ( &lt;button onClick=&#123;props.onClick&#125;&gt; Login &lt;/button&gt; );&#125;//创建LogoutButton按钮组件function LogoutButton(props) &#123; return ( &lt;button onClick=&#123;props.onClick&#125;&gt; Logout &lt;/button&gt; );&#125;//创建一个LoginControl组件，它可以根据当前的状态渲染LoginButton或者LogoutButton组件，它也将渲染上面的Gretting组件class LoginControl extends React.Component &#123; constructor(props) &#123; super(props); this.handleLoginClick = this.handleLoginClick.bind(this); this.handleLogoutClick = this.handleLogoutClick.bind(this); this.state = &#123;isLoggedIn: false&#125;; &#125; handleLoginClick() &#123; this.setState(&#123;isLoggedIn: true&#125;); &#125; handleLogoutClick() &#123; this.setState(&#123;isLoggedIn: false&#125;); &#125; render() &#123; const isLoggedIn = this.state.isLoggedIn; let button = null; if (isLoggedIn) &#123; button = &lt;LogoutButton onClick=&#123;this.handleLogoutClick&#125; /&gt;; &#125; else &#123; button = &lt;LoginButton onClick=&#123;this.handleLoginClick&#125; /&gt;; &#125; return ( &lt;div&gt; &lt;Greeting isLoggedIn=&#123;isLoggedIn&#125; /&gt; &#123;button&#125; &lt;/div&gt; ); &#125;&#125;ReactDOM.render( &lt;LoginControl /&gt;, document.getElementById('root')); 内联if使用逻辑‘&amp;&amp;’操作符声明一个变量并且使用if语句有条件的渲染组件是一个很好的方法，然而，有时候你想使用一些简短的语法，就需要用到JSX内联表达式。 JSX可以在‘{}’内嵌套任何表达式，这其中就包括JavaScript逻辑&amp;&amp;操作符，这对于有条件的引入一个元素是很方便的。 12345678910111213141516171819function Mailbox(props) &#123; const unreadMessages = props.unreadMessages; return ( &lt;div&gt; &lt;h1&gt;Hello!&lt;/h1&gt; &#123;unreadMessages.length &gt; 0 &amp;&amp; &lt;h2&gt; You have &#123;unreadMessages.length&#125; unread messages. &lt;/h2&gt; &#125; &lt;/div&gt; );&#125;const messages = ['React', 'Re: React', 'Re:Re: React'];ReactDOM.render( &lt;Mailbox unreadMessages=&#123;messages&#125; /&gt;, document.getElementById('root')); 它之所以起作用是因为true &amp;&amp; 表达式 总是得到一个表达式，而false &amp;&amp; 表达式 总是计算为false。因此，如果条件是true,&amp;&amp;后面元素将会被输出，相反如果条件是false，React将会忽略并且跳过它。 内联if-else条件运算符另一种内联方式条件渲染元素是使用JavaScript条件运算符：condition ? true : false 1234567891011121314151617181920212223//使用条件运算符渲染一小块文本render() &#123; const isLoggedIn = this.state.isLoggedIn; return ( &lt;div&gt; The user is &lt;b&gt;&#123;isLoggedIn ? 'currently' : 'not'&#125;&lt;/b&gt; logged in. &lt;/div&gt; );&#125;//它也可以使用在大的表达式中，尽管看起来不明显render() &#123; const isLoggedIn = this.state.isLoggedIn; return ( &lt;div&gt; &#123;isLoggedIn ? ( &lt;LogoutButton onClick=&#123;this.handleLogoutClick&#125; /&gt; ) : ( &lt;LoginButton onClick=&#123;this.handleLoginClick&#125; /&gt; )&#125; &lt;/div&gt; );&#125; 就像JavaScript一样，根据你和团队的考虑，可以选择一种适合风格。但要记住，当一个组件的的条件判断过于复杂时，应该考虑拆分组件了。 阻止组件渲染极少的情况下，你可能一个组件隐藏它自己，即使它被其它组件渲染。想隐藏组件可以把它的返回值设为null。 1234567891011121314151617181920212223242526272829303132333435363738394041function WarningBanner(props) &#123; if (!props.warn) &#123; return null; &#125; return ( &lt;div className="warning"&gt; Warning! &lt;/div&gt; );&#125;class Page extends React.Component &#123; constructor(props) &#123; super(props); this.state = &#123;showWarning: true&#125; this.handleToggleClick = this.handleToggleClick.bind(this); &#125; handleToggleClick() &#123; this.setState(prevState =&gt; (&#123; showWarning: !prevState.showWarning &#125;)); &#125; render() &#123; return ( &lt;div&gt; &lt;WarningBanner warn=&#123;this.state.showWarning&#125; /&gt; &lt;button onClick=&#123;this.handleToggleClick&#125;&gt; &#123;this.state.showWarning ? 'Hide' : 'Show'&#125; &lt;/button&gt; &lt;/div&gt; ); &#125;&#125;ReactDOM.render( &lt;Page /&gt;, document.getElementById('root')); 组件的render方法返回null，不能影响到组件生命周期方法。例如：componentWillUpdate 和 componentDidUpdate方法仍然后执行。]]></content>
+      <categories>
+        <category>软件开发</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+        <tag>JavaScript</tag>
+        <tag>NodeJs</tag>
+        <tag>HTML</tag>
+        <tag>React学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[MacOS Sierra触摸板滑动敏感问题解决方案]]></title>
+    <url>%2F2016%2F10%2F08%2Ftech_stack%2FMacOS%20Sierra%E8%A7%A6%E6%91%B8%E6%9D%BF%E6%BB%91%E5%8A%A8%E6%95%8F%E6%84%9F%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%2F</url>
+    <content type="text"><![CDATA[升级完macOS Sierra系统后，JAVA开发工具滚动条过于敏感问题，原因是由于JDK和Sierra不兼容，由于 Sierra 的触发事件参数比之前系统都复杂一些，而JAVA统一将这些参数处理为默认值，导致滚动速度快了很多，事实上可以发现升级系统后所有Java应用都存在这个问题，还包括Eclipse。。 下载openJDK112版本： http://bintray.com/jetbrains/intellij-jdk/download_file?file_path=jbsdk8u112b403_osx_x64.tar.gz解压后，移动到/Library/Java/JavaVirtualMachines打开idea,双击shift，弹出对话框，输入Switch IDE JDK 选择选项后，将openJDK跟换为刚才下载的版本 重启！ 原文：https://youtrack.jetbrains.com/issue/IDEA-158500]]></content>
+      <categories>
+        <category>软件开发</category>
+      </categories>
+      <tags>
+        <tag>MacOS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[编写Oracle存储过程]]></title>
+    <url>%2F2015%2F11%2F19%2Ftech_stack%2F%E7%BC%96%E5%86%99Oracle%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%2F</url>
+    <content type="text"><![CDATA[整体结构12345678910create [or replace] procedure 过程名称( 参数 IN|OUT|IN OUT 类型|表.字段%type [default 默认值], ……) AS|IS 变量 类型|表.字段%type [default 默认值]; ……begin ……exception ……end 过程名称; or replace若存在则替换IN输入参数OUT输出参数IN OUT即可做输入参数，也可做输出参数%type与表的字段同类型default赋默认值（out参数不能赋默认值）过程中参数类型不用指定大小，而声明的变量类型要指定大小。如：字符类型varchar2(30)声明时需要指定30AS|IS没有区别，任选一个即可exception异常处理[可选] 逻辑判断123456789IF判断if 条件 then ……elsif 条件 then ……else ……end if; FOR循环：1、自定义循环次数： 123for i in 1..1000 loop ……end loop; 2、利用游标循环： 1234CURSOR cur IS SELECT * FROM xxx;for cur_result in cur LOOP ……END LOOP; WHILE循环：123while 条件 loop ……end loop; 异常处理 系统异常 异常原因 access_into_null 未定义对象 case_not_found case 中若未包含相应的when，并且没有设置 collection_is_null 集合元素未初始化 curser_already_open 游标已经打开 dup_val_on_index 唯一索引对应的列上有重复的值 invalid_cursor 在不合法的游标上进行操作 invalid_number 内嵌的 sql 语句不能将字符转换为数字 no_data_found 使用 select into 未返回行，或应用索引表未初始化的 too_many_rows 执行 select into 时，结果集超过一行 zero_divide 除数为 0 subscript_beyond_count 元素下标超过嵌套表或varray的最大值 subscript_outside_limit 使用嵌套表或 varray 时，将下标指定为负数 value_error 赋值时，变量长度不足以容纳实际数据 login_denied pl/sql 应用程序连接到 oracle 数据库时，提供了不正确的用户名或密码确的用户名或密码 not_logged_on pl/sql应用程序在没有连接 oralce 数据库的情况下访问数据问数据 program_error pl/sql 内部问题，可能需要重装数据字典＆ pl./sql系统包统包 rowtype_mismatch 主游标变量与 pl/sql 游标变量的返回类型不兼容 self_is_null 使用对象类型时，在 null 对象上调用对象方法 storage_error 运行 pl/sql 时，超出内存空间 sys_invalid_id 无效的 rowid 字符串 timeout_on_resource oracle 在等待资源时超时 自定义异常12345678910111213141516171819create [or replace] procedure 过程名称( 参数 IN|OUT|IN OUT 类型|表.字段%type [default 默认值], ……) AS|IS 变量 类型|表.字段%type [default 默认值]; …… userException exception;begin if 条件 then raise userException; end if; ……exception when no_data_found then --系统异常 when userException then --自定义异常 when others then --其他异常end 过程名称; goto语句：Oracle中没有continue关键字，在loop中可以用goto语句实现同样的效果。goto会增加程序复杂度，可读性变差使程序不易控制和维护。&lt;&lt; &gt;&gt;后面不能直接跟EXCEPTION这种关键字类的语句，要用NULL把标签跟关键字隔开。类似的关键字还有END LOOP之类的，等等。 123456789101112131415declare i int := 1;begin loop dbms_output.put_line(&apos;输出i=&apos; || i); if i = 10 then goto end_loop; end if; i := i + 1; end loop; &lt;&lt;end_loop&gt;&gt; null;exception ……end; 注释– 单行注释/ / 多行注释 注释必须在create [or replace] procedure之内，否则不能保存。 其他问题DBMS_OUTPUT.put_line()打印方法可用于跟踪调试PL/SQL DEVELOPER自带调试功能]]></content>
+      <categories>
+        <category>软件开发</category>
+      </categories>
+      <tags>
+        <tag>Oracle</tag>
+        <tag>存储过程</tag>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[雪]]></title>
+    <url>%2F2015%2F11%2F07%2Fblog%2F%E9%9B%AA%2F</url>
+    <content type="text"><![CDATA[北风卷地白草折，胡天八月即飞雪。忽如一夜春风来，千树万树梨花开。 是的，这就是昨天早晨首先映入我眼帘的景象，虽然远远没有达到这个程度，但对于J城来说，也可以这样来说了。雪，对于我这样一个很久没看到过的东北人来说是一种常人很难体会到的感觉。当我走出房屋融入到其中的那一刻，心里徘徊的一个念头告诉我“我想家了”。 是啊，离家多年却从来没有真正意义的回过家乡了，很久没有感受过腊九寒冬，没有看到过银装素裹的北国风光了，甚至可能已经渐渐的忘记那种冷的感觉，有很多朋友问我是怎么忍耐那种严寒呢，我的回答是你怎么知道我们不是在享受呢。没错没有经历过的你，也许觉得难以置信。让我无耐的是有一些人，仅仅去过几次却妄加评判，我也只能呵呵了。 记得小学的时候，语文课的一篇作文，题目就是《雪》，当时外面大雪纷飞，老师为了让我们能写好决定那节课可以自由外出去感受，结果所有同学都跑到操场去写作文，当时写作文都是套用的各种模版像什么“银装素裹”，“雪你是可爱的美容师”等等，还有什么“鹅毛大雪，漫天飘舞”，结果交作业的时候，大多数人的写法都差不多==! 在我印象中那时候的雪总是特别的大的，过膝盖也是很平常的，鹅毛大雪说的真不是特别夸张，下雪后的全校上午可以少上一到两节课去操场扫雪，虽然挺累但是大家的兴致还是特别高，其中的乐趣无穷无尽。课间的时候打雪仗、堆雪人、摔跤，每当这个时候每个人包括老师都会忘记自己的身份，而变成对手。 往事总是让人感觉很美好，更多的是因为当时没有好好体会，一直是认为是理所当然，等到失去后才知道难能可贵，到头来也只能触景生情罢了。 多么希望的画面能定格在此时，一个孤寂的黑色身影走在茫茫的白色世界中……]]></content>
+      <categories>
+        <category>心情随笔</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[折腾]]></title>
+    <url>%2F2015%2F10%2F26%2Fblog%2F%E6%8A%98%E8%85%BE%2F</url>
+    <content type="text"><![CDATA[又是疲劳的一个月，又是一个又爱又恨的月分。 十一小长假又去一趟北戴河，不过这次却少了些上一次的感觉，却多了几分回味和体会，本来是想去青岛的，还好没抢到青岛的票，38元一只的虾想想都后怕……俗话说“乐极生悲，物极必反”，疯狂的假期后迎接我的就是一轮疯狂的加班，累的我是前仰后合。 一直以来都对自己的这个网站都不是特别满意，不论是功能、布局、还是内容等等，所以一直都在不断的改啊改调啊调的，这次做了比较大的调整，虽然也不算特别满意，但也可以让自己的心里抗一段时间了。 前些天用了一年的.info域名到期了，我犹豫了好久决定换回.com域名，总感觉其它域名有些不正规，应该是先入为主的影响吧。之前一直用的是.com的，去年也不知怎么的头脑发热，用了一年的.info其实主要还是因为当时比较便宜。这次换回来以后也不会再变了，除非这个站不开了。为了以后可以拓展更多功能，这次加上了二级域名blog，以后博客这块都会在这个二级域名下了，这样才能完全利用域名。 说来真是惭愧，网站建了好几年了，天天折腾外皮，内容却没怎么更新太多，正如某些博客前辈所批评的那样，目前域名Google PR 是1，这也还是我第一年刚申请时攒下来的，后来就没涨过。 本来也没想把这件事发展成怎样，其实也就算是一种娱乐吧，也不想天天弄什么长篇大论，也不想通篇BUG攻略什么，所以每当这个时候，写的都是一些流水文吧，不过那又怎么样呢，感觉也挺好的！你好，10月！]]></content>
+      <categories>
+        <category>芬芳年华</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[CSS Content]]></title>
+    <url>%2F2015%2F04%2F11%2Ftech_stack%2FCSS%20Content%2F</url>
+    <content type="text"><![CDATA[定义与用法content 属性与 :before 及 :after 伪元素配合使用，来插入生成内容。该属性用于定义元素之前或之后放置的生成内容。默认地，这往往是行内内容，不过该内容创建的框类型可以用属性 display 控制。 值 描述 none normal content specifications inherit 规定应该从父元素继承 content 属性的值。 1234567&lt;style&gt;div:before&#123; content:"书记说："; color:red;&#125;&lt;/style&gt;&lt;div&gt;同志们好！&lt;/div&gt; 浏览器支持所有浏览器都支持 content 属性。 特殊字符content属性同样支持ASCII 特殊字符，具体字符请参考(X)HTML的特殊字符，如果想要查询某个符号的数值可以使用the Entity Conversion Calculator进行转换或者反向转换。 1234567&lt;style&gt;div:before&#123; content:"\2660"; color:red;&#125;&lt;/style&gt;&lt;div&gt;A（红桃A）&lt;/div&gt; 属性的使用content属性还可以通过attr(属性名)方式与标签属性相结合使用。 1234567&lt;style&gt;div:before&#123; content:attr(title); color:red;&#125;&lt;/style&gt;&lt;div title="副"&gt;总经理说：全体涨工资！&lt;/div&gt; 功能进阶与CSS3相配合实现类似title属性的功能，但是比title体验效果好。 1234567891011121314151617181920212223242526272829303132333435&lt;style&gt;a &#123; color: #900; text-decoration: none;&#125;a:hover &#123; color: red; position: relative;&#125;a[tip]:hover:after &#123; content: attr(tip); padding: 4px 8px; color: #333; position: absolute; left: 0; top: 100%; white-space: nowrap; z-index: 20px; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; -moz-box-shadow: 0px 0px 4px #222; -webkit-box-shadow: 0px 0px 4px #222; box-shadow: 0px 0px 4px #222; background-image: -moz-linear-gradient(top, #eeeeee, #cccccc); background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #eeeeee),color-stop(1, #cccccc)); background-image: -webkit-linear-gradient(top, #eeeeee, #cccccc); background-image: -moz-linear-gradient(top, #eeeeee, #cccccc); background-image: -ms-linear-gradient(top, #eeeeee, #cccccc); background-image: -o-linear-gradient(top, #eeeeee, #cccccc); &#125;&lt;/style&gt;&lt;a href="#" tip="鼠标已悬浮！"&gt;请把鼠标悬浮在此！&lt;/a&gt;]]></content>
+      <categories>
+        <category>软件开发</category>
+      </categories>
+      <tags>
+        <tag>HTML</tag>
+        <tag>CSS</tag>
+        <tag>WEB</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[等我]]></title>
+    <url>%2F2015%2F04%2F07%2Fblog%2F%E7%AD%89%E6%88%91%2F</url>
+    <content type="text"><![CDATA[等我有时间了……等我有钱了……等我……等我…… 曾经或者现在不知道被这句话忽悠了多少次，一次又一次拿着这句连鬼不都信的话在敷衍着，欺骗着自己那纯洁的心灵。 体育运动是我一直以来的爱好，尤其篮球是我最喜欢的运动，从小学开始我就接触到了篮球，当时我是我们班里第一个学会三步篮的人，同学们那羡慕的眼神让我至今记忆犹新。都说好的开始是成功的一半，在我看来却未必，这只是一些人为了让自己坚持下去而找的一个鼓励自己的方式。到了中学时期，我几乎每次都是篮球比赛中的首发阵容，随着一年年的长大，除了年龄没被落下外，身高和体重到后来却慢慢的被甩开了一大截，以至于从原来的锋位掉到了后来的后位。虽然一些客观原因让我无法控制，但还是凭借着我那无人能及的速度和投篮精准的优势没让我彻底掉下神坛。后来我和我的室友们发展了第二纵队（由第二阵容人员组成）王朝，当时整个学校没有几个能打过我们那个阵容，现在想想依旧心潮澎湃。后来学习压力越来越大，渐渐地玩球的时间越来越少，当时我对自己说的一句话就是“等我以后有时间了，要好好的玩”，现在时间是有了，可是人却再也凑不齐了。 都说现在过年过节越来越没有味道了，方式方法没什么变化，为什么会变得没意思了呢。对我来说原因有几条，以前家庭经济条件不太好，平时省吃俭用的过日子，只有过年时才能吃得到平时吃不到的东西，玩到平时玩不到的，年少无愁。记得当时过完除夕盼十五，因为只有那天才有我最喜欢的元宵，家里有时为了省钱，不会去外面买，自己用糖和花生什么的自己包，有时候包的不好咬的特别硬，即使那样我还吃的满嘴留香，而且总是吃不够，当时我就想“等我挣钱了，我要买好多好多圆宵吃”。后来，我真的挣钱了，正月十八买的勉强吃了两次，现在还剩半袋在冰箱放着！ 最近我的朋友圈里有一个每天坚持学英语的，每天为了鼓励自己都写一句话，今天写的是“困难就怕坚持二字”，我想了想这句话改成“困难就怕行动二字”更适合我。很多时候真的不太需要等我，只是我们更想等我而已，莫怠明日…… 明 ·钱鹤滩《明日歌》 明日复明日， 明日何其多？我生待明日， 万事成蹉跎。世人若被明日累，春去秋来老将至。朝看水东流， 暮看日西坠。百年明日能几何？ 请君听我明日歌！]]></content>
+      <categories>
+        <category>心情随笔</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[寻找失去的记忆]]></title>
+    <url>%2F2015%2F04%2F02%2Fblog%2F%E5%AF%BB%E6%89%BE%E5%A4%B1%E5%8E%BB%E7%9A%84%E8%AE%B0%E5%BF%86%2F</url>
+    <content type="text"><![CDATA[我可能是个喜欢回忆的人，往往越久远的事，我越喜欢去想，然后是一阵感慨，然后再怀念，然后再伤感，然后再… 不知怎么着，已经几年都没联系过的高中同学最近异常活跃，还建立了微信讨论组。每天都说个不停，我也“有幸”被拽了进去，偶尔也参与一下讨论，大多数情况都没人理我，让我找不到存在感，于是我慢慢的发展成了潜水一族，现在想想那几年混的挺失败的，没有什么人缘，唯一的几个死党也随着时间的流逝逐渐疏远了。这就是当初我死活都不敢相信的现实，我不知道时间改变了什么，我只知道我还是那个我。 现在我身边讨论最多的话题就是结婚了，同事结婚，同学结婚，朋友结婚，身边的人都在结婚。是啊，到了这该死的年纪除了结婚还能有什么呢。前两天有个同学在qq上问我现在在哪怎么样之类的，我当时很诧异因为我已经和他几年没联系过了，上学的时候关系不能说有多深交情至少面上还是不错的。我开玩笑回复他我在外地谋生啊，然后他说：”是吗，我要结婚了，还想请你来喝喜酒呢，你也回不来了啊！“。我又回复他，是啊，最近有好多同学都结婚了，我也回不去，只能祝福你们了。当我还在等着他的回复时，却再也没有声音了。后来我得知有一个同学也没参加，但是礼钱到了。 没错我确实人缘不行，如果美好的东西非要带上铜臭的气味，我宁愿抛弃。如果要加上一个期限的话，那就永远吧！今夜我再一次迷失了自己，回到了无穷无尽的记忆中。”同学你叫什么名字，朋友我们在哪见过，兄弟你还记得我吗“，当我得知我曾经暗恋过的女生，已经为人妻为人母的那一刻，我才知道我当时的愚蠢。疯狂一次也许一切都会不一样，可是谁又能说那就是错呢，也许错的是我依旧还在原地踏步。 打开相册，寻找记忆中的点滴，虽然我可能忘记了你，但我却依然努力的想起…标记…]]></content>
+      <categories>
+        <category>心情随笔</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[Z的自白]]></title>
+    <url>%2F2015%2F03%2F21%2Fblog%2FZ%E7%9A%84%E8%87%AA%E7%99%BD%2F</url>
+    <content type="text"><![CDATA[“Z，22岁生日快。”“谢谢！希望新的一岁我会抬头……”我来自H市X县的一个小地方，以前的我一直都认为是自命不凡的，这个想法不知道是何时萌生的，也许是从我来到这个世界的那一刻吧，因为龙抬头那天，我注定的不平凡人生就这样开始了。 这还得从我和我现在已经不认识了的表弟第一天上学说起，那个时候学校离家比较远，交通条件也不好，只能步行两三里地去上学，当时我不知道我为什么要去一个那么多人地方，妈妈告诉我上课不许说话，铃声响后就下课了。于是，我一直没有说话，别人跟我说话我都不理会。而在妈妈走后不知过了多久，我终于听到了铃声，而我却把课间休息当成了放学，我跑到学校门口找了妈妈很久都没找到，于是我做了一次不寻常的事，自己走回了家，回到家里大人们都震惊了，当时应该是5岁左右，具体记不清了。 辗转间来到了一个新的地方开始了我的小学，那也是我记忆中最美好无忧的时光。班长，委员，同桌，最好的组长，最好的朋友，最美的同学……当时忘记了是什么原因，我和一个同学打架把他推倒在地上，脸都划破了。那也是我人生中第一次打架，回到家后我很害怕，也没敢告诉父母，那个同学的家长找到了家里，我都没敢出门，后来因为大人们都认识也就不了了之了。漫长的小学时光终于在我的长大成材梦中结束了，毕业晚会上也随着当时非常火的同一首歌落下的帷幕，炉火徐徐……我们毕业了。“鲜花曾告诉我你怎样走过，大地知道你心中的第一个角落，甜蜜的梦啊谁都不会错过……” 就这样一点点，一步步，我醒了，醒得那么干脆。 我叫Z，我来自H市X县的一个小地方，以前的我一直都自命不凡！(未完待续……)]]></content>
+      <categories>
+        <category>心情随笔</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[站长也要懂项目]]></title>
+    <url>%2F2015%2F03%2F18%2Fblog%2F%E7%AB%99%E9%95%BF%E4%B9%9F%E8%A6%81%E6%87%82%E9%A1%B9%E7%9B%AE%2F</url>
+    <content type="text"><![CDATA[在当今社会中，一切都是项目，一切都将成为项目。 ——美国项目管理专业资质认证委员会主席Paul Grace 博客建立也有一年多啦，一直在断断续续的维护着，三天打渔，几个月晒网，找个好听点的借口“忙”。 俗话说“麻雀虽小，五脏俱全”，我这小站点也算是经历过风风雨雨啦，建立之初的想法是怎么也算是个ＩＴ人啦，给人做过的网站也有很多啦，为什么还没有自己的小站呢。于是网上找了好久买了一个云服务器，整个网站的全部架构全是我自己设计的，做了半个多月试运行上线了，虽然功能不是很全，但是一直在不断的完善，当时成就感天天爆棚。半年后通过一点点的了解，发现大多数的个人网站用的都是虚拟主机，于是将目光移到了这边，经两三考虑对于没有收入的网站来说，云服务器确实像它的名字一样，有点高不可及，可是虚拟主机一般支持的都是ＰＨＰ网站而我那个网站是ＪＡＶＡ做的自然就不能用了，还是有一些失望，再三衡量下我还站在了成本这一面。那么问题来啦，“空间技术哪家强”，“怎么建站”……，对于ＰＨＰ我也是一窍不通，于是网上搜罗各种攻略，手册等等直到现在，虽不敢说是什么大牛，但建站各种问题，我也应该能说说一二啦，看来抽时间我也可以写一篇建站攻略啦^_^。 对于网站来说，其实最重要的就是Search Engine Optimization，也就是我们常说的搜索引擎优化简称ＳＥＯ，网上对这方面的攻略比比绋皆是，除非你向我一样不是特别追求页面的访问量，否则我相信你应该看过很多类似的文章。虽然我并没有对这方面的技术有过太多的研究，但是我却对这方面有一些特别的看法。 我认为站长优先关注的，恰恰不是ＳＥＯ（也不是瓜子），而是网站本身质量。首先内容是否有吸引力、新颖，如果你的网站能在这方面搏到访客的满意，那么你就不太需要做别的来浪费时间啦。然而往往大多数人都是废在这儿了，这是硬实力的体现，只能自己努力啦。其次，是页面的流畅度和交互感觉方面。我相信如果一个受访页面在３秒之内加载不出来，这个网站在访客心中印象的地位就大打折扣了，如果５秒中之内还打不开，我会选择直接关掉，除非你有让我不得不看的理由。不过你真的有这本事，你还优化什么流量啊！你不就垄断了吗……质量是一个项目最基本的要求，如果一产品边最基本的质量都保证不了，那么这个产品可能不会成功。之所以用“可能”两字，原因在于不同环境下有不同的需求，不同的需求下又造成了不同的标准，所以不同的产品质量的好坏也就无法做到统一评判。归结一句话就是干系人是否满意，从马桶盖上就可以看出些问题了……. 影响到用户体验的因素往往有很多，比如常说的主机类型，带宽大小，以及智能交互的体验等方面，而说到这些往往也都会牵扯一个问题“成本”，尤其对没有收益的小网站来说，当然要想办法越低越好啦。但是这里需要注意到一个前提“不影响体验效果”，也就是一直说的保证质量。有些人可能不太想花钱，但是也想搭建一个网站，于是就到处搜寻免费空间，费了好大的劲终于弄好了，也写了好多内容，功能和体验上也花费了好多心思，结果没过几个月或者几天，主机数据全部丢失或停止运营，最后连灰都没见着！你可能会想，没事反正也没花钱没啥损失。但是，真的没什么损失吗，你所付出的精力，你辛辛苦苦写出来文章，即使你的内容全都是些流水仗，那也是付出了机会成本的。当然一个产品的好与坏不能仅仅用成本的高低来区分，最根本的因素还是质量达标－干系人满意。然而质量有时又不仅仅说的是产品的本身，雾霾就是很好的例证…… 虽然我并不是什么技术大牛，但凭借这么多年的实践，我相信做到每天几更应该是不成问题的，但事实上我并没有这么做，因为从最开始的定位上我就不想让我的地盘变成一个纯技术类型，我只想在这里记录的是日常的点点滴滴，可以是任何类型。这个问题也就涉及到你的网站想要发展的范围，它是整个网站的骨架，直接影响着你网站的流量。你的网站到底是什么类型，一定要做到心中有数。 前面谈到硬实力，须要长时间的积累，但是就像我一样眼下并不达不到，难道就被判死刑了吗。也不一定，硬的不行咱来软的呗，交流是可以很好解决这一问题的办法，只有互动多了才能发掘出更多的想法和不被所知的见解，流量也自然而然就上去了。 有了这些，你还用ＳＥＯ吗？用，当然用，锦上添花嘛^_^……]]></content>
+      <categories>
+        <category>心情随笔</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[吃汤圆]]></title>
+    <url>%2F2015%2F03%2F09%2Fblog%2F%E5%90%83%E6%B1%A4%E5%9C%86%2F</url>
+    <content type="text"><![CDATA[独在异乡为异客，每逢佳节倍思亲。遥知兄弟登高处， 遍插茱萸少一人。 —王维 十五的元宵十八吃，说到元宵让我想起前天下班高峰期的８号线瘫痪，好多人都去鸟巢看灯，导致截流限行排了半个小时才上去。 记得以前在家的时候每到十五那天，家家户户都会走出家门，我们那里叫做“走百步”，意思是除百病，让一年有个好身体。大街上人来人往，有的跑着，有的蹦着，有的手里提着灯笼，有的嘴里嚼着冰糖葫芦；有集体放烟花的，也有组织扭大秧歌的，雪花飞舞，冰灯闪耀，街边到处都是点的透亮的火堆…… 另一个习俗应该就是往河里仍硬币了，一块的，五角的，一毛的，还有几分的。好多人到了第二天就下去捡，据说可以让你小发一笔的。路上遇到卖小灯笼的，我们叫喊着让母亲给买一个，软磨硬泡下母亲终于给我和小哥一人买了一个，小灯笼是玻璃做的，在里面放上蜡烛，专门喜欢往黑暗的地方跑，那叫一个开心，整个晚上都高兴的无法入睡。 散步回来，最大的期待就是煮元宵啦，那个时候一年到头来就只有这一天才能吃得到元宵，满满吃了两大碗小肚子撑的圆鼓鼓的，却还是眼巴巴的看着锅里剩下的，真嫌自己的肚子太小。 后来，大一些了才知道了，有北方“滚”元宵，南方“包”汤圆的说法，那个时候记得大人总是喜欢给小孩讲一个故事，大意就是说俄罗斯人来中国看到元宵，怎么也弄不明白为什么中国人能把元宵包的那么圆，然后大人总是自豪的说滚圆的呗。 再大一些后，总是在十五的时候吃元宵，可是我发现每次回来时候包装上写的都是汤圆，从没看过有写着元宵的，不知为何，我开始怀疑我是否吃过真的元宵，难免总有一些失落感！ …… 哐嘁哐嘁，终于做上地铁啦，吃了点快餐，到家了……]]></content>
+      <categories>
+        <category>心情随笔</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[回归平常]]></title>
+    <url>%2F2015%2F03%2F02%2Fblog%2F%E5%9B%9E%E5%BD%92%E5%B9%B3%E5%B8%B8%2F</url>
+    <content type="text"><![CDATA[龙应台写给儿子安德烈的一段话，“孩子，我要求你读书用功，不是因为我要你跟别人比成绩，而是因为，我希望你将来会拥有选择的权利，选择有意义、有时间的工作，而不是被迫谋生。当你的工作在你心中有意义，你就有成就感。当你的工作给你时间，不剥夺你的生活，你就有尊严。成就感和尊严，给你快乐。 转眼间，年已过，节已跑，与预想中一样，除了又老了一岁，就真的再也没有别的了。送走了亲朋暂别了好友，生活又回归到了原有，一个春节过后钱包在不知不觉中少了几千块大洋，还引起不小风波。算了算小时候一共收到的红包都没这一次发出去的多，Ｄuang！！！ 节前信誓旦旦的不惰落，又荡成了一波波水纹，放松了一个小长假后，又要转换回奔波学习的节奏，确实有很大的挑战，有些不知所措。 刚看了一下最近讨论最热的《穹顶之下》，这部百万巨作，终于解答了我一直以来的疑问。“是什么？从哪来？到哪去？” 发展可以与环境同在，但铜臭才是万恶之根！ 好了，不唠叨啦，戴上口罩谋生去了……]]></content>
+      <categories>
+        <category>心情随笔</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[无心]]></title>
+    <url>%2F2015%2F02%2F03%2Fblog%2F%E6%97%A0%E5%BF%83%2F</url>
+    <content type="text"><![CDATA[无心工作，无心看书，两周，一周，5天，3天……，人人都在倒数着，期盼着！ 冬去春来，新年的脚步已然渐渐走近，不知不觉中，时光悄然逝去，到头来浑浑噩噩的不是唱着时间都去哪了就是什么时光时光慢些吧，了然无趣。 今年春节应该是近几年比较热闹的一年，好多亲戚都要聚到一起来过年，记得小时候每逢春节都有好多人，欢聚一堂，只有经历过才能体会到什么叫年味；长大后，为生活，为“幸福”，或者不知道为了什么，各自四散，得到了很多，却失去了更多。 Ｊ城今冬下三场雪，一场十分钟（没有亲眼看见），一场五分钟，一场在梦里。 总是想做一些事情，可实现起来才知道想和做的结合有多么困难，明日复明日，于是，一连串的恶性循环就开始了。 明年是期待收获的一年，想要花开，就不能停止灌溉！]]></content>
+      <categories>
+        <category>心情随笔</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[等一分钟MV]]></title>
+    <url>%2F2015%2F01%2F09%2Fblog%2F%E7%AD%89%E4%B8%80%E5%88%86%E9%92%9FMV%2F</url>
+    <content type="text"><![CDATA[最近迷上mv于是拿出以前录的歌用了十几个小时的视频制作，完成了这个mv，也算是处女作啦，瑕疵很多，但毕竟也算是一点成果,相信后续会起来越来越精致。 歌曲录制于2011年]]></content>
+      <categories>
+        <category>自娱自乐</category>
+      </categories>
+      <tags>
+        <tag>MV</tag>
+        <tag>翻唱</tag>
+        <tag>音乐</tag>
       </tags>
   </entry>
   <entry>
@@ -142,9 +399,66 @@
       </categories>
   </entry>
   <entry>
+    <title><![CDATA[网页head内容跑到了body中]]></title>
+    <url>%2F2014%2F09%2F29%2Ftech_stack%2F%E7%BD%91%E9%A1%B5head%E5%86%85%E5%AE%B9%E8%B7%91%E5%88%B0%E4%BA%86body%E4%B8%AD%2F</url>
+    <content type="text"><![CDATA[最近发现博客的favicon图标在chrome浏览器中不显示，但在IE中却可以，于是我打开调试工具查看，结果发现HTML head标签的内容全部跑到body中去了，由于favicon必须在head标签中所以现在不能显示了。于是排查可能出现的问题： 1.存在标签未闭合等问题2.存在移动head内容的js代码等问题3.存在编码或乱码等问题 经过检查后排除了1.2项的问题于是把注意力集中在第三个问题上，经过一阵咕弄终于发现了由于文件保存的时候编码存在BOM标记。 BOM是Windows下记事本软件保存一个UTF-8编码的文件时开头正文的一部分来表明编码方式的隐藏字符，对于一般文件貌似没有什么太大麻烦，但对于PHP来说却不是个福星，它会被PHP完全读取出来，使整个网页向下填充无法紧贴浏览器顶部，并且可能出现标签混乱。 既然找到了问题就着手解决问题吧。 一种方法是手动将文本在编辑器中打开，将编码转换为UTF-8无BOM编码方式，当然如果你的文件太多这个方法就不太适用了。 第二种方法如下 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647&lt;?php $basedir = str_replace('/clearBOM.php','',str_replace('\\','/',dirname(__FILE__)));$auto = 1;checkdir($basedir);function checkdir($basedir)&#123; if ($dh = opendir($basedir)) &#123; while (($file = readdir($dh)) !== false) &#123; if ($file != '.' &amp;&amp; $file != '..')&#123; if (!is_dir($basedir.'/'.$file)) &#123; $filename = $basedir.'/'.$file; echo 'filename:'.$basedir.'/'.$file.checkBOM($filename).'&lt;br&gt;'; &#125; else &#123; $dirname = $basedir.'/'.$file; checkdir($dirname); &#125; &#125; &#125; closedir($dh); &#125;&#125;function checkBOM ($filename) &#123; global $auto; $contents = file_get_contents($filename); $charset[1] = substr($contents, 0, 1); $charset[2] = substr($contents, 1, 1); $charset[3] = substr($contents, 2, 1); if (ord($charset[1]) == 239 &amp;&amp; ord($charset[2]) == 187 &amp;&amp; ord($charset[3]) == 191) &#123; if ($auto == 1) &#123; $rest = substr($contents, 3); rewrite ($filename, $rest); return '&lt;font color=red&gt;BOM found,automatically removed.&lt;/font&gt;'; &#125; else &#123; return '&lt;font color=red&gt;BOM found.&lt;/font&gt;'; &#125; &#125; else &#123; return 'BOM Not Found.'; &#125;&#125;function rewrite ($filename, $data) &#123; $filenum = fopen($filename, 'w'); flock($filenum, LOCK_EX); fwrite($filenum, $data); fclose($filenum);&#125;?&gt; 将上面代码保存为PHP文件（注意编码格式哦），然后上传后在浏览器中执行一下就OK了，看一下效果，搞定收工……^^!]]></content>
+      <categories>
+        <category>软件开发</category>
+      </categories>
+      <tags>
+        <tag>HTML</tag>
+        <tag>BOM</tag>
+        <tag>PHP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Java Properties文件]]></title>
+    <url>%2F2014%2F09%2F28%2Ftech_stack%2FJava%20Properties%E6%96%87%E4%BB%B6%2F</url>
+    <content type="text"><![CDATA[Java开发者对Properties一定再熟悉不过了,它是JAVA项目里特有的一种配置文件，Properties 继承于 Hashtable，所以可对 Properties 对象应用 put 和 putAll 方法。但不建议使用这两个方法，因为它们允许调用者插入其键或值不是 String 的项，应该使用 setProperty 方法。如果在“不安全”的 Properties 对象（即包含非 String 的键或值）上调用 store 或 save 方法，则该调用将失败。 最近做项目想在项目中实现动态配置文件的功能，本来以为水到渠成的事，结果遇到了一点小麻烦，现将问题记录下来。 通常用法： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969798package com.test;import java.io.FileNotFoundException;import java.io.FileOutputStream;import java.io.IOException;import java.io.InputStream;import java.io.OutputStream;import java.text.SimpleDateFormat;import java.util.Date;import java.util.Properties;/** * * @author Windus * @version v1.0 * */public class PropertiesUtil &#123; private Properties properties; // properties文件路径 private String proPath; public PropertiesUtil(String proPath) &#123; this.proPath = proPath; loadProperties(); &#125; /** * 加载Properties文件 * * @param proPath */ public void loadProperties() &#123; try &#123; properties = new Properties(); InputStream is = this.getClass().getResourceAsStream(proPath); properties.load(is); is.close(); &#125; catch (IOException e) &#123; e.printStackTrace(); &#125; &#125; /** * 读取配置文件键值 * * @param key * @return */ public String getProperties(String key) &#123; if (properties != null) &#123; return properties.getProperty(key); &#125; else &#123; return null; &#125; &#125; /** * 设置键值 * * @param key * @param value */ public void setProperties(String key, String value) &#123; try &#123; if (properties != null) &#123; // 设置键值 properties.setProperty(key, value); OutputStream fos = new FileOutputStream(proPath); properties.store(fos, new SimpleDateFormat("yyyy-MM-dd").format(new Date())); fos.flush(); fos.close(); &#125; &#125; catch (FileNotFoundException e) &#123; // TODO Auto-generated catch block e.printStackTrace(); &#125; catch (IOException e) &#123; // TODO Auto-generated catch block e.printStackTrace(); &#125; &#125; public static void main(String[] args) &#123; PropertiesUtil propertiesUtil = new PropertiesUtil("/test.properties"); //打印当前键值 System.out.println(propertiesUtil.getProperties("name")); //设置键值 propertiesUtil.setProperties("name", "windus"); //打印修改后的值 System.out.println(propertiesUtil.getProperties("name")); //重新加载properties文件读取 PropertiesUtil propertiesUtil = new PropertiesUtil("/test.properties"); System.out.println(propertiesUtil.getProperties("name")); &#125; &#125; 当我在启动Tomcat后，重新在前台传入key值后调用设置方法后重新读取，如main方法中一样调用，发现每次修改后的properties文件本身确实改变了，但读取出来的值确不是实时更新的，原因在于getProperties每次读取都是从内存中读取，而对于文件的更新后没有实时加载到内存中。 经过轮番的修改……测试……不行；修改……测试……不行；…… ……后：得出解决方法，问题出现在加载properties文件的方法上：如上37行 123InputStream is = this.getClass().getResourceAsStream(proPath);//修改为InputStream is = new BufferedInputStream(new FileInputStream(getClass().getResource(proPath).getPath())); getResourceAsStream每次读取来自内存中，所以可以通过getResource(proPath).getPath()来获取properties文件路径，然后读取到输入流中实时加载properties文件，此时即可得到每次改变后的值。]]></content>
+      <categories>
+        <category>软件开发</category>
+      </categories>
+      <tags>
+        <tag>JAVA</tag>
+        <tag>Properties</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Linux上分不清的查询指令]]></title>
+    <url>%2F2014%2F05%2F05%2Ftech_stack%2FLinux%E4%B8%8A%E5%88%86%E4%B8%8D%E6%B8%85%E7%9A%84%E6%9F%A5%E8%AF%A2%E6%8C%87%E4%BB%A4%2F</url>
+    <content type="text"><![CDATA[whatis [指令或数据]: 列出相关指令的说明文件（相当于man -f） apropos [指令或数据]: 列出系统的说明文件中，相关指令或关键词（相当于man -k） whatis/apropos两个指令想要使用必须用makewhatis(root权限)建立whatis数据库。 whois: 查找并显示指定帐号(或域名)的用户相关信息，因为它是到Network Solutions的WHOIS数据库去查找，所以该帐号名称必须在上面注册方能寻获，不区分大小写。 whereis [-bmsu] 档案或目录名: 从指定目录中搜寻特定档案。 1234-b : 查找binary格式档案-m : 查找在说明文件manual路径下的文件-s : 查找source来源档案-u : 查找不在上述档案中的其它特殊档案 locate [-ir] 搜寻字符串: 和whereis类似locate是从数据库中搜寻档案，由于数据库默认每天更新一次，所以会有数据不实时的限制问题。（如：最新文档搜寻不到、已删除档案仍然存在等问题） updatedb指令可以读取/etc/updatedb.conf,然后在硬盘中搜寻文件动作，最后更新/var/lib/mlocate数据库。locate：依据 /var/lib/mlocate 内癿数据库记载，找出用户输入癿关键词文件名。 which: 从PATH路径中搜寻执行档（默认显示第一个，加-a显示全部） type [-typa] name: 查找指令类型（如：内建指令builtin）,如果后面名称不能以执行档的状态找到，那该名称不会被找到。也可以作为which用来找指令。 file: 查看档案基本数据的类型（如：ASCII、data 档案、binary等），并且其中没有使用到动态函式库。 find [选项] : 功能强大的搜寻指令，由于是硬盘操作，速度稍慢。]]></content>
+      <categories>
+        <category>软件开发</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[乔迁之喜,开門大吉]]></title>
+    <url>%2F2014%2F03%2F09%2Fblog%2F%E4%B9%94%E8%BF%81%E4%B9%8B%E5%96%9C%2C%E5%BC%80%E9%96%80%E5%A4%A7%E5%90%89%2F</url>
+    <content type="text"><![CDATA[新博客终于搭建完毕了,由于先前从一个国外免费空间先试了一下手,所以一切还很顺利,没有遇到什么难题,只是主题真是让我煞费苦心,想要一种自由,大气,舒适的,确始终没找到.最后发现了这一款还算满意吧. 对自已的文彩很有自知之明的我建立这个博客只是为了自我生活中比较有意义的人或事以一篇或一段文字的形式记录下来,如果恰巧其中的某些只言片语能够让你感受到乐趣或是对你有所帮助,那便是我又一收获实乃三生有幸. 最近翻我以前的物品时,从中发现了我一本10多年以前的一篇日记,我从头到尾翻了一遍往事一幕幕浮现在我脑海,回想起那时青涩的我,还有我那年青的母亲.多年以后我越长越大,离家也越来越远.回家就越来越少.时过境迁,物是人非唯有那本快要泛黄的日记本记录着那一幕幕永恒的瞬间.那一笔笔的画面比影像还要清晰的在我的脑海放映.那一夜我兴愤的失眠了. 所以我决定重新捡起笔头来记录这生活的点点滴滴.等到下一十年、下下一个十年再来回忆.由于我对个人网站的喜爱我会公开我部分记录到到我的个人博客来,其中可能包括但不限于生活感悟、个人游记、技术文摘等等. Dolly’ll never go away ^_^]]></content>
+      <categories>
+        <category>心情随笔</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[解决浏览器模式兼容问题]]></title>
+    <url>%2F2014%2F01%2F06%2Ftech_stack%2F%E8%A7%A3%E5%86%B3%E6%B5%8F%E8%A7%88%E5%99%A8%E6%A8%A1%E5%BC%8F%E5%85%BC%E5%AE%B9%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[网站前端开发在我看来是开发中最让人郁闷的工作，并不是其技术有多难，而是因为它的各种不稳定因素。今天浏览器厂商一个标准，明天浏览器厂商一个标准，这家厂商一个标准，那家一个厂商一个标准。前端开发大多数时候并不是因为一个布局实现方式而苦恼，而是为了各种浏览器的兼容。然而，最让人头疼的就属IE6啦。虽然这个浏览器，曾经立下过汗马功劳，但真的到了功成身退的时候了。 IE7在我看来只是微软公司临时抱佛脚的替代品，过渡产品自然用的就比较少，就像曾经的vista系统。从IE8浏览器开始，微软向 Web 标准进行靠拢。改变重大，但是IE6的市场占有率仍然居高不下，且其代码标准与W3C的标准有许多出入，故按照 IE6/7 的规范来编写代码在IE8中也未必兼容，为了解决这个问题IE8浏览器增加了一种叫做“兼容性视图”的功能。从此处牵出两个功能“浏览器模式”和“文档模式”。“浏览器模式”用于切换IE针对该网页的默认文档模式、对不同版本浏览器的条件备注解析、发送给网站服务器的用户代理（User-Agent）字符串的值。网站可以根据浏览器返回的不同用户代理字符串判断浏览器的版本和安装的功能，这样就可以向不同的浏览器返回不同的页面内容。“文档模式”用于指定IE的页面排版引擎（Trident）以哪个版本的方式来解析并渲染网页代码。切换文档模式会导致网页被刷新，但不会更改用户代理字符串中的版本号，也不会从服务器重新下载网页。切换浏览器模式的同时，浏览器也会自动切换到相应的文档模式。问题出现了，既然这么多模式那么怎么选择使用哪种模式，X-UA-Compatible出现了这是一匹神马。有了它开发者无需考虑网页是否兼容IE8浏览器，只要确保网页在IE6、IE7下的表现就可以了。 页面中用法: 1&lt;meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /&gt; 在\&lt;head>标签下面加入上面代码：IE=edge告诉IE使用最新的引擎渲染网页(其它可选值：IE5、IE6、IE7、IE8 )，chrome=1则可以激活Chrome Frame(可以让旧版IE浏览器使用Chrome的WebKit渲染引擎处理网页，因此旧版IE用户可以体验到包括HTML5在内的众多现代网页技术。)参考：http://blogs.msdn.com/b/ie/archive/2010/06/16/ie-s-compatibility-features-for-site-developers.aspx Apache设置方法:[信息参考自]可以在Apache主机做一些设置让服务器告诉IE采用何种引擎来渲染。在网站作用目录找到或新建.htaccess文件，添加下面的内容保存即可。 12345678&lt;IfModule mod_setenvif.c&gt; &lt;IfModule mod_headers.c&gt; BrowserMatch MSIE ie Header set X-UA-Compatible "IE=Edge" env=ie BrowserMatch chromeframe gcf Header append X-UA-Compatible "chrome=1" env=gcf &lt;/IfModule&gt;&lt;/IfModule&gt; Ngnix设置方法:找到\nginx\conf\nginx.conf并编辑，在server { }区域里（最好是闭合符前面起一行）添加下列代码即可。 1add_header "X-UA-Compatible" "IE=Edge,chrome=1"; 360浏览器内核控制:由于WebKit内核的浏览器逐渐盛行，越来越多的人加入它的行列，然而国内windows系统的大环境下IE几乎是每台电脑必有的浏览器，所以目前很多网站只支持IE浏览器。如：银行系统从而越来越多的双核浏览器诞生了。其中360浏览器就是个典型的Chrome+IE=360,相信很多人都发现过有的页面用360浏览器打开是IE内核，有的是WebKit内核。然而当我的只想用WebKit内核或是IE内核时，360提借供了一个内核选择功能： html代码: 1234567&lt;html&gt; &lt;head&gt; &lt;meta name="renderer" content="webkit|ie-comp|ie-stand"&gt; &lt;/head&gt; &lt;body&gt; &lt;/body&gt;&lt;/html&gt; content的取值为webkit,ie-comp,ie-stand之一，区分大小写，分别代表用webkit内核，IE兼容内核，IE标准内核。详细参考：http://se.360.cn/v6/help/meta.html]]></content>
+      <categories>
+        <category>软件开发</category>
+      </categories>
+      <tags>
+        <tag>HTML</tag>
+        <tag>WEB</tag>
+        <tag>浏览器</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[五笔学习小记]]></title>
     <url>%2F2013%2F11%2F26%2Fblog%2F%E4%BA%94%E7%AC%94%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0%2F</url>
-    <content type="text"><![CDATA[键盘分区和区号汉字有五种基本笔划， 横、竖、撇、捺、折，所有的字根都是由这五种笔划组成的，分别划为5个区。每个区有五个位，按一定顺序编号，就叫区位号。比如1区顺序是从G到A，G为1区第1位，它的区位号就是11，F为1区第2位，区位号就是12 键名字根王土大木工 目日口田山禾白月人金 言立水火之已子女又纟 字根一般分布规律(1)总体规律：一区：横 二区：竖 三区：撇 四区：捺 五区：折 注意:在五笔中，笔划“提”归在“横”里，“点”归在“捺”里，“竖钩”归在“竖”里 (2)非定性规律 如：规律1：在1区1位，里面有一横这个字根，在1区2位有二横这个字根，在1区3位，里面有三横这个字根。第2区1位，有一竖这个字根，2区2位，有二竖这个字根，2区3 位，有三竖这个字根，2 区4位，有四竖这个字根。第3区1位里一撇，3区2位里二撇，3区3位里三撇。第4区，41区位里有点，42区位里有二点水，43区位里有三点水，44区位里有四点底。第5区，51区位中的“乙”是一折，52区位中的“&lt;”“ ”是二折，53区位中的“巛”是三折 规律2：1区1位，“王”的第一笔是横，第二笔还是横；1区2位，“土”的第一笔是横，第二笔是竖；1区3位，“大”的第一笔是横，第二笔是撇；再看1区5位，“七”的第一笔是横，第二笔是折。（字根的第二笔与位号一致。不是所有的字根都符合这个规律，还是有很多特殊的。） 规律3：相似性如：W键，里面的“人、八、 、 ”这四个字根形态都差不多。还有B键，里面的“阝、卩”很容易联想到字母B。L键，里面的这四个字根：，彼此长得很像，和四竖也很像。 字根顺口溜汉字拆分字根间的结构关系可以概括为四种类型，单、散、连、交。单，就是指这个字根本身就是一个汉字。包括五种基本笔划“一、丨、丿、丶、乙”，25个键名字根和字根中的汉字。比如“言、虫、寸、夕”等。散，就是指构成汉字的字根不止一个，且汉字之间有一定的距离。比如“苗”字，由“艹”和“田”两个字根组成，字根间还有点距离。连，就是指一个字根与一个单笔划相连。比如“勺”，就是“勹”和点组成的，我们认为它们是相连的。这样的例子还有“术、太、主、义、斗、头”等。 注意:有些字，字根虽然连着，但在五笔中不认为它们是相连的，如“足、充、首、左、页”等，还有，单笔划与字根间有明显距离的也不认为是相连，比如“个、少、么、旦、全”等。交就是指两个或多个字根交叉重叠构成的汉字。比如“本”，就是由字根“木”和“一”相交构成的。(1)多字跟拆分由四个或四个以上的字根的合体字，它的输入方法是按照书写顺序，取第一、二、三、末四个字根的编码。如：“毅”字是由“立、 、几、又”四个字根组成的，这四个字根的编码依次是UEMC，那么在五笔输入法中，键入UEMC，就输入了“毅”字。 注意: 1.在拆分汉字时，先要注意按书写顺序来拆分汉字，然后对里面的一些复杂字根，按照它的自然界限进行拆分，对界线不明显了，就要按拆分原则进行拆分。 2.先左后右，先上后下，先横后竖，先撇后捺，先内后外，先中间后两边，先进门后关门。 3.取大优先，兼顾直观，能散不连，能连不交。 (2)拆分原则取大优先原则。在各种可能的拆法中，保证按书写顺序拆分出尽可能大的字根，以保证拆分出的字根数最少。兼顾直观原则。就是说在拆字时，尽量照顾字的直观性，一个笔划不能分割在两个字根中。【“兼顾直观”和“取大优先”原则是相通的，都是取大字根，笔划不能重复或是截断。】能散不连原则。如果字可以拆成几个字根散的结构，就不要拆成连的结构。能连不交原则。如果字可以能按连的结构拆分, 就不要按交的结构拆分。 (3)汉字字型1、左右型—代号12、上下型—代号23、杂合型—代号3 注意:1.包围和半包围关系的汉字，一律视为杂合型，如“团、同、医、凶、句”等。2.含有“辶”的字也是杂合型，如“过、进、延”等。3.“厂、尸、眉(上半部)”等字根组成的一些字也是杂合型。4.一个基本字根和一个单笔划相连，也视为杂合型，如自己的“自”。5.一个基本字根之前或之后有孤立点的也当作杂合型，比如“勺、术、太、主、斗”等。6.几个基本字根交叉重叠之后构成的汉字，也视为杂合型。比如“申、里、半、串、东、电”等。 (4)少字根拆分由少于4个字根构成的字需要加入末笔字型交叉识别码。末笔字型交叉识别码=末笔代码+字型代码 末笔字型交叉识别码列表 &nbsp; 左右型 上下型 杂合型 横 G(11) F(12) D(13) 竖 H(21) J(22) K(23) 撇 T(31) R(32) E(33) 捺 Y(41) U(42) I(43) 折 N(51) B(52) V(53) 末笔特殊约定: 1.为了有足够多的区分能力，对“辶”、“廴”的字和全包围字，它们的“末笔”规定为被包围部分的末笔。2.如果“囗”包围的一个字根组成的双码字根再位于另一个字根之后，所得到的三根字的末笔仍然是被包围的那个字根的末笔。3.如果用“辶”包围一个字根组成的双码字再位于另一个字根后面，所得到的三根字末笔为“辶”的末笔“丶”，如“链”，编码为OLPY。4.对“九、刀、七、力、匕”等字根，当它们参加“识别”时一律用“折笔”作为末笔。5.我们接着讲末笔约定。“我”、“贱”、“成”等字的“末笔”，遵循“从上到下”的原则，末笔应该是“丿”。6.带单独点的字，比如“义”，“太”，“勺”等，我们把点当作末笔，并且认为“丶”与附近的字根是“连”的关系。 (5)成子字根输入在字根总表中，除了键名字根外，本身就是汉字的字根。输入方法是：先打一下该字根所在的键，再打该字根的第一、第二及最末一个单笔画。 (6) 一级简码 一地在要工，上是中国同。gfdsa hjklm和的有人我，主产不为这。trewq yuiop民了发以经。nbvcx (7) 二级简码输入方法：一笔代码+二笔代码+空格键 如：睡：全码（htgf）简码（ht）二级简码是由25个键位代码排列组合而成的。25×25=625，去掉一些没有的空字，二级简码将近六百个。 (8) 三级简码输入方法：一笔代码+二笔代码+三笔代码+空格键字的前三个字根编码在五笔中是唯一的，这个字都可以作为三级简码来输入。在汉字中，三级简码一共有4000多个。 (9) 二字词汇输入方法：取每个字的前两个字根的代码如：热爱 － rvyo epdc = rvep 注意:当“键名”及“成字字根”参加组词时，应该从这个字的全码中取头两位编码如：土地 — ffff fbn = fffb (10) 多字词汇三字词汇：取前两个字的第一个字根+最后一个字前两个字根如：计算机－yfh thaj smn＝ytsm四字词汇：取每个字的第一个字根 如：操作系统－rwtx]]></content>
+    <content type="text"><![CDATA[键盘分区和区号汉字有五种基本笔划， 横、竖、撇、捺、折，所有的字根都是由这五种笔划组成的，分别划为5个区。每个区有五个位，按一定顺序编号，就叫区位号。比如1区顺序是从G到A，G为1区第1位，它的区位号就是11，F为1区第2位，区位号就是12 键名字根王土大木工 目日口田山禾白月人金 言立水火之已子女又纟 字根一般分布规律(1)总体规律：一区：横 二区：竖 三区：撇 四区：捺 五区：折 注意:在五笔中，笔划“提”归在“横”里，“点”归在“捺”里，“竖钩”归在“竖”里 (2)非定性规律 如：规律1：在1区1位，里面有一横这个字根，在1区2位有二横这个字根，在1区3位，里面有三横这个字根。第2区1位，有一竖这个字根，2区2位，有二竖这个字根，2区3 位，有三竖这个字根，2 区4位，有四竖这个字根。第3区1位里一撇，3区2位里二撇，3区3位里三撇。第4区，41区位里有点，42区位里有二点水，43区位里有三点水，44区位里有四点底。第5区，51区位中的“乙”是一折，52区位中的“&lt;”“ ”是二折，53区位中的“巛”是三折 规律2：1区1位，“王”的第一笔是横，第二笔还是横；1区2位，“土”的第一笔是横，第二笔是竖；1区3位，“大”的第一笔是横，第二笔是撇；再看1区5位，“七”的第一笔是横，第二笔是折。（字根的第二笔与位号一致。不是所有的字根都符合这个规律，还是有很多特殊的。） 规律3：相似性如：W键，里面的“人、八、 、 ”这四个字根形态都差不多。还有B键，里面的“阝、卩”很容易联想到字母B。L键，里面的这四个字根：，彼此长得很像，和四竖也很像。 字根顺口溜横区:王旁青头(兼)五一(G), 土士二干十寸雨(F)大犬三(羊)古石厂(D), 木丁西(S)工戈草头右框七(A) 竖区:目具上止卜虎皮(H), 日早两竖与虫依(J)口与川 字根稀(K), 田甲方框四车力(L)山由贝 下框几(M) 撇区:禾竹一撇双人立 反文条头共三一(T), 白手看头三二斤(R)月彡(衫)乃用家衣底(E), 人和八 三四里(W)金勺缺点无尾鱼 犬旁留乂一点夕 氏无七(妻)(Q) 捺区:言文方广在四一 高头一捺谁人去(Y), 立辛两点六门病(U)水旁兴头小倒立(I), 火业头 四点米(O)之字军盖建到底 摘礻(示)衤(衣)(P) 折区:已半巳满不出己 左框折尸心和羽(N), 子耳了也框向上(B)女刀九臼山朝西(V), 又巴马 丢矢矣(C)慈母无心弓和匕 幼无力 汉字拆分字根间的结构关系可以概括为四种类型，单、散、连、交。单，就是指这个字根本身就是一个汉字。包括五种基本笔划“一、丨、丿、丶、乙”，25个键名字根和字根中的汉字。比如“言、虫、寸、夕”等。散，就是指构成汉字的字根不止一个，且汉字之间有一定的距离。比如“苗”字，由“艹”和“田”两个字根组成，字根间还有点距离。连，就是指一个字根与一个单笔划相连。比如“勺”，就是“勹”和点组成的，我们认为它们是相连的。这样的例子还有“术、太、主、义、斗、头”等。 注意:有些字，字根虽然连着，但在五笔中不认为它们是相连的，如“足、充、首、左、页”等，还有，单笔划与字根间有明显距离的也不认为是相连，比如“个、少、么、旦、全”等。交就是指两个或多个字根交叉重叠构成的汉字。比如“本”，就是由字根“木”和“一”相交构成的。(1)多字跟拆分由四个或四个以上的字根的合体字，它的输入方法是按照书写顺序，取第一、二、三、末四个字根的编码。如：“毅”字是由“立、 、几、又”四个字根组成的，这四个字根的编码依次是UEMC，那么在五笔输入法中，键入UEMC，就输入了“毅”字。 注意: 1.在拆分汉字时，先要注意按书写顺序来拆分汉字，然后对里面的一些复杂字根，按照它的自然界限进行拆分，对界线不明显了，就要按拆分原则进行拆分。 2.先左后右，先上后下，先横后竖，先撇后捺，先内后外，先中间后两边，先进门后关门。 3.取大优先，兼顾直观，能散不连，能连不交。 (2)拆分原则取大优先原则。在各种可能的拆法中，保证按书写顺序拆分出尽可能大的字根，以保证拆分出的字根数最少。兼顾直观原则。就是说在拆字时，尽量照顾字的直观性，一个笔划不能分割在两个字根中。【“兼顾直观”和“取大优先”原则是相通的，都是取大字根，笔划不能重复或是截断。】能散不连原则。如果字可以拆成几个字根散的结构，就不要拆成连的结构。能连不交原则。如果字可以能按连的结构拆分, 就不要按交的结构拆分。 (3)汉字字型1、左右型—代号12、上下型—代号23、杂合型—代号3 注意:1.包围和半包围关系的汉字，一律视为杂合型，如“团、同、医、凶、句”等。2.含有“辶”的字也是杂合型，如“过、进、延”等。3.“厂、尸、眉(上半部)”等字根组成的一些字也是杂合型。4.一个基本字根和一个单笔划相连，也视为杂合型，如自己的“自”。5.一个基本字根之前或之后有孤立点的也当作杂合型，比如“勺、术、太、主、斗”等。6.几个基本字根交叉重叠之后构成的汉字，也视为杂合型。比如“申、里、半、串、东、电”等。 (4)少字根拆分由少于4个字根构成的字需要加入末笔字型交叉识别码。末笔字型交叉识别码=末笔代码+字型代码 末笔字型交叉识别码列表 &nbsp; 左右型 上下型 杂合型 横 G(11) F(12) D(13) 竖 H(21) J(22) K(23) 撇 T(31) R(32) E(33) 捺 Y(41) U(42) I(43) 折 N(51) B(52) V(53) 末笔特殊约定: 1.为了有足够多的区分能力，对“辶”、“廴”的字和全包围字，它们的“末笔”规定为被包围部分的末笔。2.如果“囗”包围的一个字根组成的双码字根再位于另一个字根之后，所得到的三根字的末笔仍然是被包围的那个字根的末笔。3.如果用“辶”包围一个字根组成的双码字再位于另一个字根后面，所得到的三根字末笔为“辶”的末笔“丶”，如“链”，编码为OLPY。4.对“九、刀、七、力、匕”等字根，当它们参加“识别”时一律用“折笔”作为末笔。5.我们接着讲末笔约定。“我”、“贱”、“成”等字的“末笔”，遵循“从上到下”的原则，末笔应该是“丿”。6.带单独点的字，比如“义”，“太”，“勺”等，我们把点当作末笔，并且认为“丶”与附近的字根是“连”的关系。 (5)成子字根输入在字根总表中，除了键名字根外，本身就是汉字的字根。输入方法是：先打一下该字根所在的键，再打该字根的第一、第二及最末一个单笔画。 (6) 一级简码 一地在要工，上是中国同。gfdsa hjklm和的有人我，主产不为这。trewq yuiop民了发以经。nbvcx (7) 二级简码输入方法：一笔代码+二笔代码+空格键 如：睡：全码（htgf）简码（ht）二级简码是由25个键位代码排列组合而成的。25×25=625，去掉一些没有的空字，二级简码将近六百个。 (8) 三级简码输入方法：一笔代码+二笔代码+三笔代码+空格键字的前三个字根编码在五笔中是唯一的，这个字都可以作为三级简码来输入。在汉字中，三级简码一共有4000多个。 (9) 二字词汇输入方法：取每个字的前两个字根的代码如：热爱 － rvyo epdc = rvep 注意:当“键名”及“成字字根”参加组词时，应该从这个字的全码中取头两位编码如：土地 — ffff fbn = fffb (10) 多字词汇三字词汇：取前两个字的第一个字根+最后一个字前两个字根如：计算机－yfh thaj smn＝ytsm四字词汇：取每个字的第一个字根 如：操作系统－rwtx]]></content>
       <categories>
         <category>芬芳年华</category>
       </categories>
