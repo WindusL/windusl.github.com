@@ -1041,7 +1041,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://fcwalkers.com/2017/04/21/React/React学习笔记——条件渲染(v15.5)/">
+    <link itemprop="mainEntityOfPage" href="http://fcwalkers.com/2017/04/21/React/React学习笔记——列表和Keys(v15.5)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Windus">
@@ -1060,7 +1060,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/04/21/React/React学习笔记——条件渲染(v15.5)/" itemprop="url">React学习笔记——条件渲染(v15.5)</a></h2>
+                <a class="post-title-link" href="/2017/04/21/React/React学习笔记——列表和Keys(v15.5)/" itemprop="url">React学习笔记——列表和Keys(v15.5)</a></h2>
         
 
         <div class="post-meta">
@@ -1108,8 +1108,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/04/21/React/React学习笔记——条件渲染(v15.5)/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments：</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/04/21/React/React学习笔记——条件渲染(v15.5)/" itemprop="commentCount"></span>
+                <a href="/2017/04/21/React/React学习笔记——列表和Keys(v15.5)/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments：</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/04/21/React/React学习笔记——列表和Keys(v15.5)/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1139,13 +1139,11 @@
       
         
           <p>[TOC]</p>
-<p>React条件渲染和JavaScript的条件工作方式是一样的。</p>
-<ul>
-<li>使用JavaScript中if或者条件运算符来创建一个代表当前状态的元素，然后让React来更新匹配的UI。</li>
-</ul>
+<h3 id="渲染多个组件"><a href="#渲染多个组件" class="headerlink" title="渲染多个组件"></a>渲染多个组件</h3><p>你可以创建一个元素集合，通过‘{}’在JSX中使用</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建元素集合</span></span><br><span class="line"><span class="keyword">const</span> numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line"><span class="keyword">const</span> listItems = numbers.map(<span class="function">(<span class="params">number</span>) =&gt;</span></span><br><span class="line">  &lt;li&gt;&#123;number&#125;&lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">);</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/使用集合放到ul标签</span></span><br><span class="line"><span class="regexp">ReactDOM.render(</span></span><br><span class="line"><span class="regexp">  &lt;ul&gt;&#123;listItems&#125;&lt;/u</span>l&gt;,</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'root'</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/04/21/React/React学习笔记——条件渲染(v15.5)/#more" rel="contents">
+            <a class="btn" href="/2017/04/21/React/React学习笔记——列表和Keys(v15.5)/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1254,8 +1252,6 @@
                 <div class="site-state-item site-state-categories">
                   <a href="/categories/index.html">
                     
-                    
-                      
                     
                       
                     
