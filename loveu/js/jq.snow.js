@@ -6,7 +6,7 @@
 	$.fn.snow = function(options){
 	
 			var $flake 			= $('<div id="snowbox" />').css({'position': 'absolute', 'top': '-50px'}).html('&hearts;'),
-				documentHeight 	= $(document).height()-80,
+				documentHeight 	= $(document).height()-60,
 				documentWidth	= $(document).width()-60,
 				defaults		= {
 									minSize		: 10,		//雪花的最小尺寸
@@ -31,8 +31,6 @@
 						endPositionLeft = 0;
 					}
 
-					console.log("- :"+startPositionLeft)
-					console.log("=:"+endPositionLeft)
 				$flake.clone().appendTo('body').css({
 							left: startPositionLeft,
 							opacity: startOpacity,
