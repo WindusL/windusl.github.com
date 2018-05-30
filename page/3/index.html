@@ -1056,7 +1056,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://fcwalkers.com/2017/05/03/React/React学习笔记——引用和DOM(v15.5)/">
+    <link itemprop="mainEntityOfPage" href="http://fcwalkers.com/2017/05/03/React/React学习笔记——使用PropTypes类型检查(v15.5)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Windus">
@@ -1075,7 +1075,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/05/03/React/React学习笔记——引用和DOM(v15.5)/" itemprop="url">React学习笔记——引用和DOM(v15.5)</a></h2>
+                <a class="post-title-link" href="/2017/05/03/React/React学习笔记——使用PropTypes类型检查(v15.5)/" itemprop="url">React学习笔记——使用PropTypes类型检查(v15.5)</a></h2>
         
 
         <div class="post-meta">
@@ -1123,8 +1123,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/05/03/React/React学习笔记——引用和DOM(v15.5)/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments：</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/05/03/React/React学习笔记——引用和DOM(v15.5)/" itemprop="commentCount"></span>
+                <a href="/2017/05/03/React/React学习笔记——使用PropTypes类型检查(v15.5)/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments：</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/05/03/React/React学习笔记——使用PropTypes类型检查(v15.5)/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1154,10 +1154,11 @@
       
         
           <p>[TOC]</p>
-<p>在典型的React数据流中，props是父组件与子组件交互的唯一方式。想要修改子组件的，你需要重新渲染父组件的props。然而，有一些种情况是你需要在典型数据流的外面立即修改子组件。要修改的子组件可以是React组件的实例或者是一个DOM元素。对于这两种情况，React 提供了一个解决方案。</p>
+<p>React v15.5中React.PropTypes已经被废弃了，建议使用prop-types库代替。</p>
+<p>随着应用的增长，可能遇到越来越多的类型检查方面的bug，对于一些应用，你可以使用JavaScript的扩展如：flow、typescript来检查你整个应用。但是，对于React来说，即使你不使用这些，其也内置了一些类型检查能力。要使用类型检查作用于组件，你可以指定一个特殊的属性proptypes：</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/05/03/React/React学习笔记——引用和DOM(v15.5)/#more" rel="contents">
+            <a class="btn" href="/2017/05/03/React/React学习笔记——使用PropTypes类型检查(v15.5)/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
