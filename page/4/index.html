@@ -400,7 +400,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://fcwalkers.com/2017/05/03/React/React学习笔记——引用和DOM(v15.5)/">
+    <link itemprop="mainEntityOfPage" href="http://fcwalkers.com/2017/05/03/React/React学习笔记——使用PropTypes类型检查(v15.5)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Windus">
@@ -419,7 +419,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/05/03/React/React学习笔记——引用和DOM(v15.5)/" itemprop="url">React学习笔记——引用和DOM(v15.5)</a></h2>
+                <a class="post-title-link" href="/2017/05/03/React/React学习笔记——使用PropTypes类型检查(v15.5)/" itemprop="url">React学习笔记——使用PropTypes类型检查(v15.5)</a></h2>
         
 
         <div class="post-meta">
@@ -467,8 +467,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/05/03/React/React学习笔记——引用和DOM(v15.5)/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments：</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/05/03/React/React学习笔记——引用和DOM(v15.5)/" itemprop="commentCount"></span>
+                <a href="/2017/05/03/React/React学习笔记——使用PropTypes类型检查(v15.5)/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments：</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/05/03/React/React学习笔记——使用PropTypes类型检查(v15.5)/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -498,10 +498,11 @@
       
         
           <p>[TOC]</p>
-<p>在典型的React数据流中，props是父组件与子组件交互的唯一方式。想要修改子组件的，你需要重新渲染父组件的props。然而，有一些种情况是你需要在典型数据流的外面立即修改子组件。要修改的子组件可以是React组件的实例或者是一个DOM元素。对于这两种情况，React 提供了一个解决方案。</p>
+<p>React v15.5中React.PropTypes已经被废弃了，建议使用prop-types库代替。</p>
+<p>随着应用的增长，可能遇到越来越多的类型检查方面的bug，对于一些应用，你可以使用JavaScript的扩展如：flow、typescript来检查你整个应用。但是，对于React来说，即使你不使用这些，其也内置了一些类型检查能力。要使用类型检查作用于组件，你可以指定一个特殊的属性proptypes：</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/05/03/React/React学习笔记——引用和DOM(v15.5)/#more" rel="contents">
+            <a class="btn" href="/2017/05/03/React/React学习笔记——使用PropTypes类型检查(v15.5)/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -725,170 +726,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://fcwalkers.com/2017/04/25/React/React学习笔记——提升state(v15.5)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Windus">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="风尘">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/04/25/React/React学习笔记——提升state(v15.5)/" itemprop="url">React学习笔记——提升state(v15.5)</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-25T00:00:00+08:00">2017-04-25</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/软件开发/" itemprop="url" rel="index"><span itemprop="name">软件开发</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/04/25/React/React学习笔记——提升state(v15.5)/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments：</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/04/25/React/React学习笔记——提升state(v15.5)/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>[TOC]</p>
-<p>通常几个组件需要反映相同数据变化，我们推荐提升共享的state到它们最近的共同祖先元素。实现如下：</p>
-<p>创建一个温度计算器来计算，给定温度的水是否会沸腾。</p>
-<p>我们将从一个BoilingVerdict组件开始，它接收一个celsius作为prop参数，并且打印水温度。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/04/25/React/React学习笔记——提升state(v15.5)/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-	
-	<div>
-	
-	</div>
-
-    
-	
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://fcwalkers.com/2017/04/25/React/React学习笔记——组合与继承(v15.5)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -993,6 +830,170 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/04/25/React/React学习笔记——组合与继承(v15.5)/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+	
+	<div>
+	
+	</div>
+
+    
+	
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://fcwalkers.com/2017/04/25/React/React学习笔记——提升state(v15.5)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Windus">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="风尘">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/04/25/React/React学习笔记——提升state(v15.5)/" itemprop="url">React学习笔记——提升state(v15.5)</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-25T00:00:00+08:00">2017-04-25</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/软件开发/" itemprop="url" rel="index"><span itemprop="name">软件开发</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/04/25/React/React学习笔记——提升state(v15.5)/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments：</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/04/25/React/React学习笔记——提升state(v15.5)/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>[TOC]</p>
+<p>通常几个组件需要反映相同数据变化，我们推荐提升共享的state到它们最近的共同祖先元素。实现如下：</p>
+<p>创建一个温度计算器来计算，给定温度的水是否会沸腾。</p>
+<p>我们将从一个BoilingVerdict组件开始，它接收一个celsius作为prop参数，并且打印水温度。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/04/25/React/React学习笔记——提升state(v15.5)/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1430,7 +1431,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2013 &mdash; <span itemprop="copyrightYear">2018</span>
   <span class="with-love" id="animate"> 
     <i class="fa fa-user"></i>
   </span>
