@@ -125,6 +125,8 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="风尘" type="application/atom+xml" />
+
 
 
 
@@ -507,7 +509,7 @@
 <p>React.Component是一个抽象的基类，因此它很少的被直接使用。反而，你会用一个有代表性的子类，并且至少定义一个render()方法。</p>
 <a id="more"></a>
 <p>使用JavaScript定义一个简单的类组件：</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Greeting</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, &#123;this.props.name&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Greeting</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> &lt;h1&gt;Hello, &#123;this.props.name&#125;&lt;/h1&gt;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>如果你没有使用ES6，你需要使用react-create-class模块创建。可以参考React中不使用ES6。</p>
 <h3 id="组件生命周期"><a href="#组件生命周期" class="headerlink" title="组件生命周期"></a>组件生命周期</h3><p>每个组件都有几个生命周期，你可重写它们并在特定时间，它们会被执行。前缀是will的方法会在行为发生前被调用;前缀为did的方法会在行为发生后被调用。</p>
 <h4 id="Mounting"><a href="#Mounting" class="headerlink" title="Mounting"></a>Mounting</h4><p>当一个组件实例被创建并且插入到DOM时，这些方法被调用：</p>
@@ -661,8 +663,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/03/React/React学习笔记——引用和DOM(v15.5)/" rel="next" title="React学习笔记——引用和DOM(v15.5)">
-                <i class="fa fa-chevron-left"></i> React学习笔记——引用和DOM(v15.5)
+              <a href="/2017/05/03/React/React学习笔记——使用PropTypes类型检查(v15.5)/" rel="next" title="React学习笔记——使用PropTypes类型检查(v15.5)">
+                <i class="fa fa-chevron-left"></i> React学习笔记——使用PropTypes类型检查(v15.5)
               </a>
             
           </div>
@@ -898,6 +900,13 @@
             </nav>
           
 
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
           
 
           

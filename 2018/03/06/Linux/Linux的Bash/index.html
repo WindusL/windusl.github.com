@@ -118,17 +118,19 @@
 <meta property="og:site_name" content="风尘">
 <meta property="og:description" content="[TOC] Shell/etc/shells记录系统所有shell Bash shell 功能命令编修能力 默认指令记忆功能可以达到1000个记录位置~/.bash_history(当前指令用户指令在内存中,登出后才记录到文件此内)   命令与文件实例功能(tab补全) 命令别名设置功能 工作控制/前景背景控制 程序化脚本shell script 万用字符(*)">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://fcwalkers.com/2018/03/06/Linux/Linux的Bash/Linux的Bash/QQ20180307-115110@2x.png">
-<meta property="og:image" content="http://fcwalkers.com/2018/03/06/Linux/Linux的Bash/Linux的Bash/QQ20180315-174127@2x.png">
-<meta property="og:image" content="http://fcwalkers.com/2018/03/06/Linux/Linux的Bash/Linux的Bash/QQ20180316-134233@2x.png">
-<meta property="og:image" content="http://fcwalkers.com/2018/03/06/Linux/Linux的Bash/Linux的Bash/QQ20180319-161532@2x.png">
+<meta property="og:image" content="http://fcwalkers.com/2018/03/06/Linux/Linux的Bash/QQ20180307-115110@2x.png">
+<meta property="og:image" content="http://fcwalkers.com/2018/03/06/Linux/Linux的Bash/QQ20180315-174127@2x.png">
+<meta property="og:image" content="http://fcwalkers.com/2018/03/06/Linux/Linux的Bash/QQ20180316-134233@2x.png">
+<meta property="og:image" content="http://fcwalkers.com/2018/03/06/Linux/Linux的Bash/QQ20180319-161532@2x.png">
 <meta property="og:updated_time" content="2018-05-02T10:18:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux的Bash">
 <meta name="twitter:description" content="[TOC] Shell/etc/shells记录系统所有shell Bash shell 功能命令编修能力 默认指令记忆功能可以达到1000个记录位置~/.bash_history(当前指令用户指令在内存中,登出后才记录到文件此内)   命令与文件实例功能(tab补全) 命令别名设置功能 工作控制/前景背景控制 程序化脚本shell script 万用字符(*)">
-<meta name="twitter:image" content="http://fcwalkers.com/2018/03/06/Linux/Linux的Bash/Linux的Bash/QQ20180307-115110@2x.png">
+<meta name="twitter:image" content="http://fcwalkers.com/2018/03/06/Linux/Linux的Bash/QQ20180307-115110@2x.png">
 
 
+
+  <link rel="alternate" href="/atom.xml" title="风尘" type="application/atom+xml" />
 
 
 
@@ -584,7 +586,7 @@
 - ? 上个指令的回传值
     执行某些指令时， 这些指令都会回传一个执行后的代码。一般来说，如果成功的执行该指令， 则会回传一个 0 值,如果执行过程发生错误,就会传回错误代码.一般以非0代码取代.
 </code></pre><ul>
-<li><p>export命令<br>  当你登陆 Linux 并取得一个 bash 之后，你的 bash 就是一个独立的程序，这个程序的识别使用的是一个称为程序识别码，被称为 PID 的就是。 接下来你在这个 bash 下面所下达的任何指令都是由这个 bash 所衍生出来的，那些被下达的指令就被称为子程序了.<br>  <img src="Linux的Bash/QQ20180307-115110@2x.png" alt="程序相关性示意图"></p>
+<li><p>export命令<br>  当你登陆 Linux 并取得一个 bash 之后，你的 bash 就是一个独立的程序，这个程序的识别使用的是一个称为程序识别码，被称为 PID 的就是。 接下来你在这个 bash 下面所下达的任何指令都是由这个 bash 所衍生出来的，那些被下达的指令就被称为子程序了.<br>  <img src="/2018/03/06/Linux/Linux的Bash/QQ20180307-115110@2x.png" alt="程序相关性示意图"></p>
 <p>  子程序仅会继承父程序的环境变量， 子程序不会继承父程序的自订变量.所以你在原本 bash 的自订变量在进入了子程序后就会消失不见， 一直到你离开子程序并回到原本的父程序后，这个变量才会又出现！<br>此时,把自定变量变成环境变量就变得很有必要了:<br><code>export 变量名称</code></p>
 </li>
 </ul>
@@ -668,7 +670,7 @@
 <h4 id="bash-profile-login-Shell读取"><a href="#bash-profile-login-Shell读取" class="headerlink" title="~/.bash_profile (login Shell读取)"></a>~/.bash_profile (login Shell读取)</h4><p>bash 在读完了整体环境设置的 /etc/profile 并借此调用其他配置文件后，接下来则是会读取使用者的个人配置文件。 在 login shell 的 bash 环境中，所读取的个人偏好配置文件其实主要有三个，依序分别是：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. ~/.bash_profile</span><br><span class="line">2. ~/.bash_login</span><br><span class="line">3. ~/.profile</span><br></pre></td></tr></table></figure>
 <p>其实 bash 的 login shell 设置只会读取上面三个文件的其中一个， 而读取的顺序则是依照上面的顺序。也就是说，如果 ~/.bash_profile 存在，那么其他两个文件不论有无存在，都不会被读取。 如果 ~/.bash_profile 不存在才会去读取 ~/.bash_login，而前两者都不存在才会读取 ~/.profile 的意思。 会有这么多的文件，其实是因应其他 shell 转换过来的使用者的习惯而已。</p>
-<p><img src="Linux的Bash/QQ20180315-174127@2x.png" alt="shell 读取流程"></p>
+<p><img src="/2018/03/06/Linux/Linux的Bash/QQ20180315-174127@2x.png" alt="shell 读取流程"></p>
 <h4 id="source-读入环境配置文件指令"><a href="#source-读入环境配置文件指令" class="headerlink" title="source 读入环境配置文件指令"></a>source 读入环境配置文件指令</h4><p>由于 /etc/profile 与 ~/.bash_profile 都是在取得 login shell 的时候才会读取的配置文件，所以， 如果你将自己的偏好设置写入上述的文件后，通常都是得登出再登陆后，该设置才会生效。利用这个指令可以直接生效!</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[dmtsai@study ~]$ source 配置文件文件名</span><br><span class="line"></span><br><span class="line">范例：将主文件夹的 ~/.bashrc 的设置读入目前的 bash 环境中</span><br><span class="line">[dmtsai@study ~]$ source ~/.bashrc  &lt;==下面这两个指令是一样的！</span><br><span class="line">[dmtsai@study ~]$  .  ~/.bashrc</span><br></pre></td></tr></table></figure>
 <h4 id="bashrc-（non-login-shell-读取）"><a href="#bashrc-（non-login-shell-读取）" class="headerlink" title="~/.bashrc （non-login shell 读取）"></a>~/.bashrc （non-login shell 读取）</h4><p>CentOS 7.x 还会主动的调用 /etc/bashrc 这个文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/etc/bashrc文件记录内容</span><br><span class="line">1. 依据不同的 UID 规范出 umask 的值；</span><br><span class="line">2. 依据不同的 UID 规范出提示字符 （就是 PS1 变量）；</span><br><span class="line">3. 调用 /etc/profile.d/*.sh 的设置</span><br></pre></td></tr></table></figure></p>
@@ -698,7 +700,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[dmtsai@study ~]$ ls /tmp/abc || mkdir /tmp/abc &amp;&amp; touch /tmp/abc/hehe</span><br></pre></td></tr></table></figure>
 <p>Linux 下面的指令都是由左往右执行,上面执行结果:<br><em>情况一:</em><br>（1）若 /tmp/abc 不存在故回传 $?≠0，则<br>（2）因为 || 遇到非为 0 的 \$? 故开始 mkdir /tmp/abc，由于 mkdir /tmp/abc 会成功进行，所以回传 \$?=0<br>（3）因为 &amp;&amp; 遇到 \$?=0 故会执行 touch /tmp/abc/hehe，最终 hehe 就被创建了；</p>
 <p><em>情况二:</em><br>（1）若 /tmp/abc 存在故回传 $?=0，则<br>（2）因为 || 遇到 0 的 $? 不会进行，此时 $?=0 继续向后传，故<br>（3）因为 &amp;&amp; 遇到 \$?=0 就开始创建 /tmp/abc/hehe 了！最终 /tmp/abc/hehe 被创建起来。</p>
-<p><img src="Linux的Bash/QQ20180316-134233@2x.png" alt="指令执行关系示意图"></p>
+<p><img src="/2018/03/06/Linux/Linux的Bash/QQ20180316-134233@2x.png" alt="指令执行关系示意图"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ls /tmp/vbirding || echo &quot;not exist&quot; &amp;&amp; echo &quot;exist”</span><br><span class="line">#返回结果:</span><br><span class="line">not exist</span><br><span class="line">exist</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>由于指令是一个接着一个去执行的，因此，如果真要使用判断， 那么这个 &amp;&amp; 与 || 的顺序就不能搞错(如上面例子).<br>一般来说，假设判断式有三个，也就是：<br>command1 &amp;&amp; command2 || command3</p>
@@ -711,7 +713,7 @@
 <h4 id="uniq"><a href="#uniq" class="headerlink" title="uniq"></a>uniq</h4><p>重复的数据仅列出一个显示</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[dmtsai@study ~]$ uniq [-ic]</span><br><span class="line">选项与参数：</span><br><span class="line">-i  ：忽略大小写字符的不同；</span><br><span class="line">-c  ：进行计数</span><br><span class="line"></span><br><span class="line">#使用 last 将帐号列出，仅取出帐号栏，进行排序后仅取出一位；</span><br><span class="line">[dmtsai@study ~]$ last | cut -d &apos; &apos; -f1 | sort | uniq</span><br><span class="line"></span><br><span class="line">#承上,继续显示每个帐号登录次数</span><br><span class="line">[dmtsai@study ~]$ last | cut -d &apos; &apos; -f1 | sort | uniq -c</span><br><span class="line">      1</span><br><span class="line">      6 （unknown</span><br><span class="line">     47 dmtsai</span><br><span class="line">      4 reboot</span><br><span class="line">      7 root</span><br><span class="line">      1 wtmp</span><br></pre></td></tr></table></figure>
 <h4 id="wc"><a href="#wc" class="headerlink" title="wc"></a>wc</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[dmtsai@study ~]$ wc [-lwm]</span><br><span class="line">选项与参数：</span><br><span class="line">-l  ：仅列出行；</span><br><span class="line">-w  ：仅列出多少字（英文单字）；</span><br><span class="line">-m  ：多少字符；</span><br><span class="line"></span><br><span class="line">#/etc/man_db.conf 里面到底有多少相关字、行、字符数？</span><br><span class="line">[dmtsai@study ~]$ cat /etc/man_db.conf | wc</span><br><span class="line">    131     723    5171</span><br><span class="line"># 输出的三个数字中，分别代表： “行、字数、字符数</span><br></pre></td></tr></table></figure>
-<h3 id="双重导向tee"><a href="#双重导向tee" class="headerlink" title="双重导向tee"></a>双重导向tee</h3><p>可以让 standard output 转存一份到文件内并将同样的数据继续送到屏幕去处理.<br><img src="Linux的Bash/QQ20180319-161532@2x.png" alt="tee工作流程示意图"></p>
+<h3 id="双重导向tee"><a href="#双重导向tee" class="headerlink" title="双重导向tee"></a>双重导向tee</h3><p>可以让 standard output 转存一份到文件内并将同样的数据继续送到屏幕去处理.<br><img src="/2018/03/06/Linux/Linux的Bash/QQ20180319-161532@2x.png" alt="tee工作流程示意图"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[dmtsai@study ~]$ tee [-a] file</span><br><span class="line">选项与参数：</span><br><span class="line">-a  ：以累加 （append） 的方式，将数据加入 file 当中！</span><br><span class="line"></span><br><span class="line">[dmtsai@study ~]$ ls -l /home | tee ~/homefile | more</span><br><span class="line"># 将 ls 的数据存一份到 ~/homefile ，同时屏幕也有输出讯息！</span><br><span class="line"></span><br><span class="line">[dmtsai@study ~]$ ls -l / | tee -a ~/homefile | more</span><br><span class="line"># 要注意！ tee 后接的文件会被覆盖，若加上 -a 这个选项则能将讯息累加。</span><br></pre></td></tr></table></figure>
 <h3 id="字符转换命令-tr-col-join-paste-expand"><a href="#字符转换命令-tr-col-join-paste-expand" class="headerlink" title="字符转换命令 tr, col, join, paste, expand"></a>字符转换命令 tr, col, join, paste, expand</h3><h4 id="tr"><a href="#tr" class="headerlink" title="tr"></a>tr</h4><p>tr 可以用来删除一段讯息当中的文字，或者是进行文字讯息的替换！</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[dmtsai@study ~]$ tr [-ds] SET1 ...</span><br><span class="line">选项与参数：</span><br><span class="line">-d  ：删除讯息当中的 SET1 这个字串；</span><br><span class="line">-s  ：取代掉重复的字符！</span><br><span class="line"></span><br><span class="line">#将 last 输出的讯息中，所有的小写变成大写字符：</span><br><span class="line">[dmtsai@study ~]$ last | tr &apos;[a-z]&apos; &apos;[A-Z]&apos;</span><br><span class="line"># 不加单引号也是可以执行的，如：“ last | tr [a-z] [A-Z] ”</span><br><span class="line"></span><br><span class="line">#将 /etc/passwd 输出的讯息中，将冒号 （:） 删除</span><br><span class="line">[dmtsai@study ~]$ cat /etc/passwd | tr -d &apos;:&apos;</span><br></pre></td></tr></table></figure>
@@ -1072,6 +1074,13 @@
             </nav>
           
 
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
           
 
           
