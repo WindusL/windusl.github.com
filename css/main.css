@@ -2136,7 +2136,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ffffb4;
+  background: #ba44ff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3125,25 +3125,40 @@ hr {
     text-align: center;
   }
 }
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1024px) {
+  * {
+    color: #808080 !important;
+    cursor: url("/images/chalk.ico"), default;
+  }
+  a:hover {
+    border-bottom-color: #f00;
+  }
   body {
-    background-image: url("/images/ef7e57536c5154d77b81843a014e6d03.jpg");
+    background-image: url("/images/581f668053bd8bcc2ca5e9caab03d54e.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100% 100%;
-    background-position: 10% 0;
   }
   #header,
   #footer {
     background-color: transparent;
   }
   .content-wrap {
-    background: #fff;
     border-radius: 5px;
     padding: 20px;
   }
   #footer,
   .with-love {
     color: #fff;
+  }
+  #sidebar {
+    background-image: url("/images/4e07e9e67d56562c0aea1925b3a69a31.jpg");
+    background-size: auto 100%;
+  }
+  ::selection {
+    background: #9acd32;
+  }
+  .posts-expand .post-title-link::before {
+    background-color: #f00;
   }
 }
