@@ -1,0 +1,723 @@
+ul,li{margin: 0; padding: 0; list-style: none}
+#wenkmPlayer.show {
+-webkit-transform: translate3d(480px, 0, 0);
+-moz-transform: translate3d(480px, 0, 0);
+-ms-transform: translate3d(480px, 0, 0);
+transform: translate3d(480px, 0, 0);
+}
+#wenkmPlayer {
+-webkit-transition: 0.5s;
+-moz-transition: 0.5s;
+-ms-transition: 0.5s;
+transition: 0.5s;
+left: -480px;
+color: #38343e;
+width: 480px;
+position: fixed;
+bottom: 50px;
+box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.2);
+border-radius: 5px;
+z-index: 5000;
+font-size: 13px;
+font-family: 微软雅黑;
+}
+#wenkmPlayer .player {
+position: relative;
+overflow: hidden;
+background-color: rgba(0, 0, 0, 0.6);
+height: 168px;
+border-radius: 5px 5px 0 0;
+}
+#wenkmPlayer .player .infos {
+position: absolute;
+text-shadow: 0 1px 1px #000;
+top: 28px;
+left: 196px;
+}
+#wenkmPlayer .player .infos .songstyle {
+font-size: 1.2em;
+color: #fff;
+}
+#wenkmPlayer .player .infos .song {
+font-size: 1em;
+color: #fff;
+}
+#wenkmPlayer .player .infos .timestyle {
+color: #fff;
+font-size: 12px;
+margin-left: 180px;
+margin-top: -20px;
+}
+#wenkmPlayer .player .infos .artiststyle {
+color: #81c300;
+margin-top: 10px;
+}
+#wenkmPlayer .player .infos .artist {
+color: #81c300;
+margin-top: 20px;
+}
+#wenkmPlayer .player .infos .artiststyle1 {
+color: #81c300;
+float: right;
+}
+#wenkmPlayer .player .infos .artist1 {
+color: #81c300;
+margin-top: 20px;
+}
+#wenkmPlayer .player .control {
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+position: absolute;
+bottom: 39px;
+left: 196px;
+font-size: 1.4em;
+color: #fff;
+}
+#wenkmPlayer .player .control i.current {
+color: #81c300;
+}
+#wenkmPlayer .player .control .loop, #wenkmPlayer .player .control .prev, #wenkmPlayer .player .control .status, #wenkmPlayer .player .control .next, #wenkmPlayer .player .control .random {
+-webkit-transition: 0.5s;
+-moz-transition: 0.5s;
+-ms-transition: 0.5s;
+transition: 0.5s;
+margin-right: 25px;
+
+}
+#wenkmPlayer .player .control .status {
+position: relative;
+display: inline-block;
+vertical-align: middle;
+width: 44px;
+height: 44px;
+overflow: hidden;
+border-radius: 50%;
+background-color: #81c300;
+background-image: linear-gradient(90deg, #6c6971 50%, transparent 50%, transparent), linear-gradient(90deg, #81c300 50%, #6c6971 50%, #6c6971);
+}
+#wenkmPlayer .player .bottom {
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+position: absolute;
+background-color: #fff;
+height: 25px;
+width: 100%;
+left: 0;
+bottom: 0;
+line-height: 25px;
+}
+#wenkmPlayer .player .bottom .volume {
+position: absolute;
+left: 196px;
+top: 6px;
+color: #cccbce;
+}
+#wenkmPlayer .player .bottom .volume .mute {
+float: left;
+}
+#wenkmPlayer .player .bottom .volume .volumeup {
+float: right;
+}
+#wenkmPlayer .player .bottom .volume .progress {
+position: relative;
+width: 145px;
+margin: 0 15px;
+margin-top: 4.5px;
+height: 3px;
+background-color: #b0aeb2;
+}
+#wenkmPlayer .player .bottom .volume .progress .volume-on {
+position: relative;
+background-color: #81c300;
+width: 0;
+height: 3px;
+}
+#wenkmPlayer .player .bottom .volume .progress .volume-on .drag {
+width: 14px;
+height: 14px;
+position: absolute;
+top: -5px;
+right: -5px;
+background-color: #fff;
+border-radius: 50%;
+box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+#wenkmPlayer .player .bottom .switch-playlist {
+position: absolute;
+-webkit-transition: 0.5s;
+-moz-transition: 0.5s;
+-ms-transition: 0.5s;
+transition: 0.5s;
+top: 6px;
+right: 10px;
+}
+#wenkmPlayer .player .bottom .switch-word{
+position: absolute;
+right: 32px;
+top: 6px;
+color:gray;
+}
+#wenkmPlayer .player .bottom .switch-word .current{
+color:#81c300;
+}
+#wenkmPlayer .player .cover {
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+position: absolute;
+background-color: #fff;
+width: 143px;
+height: 143px;
+top: 26px;
+left: 23px;
+border-radius: 5px 5px 0 0;
+box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+#wenkmPlayer .player .cover img {
+-webkit-transition: 0.5s;
+-moz-transition: 0.5s;
+-ms-transition: 0.5s;
+transition: 0.5s;
+border-radius: 5px 5px 0 0;
+width: 143px;
+height: 143px;
+top: 50px;
+left: 50px;
+position: relative;
+z-index: 10;
+}
+#wenkmPlayer .player .cover.changing img {
+-webkit-transform: scale(.3);
+	-moz-transform: scale(.3);
+	-ms-transform: scale(.3);
+	transform: scale(.3);
+	opacity: 0;
+}
+.player img {
+position: fixed;
+top: 50%;
+left: 50%;
+margin-top: -50px;
+margin-left: -50px;
+width: 100px;
+height: 100px;
+}
+#wenkmPlayer .playlist {
+-webkit-transition: 0.5s;
+-moz-transition: 0.5s;
+-ms-transition: 0.5s;
+transition: 0.5s;
+padding: 0 15px;
+height: 0;
+overflow: hidden;
+background-color: #fff;
+border-top: solid #ebebeb 1px;
+}
+#wenkmPlayer .playlist .header {
+-webkit-transition: 0.5s;
+-moz-transition: 0.5s;
+-ms-transition: 0.5s;
+transition: 0.5s;
+font-size: 1.6em;
+padding: 0 0 10px 10px;
+-webkit-transform: translate3d(500px, 0, 0);
+-moz-transform: translate3d(500px, 0, 0);
+-ms-transform: translate3d(500px, 0, 0);
+transform: translate3d(500px, 0, 0);
+}
+#wenkmPlayer .playlist .list {
+-webkit-transition: 0.5s;
+-moz-transition: 0.5s;
+-ms-transition: 0.5s;
+transition: 0.5s;
+opacity: 0;
+-webkit-transform: translate3d(500px, 0, 0);
+-moz-transform: translate3d(500px, 0, 0);
+-ms-transform: translate3d(500px, 0, 0);
+transform: translate3d(500px, 0, 0);
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+height: 200px;
+overflow: hidden;
+-webkit-transform-origin: 50% 100px;
+-moz-transform-origin: 50% 100px;
+-ms-transform-origin: 50% 100px;
+transform-origin: 50% 100px;
+}
+#wenkmPlayer .playlist .list ul {
+margin-right: 15px;
+}
+#wenkmPlayer .playlist .list li {
+-webkit-transition: 0.3s;
+-moz-transition: 0.3s;
+-ms-transition: 0.3s;
+transition: 0.3s;
+height: 40px;
+line-height: 40px;
+border-bottom: solid #eee 1px;
+}
+#wenkmPlayer .playlist .list li .index {
+opacity: 0.3;
+padding: 0 10px;
+}
+#wenkmPlayer .playlist .list li .artist {
+display: none;
+}
+#wenkmPlayer .playlist .list li.current {
+background-color: #81c300;
+color: #fff;
+}
+#wenkmPlayer .playlist .list .mCSB_draggerContainer {
+height: 100%;
+}
+element.style {
+position: absolute;
+height: 39px;
+top: 0px;
+}
+#wenkmPlayer .playlist .list .mCSB_dragger {
+background-color: #81c300;
+width: 8px;
+height: auto;
+border-radius: 3px;
+z-index: 999;
+}
+#wenkmPlayer .flat {
+position: absolute;
+top: 56px;
+left: 318px;
+color: #fff;
+font-size: 1.4em;
+opacity: 0;
+}
+#wenkmPlayer.playing .flat {
+opacity: 1;
+-webkit-animation: rotate 18s linear infinite;
+-moz-animation: rotate 18s linear infinite;
+-ms-animation: rotate 18s linear infinite;
+animation: rotate 18s linear infinite;
+}
+#wenkmPlayer.playing .flat i {
+position: absolute;
+top: 0;
+left: 0;
+opacity: 0;
+-webkit-animation: flat 4s cubic-bezier(0.09, 0.64, 0.16, 0.94) infinite;
+-moz-animation: flat 4s cubic-bezier(0.09, 0.64, 0.16, 0.94) infinite;
+-ms-animation: flat 4s cubic-bezier(0.09, 0.64, 0.16, 0.94) infinite;
+animation: flat 4s cubic-bezier(0.09, 0.64, 0.16, 0.94) infinite;
+}
+#wenkmPlayer.playing .flat i:nth-of-type(1) {
+-webkit-animation-delay: 0;
+-moz-animation-delay: 0;
+-ms-animation-delay: 0;
+animation-delay: 0;
+-webkit-transform: rotate(35deg) translateX(-5px);
+-moz-transform: rotate(35deg) translateX(-5px);
+-ms-transform: rotate(35deg) translateX(-5px);
+transform: rotate(35deg) translateX(-5px);
+}
+#wenkmPlayer.playing .flat i:nth-of-type(2) {
+-webkit-animation-delay: 0.8s;
+-moz-animation-delay: 0.8s;
+-ms-animation-delay: 0.8s;
+animation-delay: 0.8s;
+-webkit-transform: rotate(-5deg) translateX(-15px);
+-moz-transform: rotate(-5deg) translateX(-15px);
+-ms-transform: rotate(-5deg) translateX(-15px);
+transform: rotate(-5deg) translateX(-15px);
+}
+#wenkmPlayer.playing .flat i:nth-of-type(3) {
+-webkit-animation-delay: 1.6s;
+-moz-animation-delay: 1.6s;
+-ms-animation-delay: 1.6s;
+animation-delay: 1.6s;
+-webkit-transform: rotate(45deg) translateX(5px);
+-moz-transform: rotate(45deg) translateX(5px);
+-ms-transform: rotate(45deg) translateX(5px);
+transform: rotate(45deg) translateX(5px);
+}
+#wenkmPlayer.playing .flat i:nth-of-type(4) {
+-webkit-animation-delay: 2.8s;
+-moz-animation-delay: 2.8s;
+-ms-animation-delay: 2.8s;
+animation-delay: 2.8s;
+-webkit-transform: rotate(-25deg) translateX(-8px);
+-moz-transform: rotate(-25deg) translateX(-8px);
+-ms-transform: rotate(-25deg) translateX(-8px);
+transform: rotate(-25deg) translateX(-8px);
+}
+#wenkmPlayer.playing .flat i:nth-of-type(5) {
+-webkit-animation-delay: 3.2s;
+-moz-animation-delay: 3.2s;
+-ms-animation-delay: 3.2s;
+animation-delay: 3.2s;
+-webkit-transform: rotate(-35deg);
+-moz-transform: rotate(-35deg);
+-ms-transform: rotate(-35deg);
+transform: rotate(-35deg);
+}
+#wenkmPlayer.playing .flat i:nth-of-type(6) {
+-webkit-animation-delay: 4.5s;
+-moz-animation-delay: 4.5s;
+-ms-animation-delay: 4.5s;
+animation-delay: 4.5s;
+-webkit-transform: rotate(15deg) translateX(-5px);
+-moz-transform: rotate(15deg) translateX(-5px);
+-ms-transform: rotate(15deg) translateX(-5px);
+transform: rotate(15deg) translateX(-5px);
+}
+
+
+#wenkmPlayer.show .switch-player {
+background-color: rgba(0, 0, 0, 0.4);
+color: #f30;
+}
+#wenkmPlayer .switch-player {
+position: absolute;
+top: 10px;
+right: -25px;
+width: 25px;
+height: 68px;
+line-height: 68px;
+background-color: rgba(0, 0, 0, 0.4);
+border-radius: 0 5px 5px 0;
+box-shadow: inset 5px 0 4px 0 rgba(0, 0, 0, 0.2);
+color: #fff;
+font-size: 2em;
+text-align: center;
+}
+.fa-music-switch{
+line-height: 68px;
+}
+#wenkmTips {
+position: fixed;
+font-weight:900;
+font-size: 1.4em;
+border-radius: 5px 0 0 5px;
+z-index: 5000;
+top: 10px;
+right: 0;
+background-color: rgba(0, 0, 0, 0.7);
+padding: 15px;
+color: #ff742b;
+-webkit-transition: 0.5s;
+-moz-transition: 0.5s;
+-ms-transition: 0.5s;
+transition: 0.5s;
+-webkit-transform: translate3d(100%, 0, 0);
+-moz-transform: translate3d(100%, 0, 0);
+-ms-transform: translate3d(100%, 0, 0);
+transform: translate3d(100%, 0, 0);
+}
+#wenkmLrc.show {
+-webkit-transform: translate3d(0, 0, 0);
+-moz-transform: translate3d(0, 0, 0);
+-ms-transform: translate3d(0, 0, 0);
+transform: translate3d(0, 0, 0);
+}
+#wenkmLrc {
+-webkit-transition: 0.5s;
+-moz-transition: 0.5s;
+-ms-transition: 0.5s;
+transition: 0.5s;
+position: fixed;
+-webkit-transform: translate3d(0, 100%, 0);
+-moz-transform: translate3d(0, 100%, 0);
+-ms-transform: translate3d(0, 100%, 0);
+transform: translate3d(0, 100%, 0);
+color: #000000;
+z-index: 4999;
+bottom: 0;
+left: 0;
+font-weight:900;
+font-size: 1.3em;
+width: 100%;
+height: 50px;
+background-color: rgba(0, 0, 0, 0.3);
+overflow: hidden;
+font-size:10px;
+}
+#wenkmLrc ul {
+-webkit-transition: 0.5s;
+-moz-transition: 0.5s;
+-ms-transition: 0.5s;
+transition: 0.5s;
+}
+#wenkmLrc li {
+-webkit-transition: 0.5s;
+-moz-transition: 0.5s;
+-ms-transition: 0.5s;
+transition: 0.5s;
+height:50px;
+font-size: 1.2em;
+text-shadow: 1px 1px 1px #fff;
+-webkit-transform: scale(1);
+-moz-transform: scale(1);
+-ms-transform: scale(1);
+transform: scale(1);
+}
+#wenkmLrc li table{
+width:100%;
+height:50px;
+}
+#wenkmLrc li table td{
+text-align:center;
+font-size: 1.2em;
+font-weight:900;
+}
+#wenkmLrc li div{
+	font-size:0.6em;
+	color:#fff;
+}
+#wenkmKsc.showPlayer {
+-webkit-transform: translate3d(480px, 0, 0);
+-moz-transform: translate3d(480px, 0, 0);
+-ms-transform: translate3d(480px, 0, 0);
+transform: translate3d(480px, 0, 0);
+}
+#wenkmKsc {
+pointer-events: none;
+-webkit-transition: 0.5s;
+-moz-transition: 0.5s;
+-ms-transition: 0.5s;
+transition: 0.5s;
+position: fixed;
+-webkit-transform: translate3d(0, 100%, 0);
+-moz-transform: translate3d(0, 100%, 0);
+-ms-transform: translate3d(0, 100%, 0);
+transform: translate3d(0, 100%, 0);
+z-index: 4999;
+bottom: 0;
+left: 0;
+width: 100%;
+}
+#wenkmPlayer .switch-player .fa {
+-webkit-transition: 1s;
+-moz-transition: 1s;
+-ms-transition: 1s;
+transition: 1s;
+}
+#wenkmPlayer.playing .player .control .status b .play {
+margin-top: -40px;
+}
+#wenkmPlayer .player .control .status b .play {
+color: #ff3300;
+-webkit-transition: 0.5s;
+-moz-transition: 0.5s;
+-ms-transition: 0.5s;
+transition: 0.5s;
+}
+#wenkmPlayer .player .control .status b .fa:hover{
+color: #ff3300;
+}
+#wenkmPlayer .player .control .status b .play:hover{
+color: #81c300;
+}
+#wenkmPlayer .player .control .status b .fa {
+display: block;
+width: 40px;
+height: 40px;
+line-height: 40px;
+}
+
+#wenkmLrc li.current,#wenkmLrc li.current table td {
+color: rebeccapurple;
+-webkit-transform: scale(1.2);
+-moz-transform: scale(1.2);
+-ms-transform: scale(1.2);
+transform: scale(1.2);
+}
+[class^="icon-"], [class*=" icon-"], .post-context .attachment:before, .post-context .message:before, .post-context blockquote:before, .post-context .download:before {
+text-transform: none;
+font-weight: normal;
+font-style: normal;
+font-variant: normal;
+font-family: 'icomoon';
+line-height: 1;
+speak: none;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+#wenkmPlayer.showList .playlist {
+padding: 15px;
+height: 238px;
+}
+#wenkmPlayer .playlist {
+-webkit-transition: 0.5s;
+-moz-transition: 0.5s;
+-ms-transition: 0.5s;
+transition: 0.5s;
+padding: 0 15px;
+height: 0;
+overflow: hidden;
+background-color: rgba(0, 0, 0, 0.6);
+border-top: solid #ebebeb 1px;
+color:#fff;
+font-weight:bold;
+}
+#wenkmPlayer.showList .playlist .header {
+-webkit-transition-delay: 0.3s;
+-moz-transition-delay: 0.3s;
+-ms-transition-delay: 0.3s;
+transition-delay: 0.3s;
+-webkit-transform: translate3d(0, 0, 0);
+-moz-transform: translate3d(0, 0, 0);
+-ms-transform: translate3d(0, 0, 0);
+transform: translate3d(0, 0, 0);
+}
+#wenkmPlayer .playlist .header {
+-webkit-transition: 0.5s;
+-moz-transition: 0.5s;
+-ms-transition: 0.5s;
+transition: 0.5s;
+font-size: 1.6em;
+padding: 0 0 10px 10px;
+-webkit-transform: translate3d(500px, 0, 0);
+-moz-transform: translate3d(500px, 0, 0);
+-ms-transform: translate3d(500px, 0, 0);
+transform: translate3d(500px, 0, 0);
+}
+#wenkmPlayer.showList .playlist .list {
+-webkit-transition-delay: 0.5s;
+-moz-transition-delay: 0.5s;
+-ms-transition-delay: 0.5s;
+transition-delay: 0.5s;
+opacity: 1;
+-webkit-transform: translate3d(0, 0, 0);
+-moz-transform: translate3d(0, 0, 0);
+-ms-transform: translate3d(0, 0, 0);
+transform: translate3d(0, 0, 0);
+}
+#wenkmPlayer .playlist .list {
+-webkit-transition: 0.5s;
+-moz-transition: 0.5s;
+-ms-transition: 0.5s;
+transition: 0.5s;
+opacity: 0;
+-webkit-transform: translate3d(500px, 0, 0);
+-moz-transform: translate3d(500px, 0, 0);
+-ms-transform: translate3d(500px, 0, 0);
+transform: translate3d(500px, 0, 0);
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+height: 200px;
+overflow: hidden;
+-webkit-transform-origin: 50% 100px;
+-moz-transform-origin: 50% 100px;
+-ms-transform-origin: 50% 100px;
+transform-origin: 50% 100px;
+}
+#wenkmPlayer .playlist .list ul {
+margin-right: 15px;
+}
+#wenkmPlayer .playlist .list li {
+-webkit-transition: 0.3s;
+-moz-transition: 0.3s;
+-ms-transition: 0.3s;
+transition: 0.3s;
+height: 40px;
+line-height: 40px;
+border-bottom: solid #eee 1px;
+}
+#wenkmPlayer .playlist .list:hover .mCSB_scrollTools {
+opacity: 1;
+}
+#wenkmPlayer .playlist .list .mCSB_scrollTools {
+top: 0;
+right: 0;
+width: 8px;
+height: 100%;
+background-color: #eee;
+border-radius: 3px;
+opacity: 0;
+-webkit-transition: 0.5s;
+-moz-transition: 0.5s;
+-ms-transition: 0.5s;
+transition: 0.5s;
+}
+#wenkmPlayer .playlist .list .mCSB_draggerContainer {
+height: 100%;
+}
+#wenkmPlayer .playlist .list .mCSB_dragger {
+background-color: #81c300;
+width: 8px;
+height: auto;
+border-radius: 3px;
+z-index: 999;
+}
+#wenkmTips.show {
+-webkit-transform: translate3d(0, 0, 0);
+-moz-transform: translate3d(0, 0, 0);
+-ms-transform: translate3d(0, 0, 0);
+transform: translate3d(0, 0, 0);
+}
+#wenkmLrc:hover {
+height: 150px;
+}
+#wenkmLrc:hover ul {
+margin: 40px 0;
+}
+#wenkmPlayer.show .switch-player .fa {
+-webkit-transform: rotate(360deg);
+-moz-transform: rotate(360deg);
+-ms-transform: rotate(360deg);
+transform: rotate(360deg);
+}
+#wenkmPlayer .player .control .status b {
+position: absolute;
+width: 40px;
+height: 40px;
+text-align: center;
+border: solid #ff3300 2px;
+top: 0;
+left: 0;
+border-radius: 50%;
+background-color: #2c2a30;
+display: inline-block;
+overflow: hidden;
+}
+#wenkmPlayer.playing .player .control .status b {
+border-width: 0;
+top: 2px;
+left: 2px;
+}
+
+@-webkit-keyframes rotate{
+	50%{.transform(rotate(-20deg))}
+}
+@-moz-keyframes rotate{
+	50%{.transform(rotate(-20deg))}
+}
+@-ms-keyframes rotate{
+	50%{.transform(rotate(-20deg))}
+}
+@keyframes rotate{
+	50%{.transform(rotate(-20deg))}
+}
+
+@-webkit-keyframes flat{
+	from{opacity: 1;}
+	to{top: -48px; left: 78px; opacity: 0; font-size: .6em;}
+}
+@-moz-keyframes flat{
+	from{opacity: 1;}
+	to{top: -48px; left: 78px; opacity: 0; font-size: .6em;}
+}
+@-ms-keyframes flat{
+	from{opacity: 1;}
+	to{top: -48px; left: 78px; opacity: 0; font-size: .6em;}
+}
+@keyframes flat{
+	from{opacity: 1;}
+	to{top: -48px; left: 78px; opacity: 0; font-size: .6em;}
+}
