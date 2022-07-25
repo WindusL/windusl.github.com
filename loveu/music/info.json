@@ -1,0 +1,30 @@
+[{
+	"song_album": ["风尘"],
+	"song_name": ["太多","Take Me To Your Heart","Yesterday Once More","哇","斯卡布罗集市","小李飞刀"],
+	"artist_name": ["陈冠蒲","Michael Learns To Rock","Carpenters","李珍贤","Sarah Brightman","罗文"],
+	"song_id": [0,1,2,3,4,5],
+	"song_lrc": [
+		"music/lrc/1.lrc",
+		"music/lrc/2.lrc",
+		"music/lrc/3.lrc",
+		"music/lrc/7.lrc",
+		"music/lrc/sikabuluojishi.lrc",
+		"music/lrc/xiaolifeidao.lrc"
+	],
+	"song_url": [
+		"http://m2.music.126.net/gzx_881HqGWnLp7jBj4NyA==/7965961744899572.mp3",
+		"http://link.hhtjim.com/163/4173190.mp3",
+		"http://link.hhtjim.com/163/3986241.mp3",
+		"http://link.hhtjim.com/163/5350620.mp3",
+		"http://link.hhtjim.com/163/444524190.mp3",
+		"http://link.hhtjim.com/163/113634.mp3"
+	],
+	"song_img": [
+		"http://p4.music.126.net/-0vorNXsVDb4PG3sh54UUg==/127543348835159.jpg",
+		"http://p3.music.126.net/ecOmBOk3xBZokt4GWdSGPg==/569547023232432.jpg",
+		"http://p3.music.126.net/Tfiad_1N1ko6iI-q1D_ZiA==/737772302281979.jpg",
+		"http://p4.music.126.net/d6TbiyPD9IVEBJtX-uraRw==/646512837135664.jpg",
+		"http://p3.music.126.net/33dYZ7E6X5MR-hkGUYlPKg==/901599534784095.jpg",
+		"http://p3.music.126.net/xXnb57XR4L2FXCGUKnMq5g==/1410673435310193.jpg"
+	]
+}]
